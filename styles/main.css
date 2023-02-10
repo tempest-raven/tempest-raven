@@ -1,0 +1,81 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: default;
+    background-color: black;
+    color: white;
+}
+
+a {
+    cursor: pointer;
+}
+
+#abilityTemplate {
+    display: none;
+}
+
+.ability {
+    width: 19%;
+    vertical-align: top;
+    display: inline-block;
+    margin: 3px;
+}
+
+.abilityTitle {
+    border: 1px solid black;
+    color: black;
+    padding: 2px;
+    background: rgb(255,255,255);
+    background: linear-gradient(
+        0deg, rgb(255, 255, 255) 0%, 
+        rgb(200, 200, 200) 75%, 
+        rgb(255, 255, 255) 100%
+    );
+    margin-bottom: 2px;
+}
+
+.abilityName {
+    font-weight: bold;
+}
+
+.abilityId {
+    color: rgb(70, 70, 70);
+    float: right;
+    text-align: right;
+}
+
+.abilityCost {
+    border: 1px solid black;
+    color: black;
+    padding: 2px;
+    background: linear-gradient(
+        0deg, rgb(255, 255, 255) 0%, 
+        rgb(155, 175, 180) 75%, 
+        rgb(255, 255, 255) 100%
+    );
+}
+
+.abilityDesc {
+    border: 1px solid black;
+    padding: 2px;
+    background-color: black;
+    color: white;
+}
+
+.abilityData {
+    border: 1px solid black;
+    padding: 2px;
+    background-color: rgb(50, 40, 50);
+    color: rgb(255, 200, 0);
+    height: 100%;
+}
+
+.abilityBuffId {
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
