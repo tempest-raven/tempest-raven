@@ -33,3 +33,28 @@ function parseAbilityScript(rawScript){
     }
     return parseArray;
 }
+
+function parseLangScript(rawScript){
+    let lines = rawScript.split("\r\n");
+    let parsed = {};
+    for (const line of lines) {
+        /** @type {RegExpMatchArray | null} */
+        let match = null;
+        if (match = line.match(
+            /^KrinLang\.ENGLISH\.([A-Za-z0-9]+)(?:\[(\d+)\])? ?= ?\"(.+)\";/
+        )){
+            const key = match[1];
+            const arrayIndex = match[2];
+            const value = match[3];
+            if (arrayIndex === undefined){
+                parsed[key] = value;
+            } else {
+                if (parsed[key] === undefined){
+                    parsed[key] = [];
+                }
+                parsed[key][arrayIndex] = value;
+            }
+        }
+    }
+    return parsed;
+}

@@ -11,10 +11,13 @@ async function loadScriptIntoStorage(key, filepath){
     }
 }
 
+let langStrings;
 let abilitiesWithScript;
 async function initLoad(){
+    await loadScriptIntoStorage("langStrings", "data/scripts/frame_1/DoAction.as");
     await loadScriptIntoStorage("abilityScript", "data/scripts/frame_42/DoAction_6.as");
     await loadScriptIntoStorage("buffScript", "data/scripts/frame_42/DoAction_10.as");
+    langStrings = parseLangScript(localStorage.getItem("langStrings"));
     abilitiesWithScript = parseAbilityScript(localStorage.getItem("abilityScript"));
     abilitiesWithScript
         .filter(e => typeof e !== "string")
