@@ -17,7 +17,7 @@ function renderAbility(ability){
     element.querySelector(".abilityId").textContent = ability.id;
     element.querySelector(".abilityName").textContent = ability.name;
     element.querySelector(".abilityCost").textContent = ability.getCostString();
-    element.querySelector(".abilityDesc").textContent = ability.description ?? "No Tooltip assigned";
+    element.querySelector(".abilityDesc").textContent = ability.localizedDescription();
     element.querySelector(".abilityElement").textContent = (JSON.parse(ability.element) ?? "Physical") + " type";
 
     let scalings = [];
@@ -36,15 +36,15 @@ function renderAbility(ability){
     if (ability.flatModifier){
         scalings.push(ability.flatModifier);
     }
-    const scaleStr = scalings.join(" + ").replace("_root.hackMove[2]", toPercent(ability.strengthScale));
+    const scaleString = scalings.join(" + ").replaceAll("_root.hackMove[2]", toPercent(ability.strengthScale));
     element.querySelectorAll(".abilityScale")
-        .forEach(span => span.textContent = scaleStr);
+        .forEach(span => span.textContent = scaleString);
     
     const targets = [];
     ability.canTargetSelf ? targets.push("self") : null;
     ability.canTargetAlly ? targets.push("ally") : null;
     ability.canTargetEnemy ? targets.push("enemy") : null;
-    if (scaleStr !== ""){
+    if (scaleString !== ""){
         element.querySelector(`.abilityEffect[x-effect="${ability.moveType}"]`).classList.remove("hidden");
     }
     

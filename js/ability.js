@@ -169,6 +169,39 @@ class Ability {
         }
     }
 
+    localizedDescription(){
+        if (!this.description) {
+            return "No Tooltip assigned";
+        }
+        let description = this.description;
+        description = description.replaceAll(/\(100 \* _root\.hackMove\[(\d+)\] \+ "%"\)/g, (_, index) => {
+            const value = this[abilityArrayMapper.get(+index)];
+            return `"${Math.round(value * 100)}%"`;
+        })
+        let parts = description.split(" + ");
+        let parsedParts = parts.map(part => {
+            let match = /krinABC(\d)\[(\d+)\]/.exec(part);
+            if (match !== null){
+                if (match[1] === "1"){
+                    match[1] = "";
+                }
+                return langStrings["SKILLTIP" + match[1]][match[2]];
+            }
+            match = /_root\.hackMove\[(\d+)\]/.exec(part);
+            if (match !== null){
+                return this[abilityArrayMapper.get(+match[1])];
+            }
+            try {
+                return JSON.parse(part);
+            } catch (e) {
+                console.log(part);
+            }
+            
+        });
+        
+        return parsedParts.join("");
+    }
+
     /**
      * Sets an attribute defined using `_root.hackMove[]` assignments
      * @param {number} attributeIndex The array index for the attribute
