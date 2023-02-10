@@ -1,16 +1,6 @@
 elementMainArray = ["Physical","Magic","Ice","Fire","Lightning","Earth","Shadow","Poison"];
 elementColorArray = ["0xC40000","0xFB95C8","0x68CBF4","0xFF6600","0xFFCC00","0x856B47","0x664D80","0x508349"];
-const projectileType = {
-    melee: "Melee",
-    shock: "Shock",
-    missile: "Missile"
-}
 
-const moveType = {
-    damage: "Full Damage",
-    focus: "Focus",
-    heal: "Heal"
-}
 /**
  * 
  * @param {Ability} ability 
@@ -28,7 +18,7 @@ function renderAbility(ability){
     element.querySelector(".abilityName").textContent = ability.name;
     element.querySelector(".abilityCost").textContent = ability.getCostString();
     element.querySelector(".abilityDesc").textContent = ability.description ?? "No Tooltip assigned";
-    element.querySelector(".abilityElement").textContent = ability.element ?? "Physical";
+    element.querySelector(".abilityElement").textContent = (JSON.parse(ability.element) ?? "Physical") + " type";
 
     let scalings = [];
     if (ability.strengthScale){
@@ -46,7 +36,7 @@ function renderAbility(ability){
     if (ability.flatModifier){
         scalings.push(ability.flatModifier);
     }
-    const scaleStr = scalings.join(" + ");
+    const scaleStr = scalings.join(" + ").replace("_root.hackMove[2]", toPercent(ability.strengthScale));
     element.querySelectorAll(".abilityScale")
         .forEach(span => span.textContent = scaleStr);
     
@@ -94,6 +84,7 @@ function renderAbility(ability){
 
 function toPercent(value){
     if (typeof value === "number"){
+        //Keeps one decimal on the final percentage
         return `${Math.round(value * 10) * 10}%`;
     } else {
         return value;

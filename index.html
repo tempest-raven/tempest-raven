@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Sonny 2 data viewer</title>
+	<title>Sonny 2 data browser</title>
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 <body>
@@ -16,11 +16,11 @@
 		<div class="abilityDesc">Hit the enemy.</div>
 		<div class="abilityData">
 			<div class="abilityElement">Physical</div>
-			<div class="abilityEffect hidden" x-effect="Full Damage">Deals <span class="abilityScale"></span> damage.</div>
-			<div class="abilityEffect hidden" x-effect="Focus">Grants <span class="abilityScale"></span> focus.</div>
-			<div class="abilityEffect hidden" x-effect="Heal">Restores <span class="abilityScale"></span> health.</div>
-			<div class="abilityEffect hidden" x-effect="Attack"><!--Shatter Bolt uses this--></div>
 			<div class="abilityTargets"></div>
+			<div class="abilityEffect hidden" x-effect="Full Damage">Deal <span class="abilityScale"></span> damage</div>
+			<div class="abilityEffect hidden" x-effect="Focus">Grant <span class="abilityScale"></span> focus</div>
+			<div class="abilityEffect hidden" x-effect="Heal">Restore <span class="abilityScale"></span> health</div>
+			<div class="abilityEffect hidden" x-effect="Attack"><!--Shatter Bolt uses this--></div>
 			<div class="abilityRequirements hidden">
 				Requires 
 				<span class="abilityReqCount"></span> 
@@ -28,25 +28,25 @@
 				type buff on the target
 			</div>
 			<div class="abilityDispel hidden">
-				Dispels 
+				Dispel 
 				<span class="abilityDispelCount"></span> 
 				<span class="abilityDispelArray"></span> 
 				<span class="abilityDispelPositive">de</span>buffs
 			</div>
 			<div class="abilityHitModifiers hidden">
 				<span class="abilityAccuracy"></span> accuracy, 
-				<span class="abilityCritChance"></span> critical strike chance
+				<span class="abilityCritChance"></span> critical strike chance multiplier
 			</div>
 			<div class="abilityFocusScale hidden">
-				This ability scales with 
-				<span class="abilityFocusMulti"></span> of current focus 
-				+ <span class="abilityBaseMulti"></span>
+				Scales with 
+				<span class="abilityFocusMulti">100%</span> of current focus 
+				+ <span class="abilityBaseMulti">100%</span>
 			</div>
 			<div class="abilityBuff hidden">
-				Has a <span class="abilityBuffChance">100%</span> 
+				<span class="abilityBuffChance">100%</span> 
 				chance to apply the 
 				<span class="abilityBuffId">AUTOREGEN</span> 
-				buff on <span class="abilityBuffTarget">self</span> on hit
+				buff to <span class="abilityBuffTarget">self</span> on hit
 			</div>
 		</div>
 	</div>
