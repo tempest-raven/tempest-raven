@@ -15,6 +15,7 @@ function renderAbility(ability){
     element.removeAttribute("id");
     element.setAttribute("x-abilityId", ability.id);
     element.querySelector(".abilityId").textContent = ability.id;
+    element.querySelector(".abilityTitle").title = "Localized name: " + langStrings["SKILLNAME"][ability.localeNameId];
     element.querySelector(".abilityName").textContent = ability.name;
     element.querySelector(".abilityCost").textContent = ability.getCostString();
     element.querySelector(".abilityDesc").textContent = ability.localizedDescription();
@@ -31,7 +32,7 @@ function renderAbility(ability){
         scalings.push(toPercent(ability.speedScale) + " Speed");
     }
     if (ability.healthScale){
-        scalings.push(toPercent(ability.healthScale) + " Health");
+        scalings.push(toPercent(ability.healthScale) + " of maximum Health");
     }
     if (ability.flatModifier){
         scalings.push(ability.flatModifier);
@@ -85,7 +86,7 @@ function renderAbility(ability){
 function toPercent(value){
     if (typeof value === "number"){
         //Keeps one decimal on the final percentage
-        return `${Math.round(value * 10) * 10}%`;
+        return `${Math.round(value * 1000) / 10}%`;
     } else {
         return value;
     }

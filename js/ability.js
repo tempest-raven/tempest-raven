@@ -173,11 +173,18 @@ class Ability {
         if (!this.description) {
             return "No Tooltip assigned";
         }
-        let description = this.description;
-        description = description.replaceAll(/\(100 \* _root\.hackMove\[(\d+)\] \+ "%"\)/g, (_, index) => {
+        const replacerFunc = function(_, index, percent) {
             const value = this[abilityArrayMapper.get(+index)];
-            return `"${Math.round(value * 100)}%"`;
-        })
+            const num = isNaN(value) ? value : Math.round(value * 100);
+            return "\"" + num + (percent ? "%" : "") + "\"";
+        }.bind(this);
+        let description = this.description;
+        description = description.replaceAll(
+                /\(?100 \* _root\.hackMove\[(\d+)\]( ?\+ "%")?\)?/g, replacerFunc
+            ).replaceAll(
+                /\(?_root\.hackMove\[(\d+)\] \* 100\)?()/g, replacerFunc
+            );
+
         let parts = description.split(" + ");
         let parsedParts = parts.map(part => {
             let match = /krinABC(\d)\[(\d+)\]/.exec(part);
@@ -190,6 +197,9 @@ class Ability {
             match = /_root\.hackMove\[(\d+)\]/.exec(part);
             if (match !== null){
                 return this[abilityArrayMapper.get(+match[1])];
+            }
+            if (/^[A-Za-z_]/.test(part)){
+                return part;
             }
             return JSON.parse(part);
         });
