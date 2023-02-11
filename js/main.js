@@ -64,8 +64,11 @@ function renderAbility(ability){
         element.querySelector(".abilityDispelPositive").classList.toggle("hidden", ability.dispelPositive === 1);
     }
 
-    element.querySelector(".abilityAccuracy").textContent = toPercent(ability.accuracyMultiplier ?? 1);
-    element.querySelector(".abilityCritChance").textContent = toPercent(ability.critChanceMultiplier ?? 1);
+    if (ability.accuracyMultiplier !== 1 || ability.critChanceMultiplier){
+        element.querySelector(".abilityHitModifiers").classList.remove("hidden");
+        element.querySelector(".abilityAccuracy").textContent = toPercent(ability.accuracyMultiplier);
+        element.querySelector(".abilityCritChance").textContent = toPercent(ability.critChanceMultiplier ?? 1);
+    }
     
     if (ability.focusScale){
         element.querySelector(".abilityFocusScale").classList.remove("hidden");
