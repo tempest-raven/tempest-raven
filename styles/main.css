@@ -13,7 +13,7 @@ a {
     display: none;
 }
 
-.tooltipTitle, .tooltipSubTitle {
+.displayTitle, .displaySubTitle {
     border: 1px solid black;
     color: black;
     padding: 2px;
@@ -25,12 +25,12 @@ a {
     );
 }
 
-.tooltipTitle {
+.displayTitle {
     font-weight: bold;
     margin-bottom: 2px;
 }
 
-.tooltipCost {
+.displayCost {
     border: 1px solid black;
     color: black;
     padding: 2px;
@@ -42,7 +42,7 @@ a {
     );
 }
 
-.tooltipDesc1 {
+.displayDesc1 {
     border: 1px solid black;
     padding: 2px;
     background-color: black;
@@ -50,7 +50,7 @@ a {
     overflow-wrap: break-word;
 }
 
-.tooltipDesc2 {
+.displayDesc2 {
     border: 1px solid black;
     padding: 2px;
     background-color: rgb(50, 40, 50);
