@@ -9,18 +9,11 @@ a {
     cursor: pointer;
 }
 
-#abilityTemplate {
+#abilityTemplate, #buffTemplate {
     display: none;
 }
 
-.ability {
-    width: 19%;
-    vertical-align: top;
-    display: inline-block;
-    margin: 3px;
-}
-
-.abilityTitle {
+.tooltipTitle, .tooltipSubTitle {
     border: 1px solid black;
     color: black;
     padding: 2px;
@@ -30,23 +23,18 @@ a {
         rgb(200, 200, 200) 75%, 
         rgb(255, 255, 255) 100%
     );
+}
+
+.tooltipTitle {
+    font-weight: bold;
     margin-bottom: 2px;
 }
 
-.abilityName {
-    font-weight: bold;
-}
-
-.abilityId {
-    color: rgb(70, 70, 70);
-    float: right;
-    text-align: right;
-}
-
-.abilityCost {
+.tooltipCost {
     border: 1px solid black;
     color: black;
     padding: 2px;
+    background: rgb(255,255,255);
     background: linear-gradient(
         0deg, rgb(255, 255, 255) 0%, 
         rgb(155, 175, 180) 75%, 
@@ -54,19 +42,35 @@ a {
     );
 }
 
-.abilityDesc {
+.tooltipDesc1 {
     border: 1px solid black;
     padding: 2px;
     background-color: black;
     color: white;
+    overflow-wrap: break-word;
 }
 
-.abilityData {
+.tooltipDesc2 {
     border: 1px solid black;
     padding: 2px;
     background-color: rgb(50, 40, 50);
     color: rgb(255, 200, 0);
     height: 100%;
+    overflow-wrap: break-word;
+}
+
+.ability, .buff {
+    width: 19%;
+    vertical-align: top;
+    display: inline-block;
+    margin: 3px;
+}
+
+.abilityId {
+    color: rgb(70, 70, 70);
+    font-weight: normal;
+    float: right;
+    text-align: right;
 }
 
 .abilityBuffId {

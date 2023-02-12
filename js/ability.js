@@ -169,7 +169,7 @@ class Ability {
         }
     }
 
-    localizedDescription(){
+    localizedDescription(langStrings){
         if (!this.description) {
             return "No Tooltip assigned";
         }
@@ -205,6 +205,10 @@ class Ability {
         });
         
         return parsedParts.join("");
+    }
+
+    localizedName(langStrings){
+        return langStrings["SKILLNAME"][this.localeNameId];
     }
 
     /**

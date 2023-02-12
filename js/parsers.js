@@ -34,6 +34,36 @@ function parseAbilityScript(rawScript){
     return parseArray;
 }
 
+/**
+ * Convert the raw script into `Buff` instances where applicable 
+ * while keeping other pieces of the original code
+ * @param {string} rawScript The script to be parsed
+ * @returns {Array<Buff | string>} The parsed script
+ */
+function parseBuffScript(rawScript){
+    let lines = rawScript.split("\r\n");
+    let lastBuff = null;
+    let parseArray = [];
+    for (const line of lines) {
+        /** @type {RegExpMatchArray | null} */
+        let match = null;
+        //Conditions ordered from most common to least commonly encountered
+        if (match = line.match(/^_root.hackMove2\[(\d+)\] ?= ?(.+);/)){
+            lastBuff.setAttribute(+match[1], match[2]);
+            continue;
+        }
+        if (match = line.match(/^addNewBuffKrin\((.+)\);/)){
+            lastBuff = new Buff(
+                match[1].replace("\\'", "'").split(",")
+            );
+            parseArray.push(lastBuff);
+            continue;
+        }
+        parseArray.push(line);
+    }
+    return parseArray;
+}
+
 function parseLangScript(rawScript){
     let lines = rawScript.split("\r\n");
     let parsed = {};
@@ -45,7 +75,7 @@ function parseLangScript(rawScript){
         )){
             const key = match[1];
             const arrayIndex = match[2];
-            const value = match[3];
+            const value = match[3].replace("\\'", "'");
             if (arrayIndex === undefined){
                 parsed[key] = value;
             } else {
