@@ -97,5 +97,14 @@ function renderBuff(buff){
     element.querySelector(".buffId").textContent = buff.id;
     element.querySelector(".buffDesc").textContent = buff.localizedDescription(gameData.langStrings);
 
+    const dataEl = element.querySelector(".buffData");
+    const attributeEl = element.querySelector(".buffAttributes");
+    buff.attributes.forEach((value, id) => {
+        let newAttributeEl = attributeEl.cloneNode(true);
+        newAttributeEl.classList.remove("hidden");
+        newAttributeEl.querySelector(".attributeId").textContent = id;
+        newAttributeEl.querySelector(".attributeValue").textContent = value;
+        dataEl.appendChild(newAttributeEl);
+    });
     return element;
 }
