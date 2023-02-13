@@ -5,17 +5,17 @@
 function renderAbility(ability){
     //Skip the "None" move
     if (ability.id === 0){
-        return;
+        return document.createElement("div");
     }
     /** @type {HTMLElement} */
     const element = document.getElementById("abilityTemplate").cloneNode(true);
     element.removeAttribute("id");
     element.setAttribute("x-abilityId", ability.id);
     element.querySelector(".abilityId").textContent = ability.id;
-    element.querySelector(".abilityTitle").title = "Localized name: " + ability.localizedName(langStrings);
+    element.querySelector(".abilityTitle").title = "Localized name: " + ability.localizedName(gameData.langStrings);
     element.querySelector(".abilityName").textContent = ability.name;
     element.querySelector(".abilityCost").textContent = ability.getCostString();
-    element.querySelector(".abilityDesc").textContent = ability.localizedDescription(langStrings);
+    element.querySelector(".abilityDesc").textContent = ability.localizedDescription(gameData.langStrings);
     element.querySelector(".abilityElement").textContent = (JSON.parse(ability.element) ?? "Physical") + " type";
 
     let scalings = [];
@@ -76,11 +76,12 @@ function renderAbility(ability){
     if (ability.buffId){
         element.querySelector(".abilityBuff").classList.remove("hidden");
         element.querySelector(".abilityBuffChance").textContent = toPercent(ability.buffApplyChance ?? 1);
+        element.querySelector(".abilityBuffId").setAttribute("tooltip-data", JSON.parse(ability.buffId));
         element.querySelector(".abilityBuffId").textContent = ability.buffId;
         element.querySelector(".abilityBuffTarget").textContent = ability.buffTarget === 1 ? "self" : "target";
     }
 
-    document.getElementById("content").appendChild(element);
+    return element;
 }
 
 /**
@@ -92,9 +93,9 @@ function renderBuff(buff){
     const element = document.getElementById("buffTemplate").cloneNode(true);
     element.removeAttribute("id");
 
-    element.querySelector(".buffName").textContent = buff.localizedName(langStrings);
-    element.querySelector(".buffId").textContent = JSON.parse(buff.id);
-    element.querySelector(".buffDesc").textContent = buff.localizedDescription(langStrings);
+    element.querySelector(".buffName").textContent = buff.localizedName(gameData.langStrings);
+    element.querySelector(".buffId").textContent = buff.id;
+    element.querySelector(".buffDesc").textContent = buff.localizedDescription(gameData.langStrings);
 
-    document.getElementById("content").appendChild(element);
+    return element;
 }

@@ -2,9 +2,9 @@
 
 class Buff {
     constructor(params){
-        this.id = params[0];
+        this.id = JSON.parse(params[0]);
         this.name = params[1];
-        this.type = params[2];
+        this.type = JSON.parse(params[2]);
         this.attributes = new Map();
         //Internal
         this.attributeOrder = [];

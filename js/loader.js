@@ -18,14 +18,32 @@ async function initLoad(){
     await loadScriptIntoStorage("langStrings", "data/scripts/frame_1/DoAction.as");
     await loadScriptIntoStorage("abilityScript", "data/scripts/frame_42/DoAction_6.as");
     await loadScriptIntoStorage("buffScript", "data/scripts/frame_42/DoAction_10.as");
-    langStrings = parseLangScript(localStorage.getItem("langStrings"));
+    
+    let langStrings = parseLangScript(localStorage.getItem("langStrings"));
+    /** @type {Map<number, Ability>} */
+    let abilityList = new Map();
+    /** @type {Map<string, Buff>} */
+    let buffList = new Map();
+
+    
     abilitiesWithScript = parseAbilityScript(localStorage.getItem("abilityScript"));
     abilitiesWithScript
         .filter(e => typeof e !== "string")
-        .forEach(a => renderAbility(a));
+        .forEach(a => {
+            abilityList.set(a.id, a);
+        });
     
     buffsWithScript = parseBuffScript(localStorage.getItem("buffScript"));
     buffsWithScript
         .filter(e => typeof e !== "string")
-        .forEach(b => renderBuff(b));
+        .forEach(b => {
+            buffList.set(b.id, b);
+        });
+    return {
+        langStrings: langStrings,
+        abilities: abilityList,
+        abilityScript: abilitiesWithScript,
+        buffs: buffList,
+        buffScript: buffsWithScript
+    };
 }
