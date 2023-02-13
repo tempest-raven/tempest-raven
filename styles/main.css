@@ -12,6 +12,7 @@ a {
 #tooltip {
     position: fixed;
     opacity: 95%;
+    max-width: 20%;
 }
 
 #abilityTemplate, #buffTemplate {
