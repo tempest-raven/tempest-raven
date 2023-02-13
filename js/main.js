@@ -48,7 +48,6 @@ document.addEventListener("mousemove", event => {
     const tooltip = document.getElementById("tooltip");
     tooltip.style.left = event.clientX + 10 + "px";
     tooltip.style.top = event.clientY + 10 + "px";
-    console.log(event.clientX, event.clientY);
 });
 
 function toPercent(value){
