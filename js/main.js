@@ -21,8 +21,8 @@ document.addEventListener("mouseover", event => {
     const element = dataMap[tooltipType].get(tooltipData);
     const tooltip = document.getElementById("tooltip");
     tooltip.appendChild(fn(element));
-    tooltip.style.left = event.clientX + 2 + "px";
-    tooltip.style.top = event.clientY + 2 + "px";
+    tooltip.style.left = event.clientX + 10 + "px";
+    tooltip.style.top = event.clientY + 10 + "px";
     tooltip.classList.remove("hidden");
 });
 
@@ -46,8 +46,8 @@ document.addEventListener("mousemove", event => {
         return false;
     }
     const tooltip = document.getElementById("tooltip");
-    tooltip.style.left = event.clientX + 2 + "px";
-    tooltip.style.top = event.clientY + 2 + "px";
+    tooltip.style.left = event.clientX + 10 + "px";
+    tooltip.style.top = event.clientY + 10 + "px";
     console.log(event.clientX, event.clientY);
 });
 
