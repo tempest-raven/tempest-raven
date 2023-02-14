@@ -146,7 +146,7 @@ class Ability {
 
     initializeData(parameters){
         for (let index = 0; index < parameters.length; index++) {
-            const paramName = parameterArray[index];
+            const paramName = Ability.parameterArray[index];
             const paramValue = parameters[index];
             this[paramName] = JSON.parse(paramValue);
         }
@@ -157,7 +157,7 @@ class Ability {
             return "No Tooltip assigned";
         }
         const replacerFunc = function(_, index, percent) {
-            const value = this[secondArrayMap.get(+index)];
+            const value = this[Ability.secondArrayMap.get(+index)];
             const num = isNaN(value) ? value : Math.round(value * 100);
             return "\"" + num + (percent ? "%" : "") + "\"";
         }.bind(this);
@@ -179,7 +179,7 @@ class Ability {
             }
             match = /_root\.hackMove\[(\d+)\]/.exec(part);
             if (match !== null){
-                return this[secondArrayMap.get(+match[1])];
+                return this[Ability.secondArrayMap.get(+match[1])];
             }
             if (/^[A-Za-z_]/.test(part)){
                 return part;
@@ -203,7 +203,7 @@ class Ability {
         if (!this.attributeOrder.includes(attributeIndex)){
             this.attributeOrder.push(attributeIndex);
         }
-        const attributeName = secondArrayMap.get(attributeIndex);
+        const attributeName = Ability.secondArrayMap.get(attributeIndex);
         let tmpVal = value;
         try {
             /*
