@@ -4,7 +4,7 @@ elementColorArray = ["0xC40000","0xFB95C8","0x68CBF4","0xFF6600","0xFFCC00","0x8
 document.addEventListener("mouseover", event => {
     /** @type {HTMLElement} */
     let target = event.target;
-    if (target.getAttribute("tooltip-type") === null){
+    if (!target.getAttribute || target.getAttribute("tooltip-type") === null){
         return false;
     }
     let tooltipType = target.getAttribute("tooltip-type");
@@ -29,7 +29,7 @@ document.addEventListener("mouseover", event => {
 document.addEventListener("mouseout", event => {
     /** @type {HTMLElement} */
     let target = event.target;
-    if (target.getAttribute("tooltip-type") === null){
+    if (!target.getAttribute || target.getAttribute("tooltip-type") === null){
         return false;
     }
     const tooltip = document.getElementById("tooltip");
@@ -42,22 +42,13 @@ document.addEventListener("mouseout", event => {
 document.addEventListener("mousemove", event => {
     /** @type {HTMLElement} */
     let target = event.target;
-    if (target.getAttribute("tooltip-type") === null){
+    if (!target.getAttribute || target.getAttribute("tooltip-type") === null){
         return false;
     }
     const tooltip = document.getElementById("tooltip");
     tooltip.style.left = event.clientX + 10 + "px";
     tooltip.style.top = event.clientY + 10 + "px";
 });
-
-function toPercent(value){
-    if (typeof value === "number"){
-        //Keeps one decimal on the final percentage
-        return `${Math.round(value * 1000) / 10}%`;
-    } else {
-        return value;
-    }
-}
 
 /** @type {Awaited<ReturnType<initLoad>>} */
 let gameData;

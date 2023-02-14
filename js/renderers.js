@@ -100,10 +100,19 @@ function renderBuff(buff){
     const dataEl = element.querySelector(".buffData");
     const attributeEl = element.querySelector(".buffAttributes");
     buff.attributes.forEach((value, id) => {
+        let attributeData = Buff.attributeMap.get(id);
+        if (attributeData === undefined){
+            return;
+        }
+        let [key, fn] = attributeData;
+        let processedValue = fn(value);
+        if (processedValue !== null){
+            processedValue = ": " + processedValue;
+        }
         let newAttributeEl = attributeEl.cloneNode(true);
         newAttributeEl.classList.remove("hidden");
-        newAttributeEl.querySelector(".attributeId").textContent = id;
-        newAttributeEl.querySelector(".attributeValue").textContent = value;
+        newAttributeEl.querySelector(".attributeId").textContent = key;
+        newAttributeEl.querySelector(".attributeValue").textContent = processedValue;
         dataEl.appendChild(newAttributeEl);
     });
     return element;

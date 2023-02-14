@@ -1,10 +1,13 @@
 //Defined in frame_42/DoAction_10
 
 class Buff {
+    /** @type {Map<number, [string, (number) => number | string]>} */
+    static attributeMap = new Map();
+
     constructor(params){
         this.id = JSON.parse(params[0]);
         this.name = params[1];
-        this.type = JSON.parse(params[2]);
+        this.element = JSON.parse(params[2]);
         this.attributes = new Map();
         //Internal
         this.attributeOrder = [];
@@ -57,6 +60,58 @@ class Buff {
         if (!this.attributeOrder.includes(attributeIndex)){
             this.attributeOrder.push(attributeIndex);
         }
+        if (attributeIndex !== 25){
+            //Except for description, everything else is a number
+            value = +value; 
+        }
         this.attributes.set(attributeIndex, value);
     }
 }
+
+const identity = (_) => _;
+let toPercentSigned = v => (v > 0 ? "+" : "") + toPercent(v);
+let scaleFunction = v => v > 0 ? `${toPercent(v)} damage` : `${toPercent(-v)} healing`;
+//We do not need to set 0 and 1 because they're built-in
+Buff.attributeMap
+    .set(3, ["Strength modifier", toPercentSigned])
+    .set(5, ["Instinct modifier", toPercentSigned])
+    .set(7, ["Speed modifier", toPercentSigned])
+    .set(9, ["Health modifier", toPercentSigned])
+    .set(10, ["Flat direct damage dealt", identity])
+    .set(11, ["Direct damage dealt", toPercentSigned])
+    .set(12, ["Flat direct damage taken", identity])
+    .set(13, ["Direct damage taken", toPercentSigned])
+    .set(14, ["Flat effect over time", 
+        v => v > 0 ? `${v} damage` : `${-v} healing`])
+    .set(15, ["Focus granted", v => -v])
+    .set(16, ["Duration", v => v > 0 ? `${v} turn(s)` : "Passive"]) //mandatory
+    .set(17, ["Stunned", _ => null])
+    .set(19, ["Flat shield", identity])
+    .set(20, ["Buff or debuff", v => v === 1 ? "buff" : "debuff"])
+    .set(23, ["Element piercing", toPercentSigned])
+    .set(24, ["Element defence", toPercentSigned])
+    //Skip 25
+    .set(26, ["Subversion", _ => "Swaps healing and damage"])
+    .set(27, ["Unstackable", _ => null])
+    .set(28, ["Strength scale", scaleFunction])
+    .set(29, ["Instinct scale", scaleFunction])
+    .set(30, ["Speed scale", scaleFunction])
+    .set(31, ["Apply visual effect", identity]) //TODO: list them
+    .set(32, ["Dispel resistance", toPercent])
+    .set(33, ["Health scale", scaleFunction])
+    .set(35, ["Healing received", toPercentSigned])
+    .set(36, ["Healing received reduction", toPercent])
+    .set(37, ["Healing done", toPercentSigned])
+    .set(38, ["Shield strength scale", toPercent])
+    .set(39, ["Shield instinct scale", toPercent])
+    .set(40, ["Shield speed scale", toPercent])
+    .set(41, ["Shield health scale", toPercent])
+    .set(42, ["Target's strength scale", toPercent])
+    .set(43, ["Target's instinct scale", toPercent])
+    .set(44, ["Target's speed scale", toPercent])
+    .set(45, ["Target's health scale", scaleFunction])
+    .set(46, ["Periodic damage taken", toPercentSigned])
+    .set(47, ["Periodic healing received", toPercentSigned])
+    .set(48, ["Periodic damage done", toPercentSigned])
+    .set(49, ["Maximum focus", identity])
+    .set(50, ["Silenced", v => null])
