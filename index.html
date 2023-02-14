@@ -7,10 +7,18 @@
 	<link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 <body>
+	<div id="navbar">
+		<button class="navbutton" x-view="abilityList">
+			Abilities
+		</button>
+		<button class="navbutton" x-view="buffList">
+			Buffs
+		</button>
+	</div>
 	<div id="loader">
 		
 	</div>
-	<div id="abilityTemplate" class="ability">
+	<div class="ability" id="abilityTemplate">
 		<div class="abilityTitle displayTitle">
 			<span class="abilityName">Auto Swing</span>
 			<span class="abilityId">0</span>
@@ -61,7 +69,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="buffTemplate" class="buff">
+	<div class="buff" id="buffTemplate">
 		<div class="buffName displayTitle"></div>
 		<div class="buffDesc displayDesc1"></div>
 		<div class="buffData displayDesc2">
@@ -73,7 +81,8 @@
 		</div>
 	</div>
 	<div id="content">
-		
+		<div class="contentPage hidden" id="abilityList"></div>
+		<div class="contentPage hidden" id="buffList"></div>
 	</div>
 	<div id="tooltip" class="hidden" style="left: 0px; top: 0px;"></div>
 	<script type="text/javascript" src="js/utility.js"></script>

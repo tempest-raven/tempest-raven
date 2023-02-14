@@ -2,6 +2,16 @@
 //elementMainArray = ["Physical","Magic","Ice","Fire","Lightning","Earth","Shadow","Poison"];
 //elementColorArray = ["0xC40000","0xFB95C8","0x68CBF4","0xFF6600","0xFFCC00","0x856B47","0x664D80","0x508349"];
 
+document.getElementById("navbar").addEventListener("click", event => {
+    /** @type {HTMLElement} */
+    let target = event.target;
+    if (!target.classList.contains("navbutton")){
+        return false;
+    }
+    document.querySelectorAll(".contentPage").forEach(el => el.classList.add("hidden"));
+    document.querySelector(".contentPage#" + target.getAttribute("x-view")).classList.remove("hidden");
+})
+
 document.addEventListener("mouseover", event => {
     /** @type {HTMLElement} */
     let target = event.target;
@@ -55,7 +65,9 @@ document.addEventListener("mousemove", event => {
 let gameData;
 window.addEventListener('DOMContentLoaded', async (event) => {
     gameData = await initLoad();
-    const content = document.getElementById("content");
-    gameData.abilities.forEach(a => content.appendChild(renderAbility(a)));
-    gameData.buffs.forEach(a => content.appendChild(renderBuff(a)));
+    const abilityEl = document.getElementById("abilityList");
+    gameData.abilities.forEach(a => abilityEl.appendChild(renderAbility(a)));
+    
+    const buffEl = document.getElementById("buffList");
+    gameData.buffs.forEach(a => buffEl.appendChild(renderBuff(a)));
 });
