@@ -12,9 +12,6 @@ async function loadScriptIntoStorage(key, filepath){
     }
 }
 
-let langStrings;
-let abilitiesWithScript;
-let buffsWithScript;
 async function initLoad(){
     await loadScriptIntoStorage("langStrings", "data/scripts/frame_1/DoAction.as");
     await loadScriptIntoStorage("abilityScript", "data/scripts/frame_42/DoAction_6.as");
@@ -27,14 +24,14 @@ async function initLoad(){
     let buffList = new Map();
 
     
-    abilitiesWithScript = parseAbilityScript(localStorage.getItem("abilityScript"));
+    let abilitiesWithScript = parseAbilityScript(localStorage.getItem("abilityScript"));
     abilitiesWithScript
         .filter(e => typeof e !== "string")
         .forEach(a => {
             abilityList.set(a.id, a);
         });
     
-    buffsWithScript = parseBuffScript(localStorage.getItem("buffScript"));
+    let buffsWithScript = parseBuffScript(localStorage.getItem("buffScript"));
     buffsWithScript
         .filter(e => typeof e !== "string")
         .forEach(b => {
