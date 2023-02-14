@@ -14,6 +14,30 @@ class Buff {
         this.attributeOrder = [];
     }
 
+    convertToScript(){
+        let script = "addNewBuffKrin(" 
+            + JSON.stringify(this.id)
+            + ","
+            + this.name
+            + ","
+            + JSON.stringify(this.element)
+            + ");";
+
+        for (const index of this.attributeOrder){
+            let value = this.attributes.get(index);
+            if (value !== undefined && value !== null) {
+                //Avoid adding extra quotes to strings
+                if (typeof value !== "string"){
+                    value = JSON.stringify(value);
+                }
+                script += "\r\n"
+                + `_root.hackMove2[${index}] = ${value};`;
+            }
+        }
+
+        return script;
+    }
+
     localizedDescription(langStrings){
         if (this.attributes.get(25) === undefined) {
             return "No description";
@@ -61,8 +85,10 @@ class Buff {
         if (!this.attributeOrder.includes(attributeIndex)){
             this.attributeOrder.push(attributeIndex);
         }
-        if (attributeIndex !== 25){
-            //Except for description, everything else is a number
+        if (attributeIndex !== 25 
+            && !value.startsWith("_root") 
+            && !value.startsWith("\"")){
+            //Except for descriptions, almost everything else is a number
             value = +value; 
         }
         this.attributes.set(attributeIndex, value);

@@ -102,22 +102,22 @@ class Ability {
             + ");";
         
         let orderedIndexes = this.attributeOrder;
-        for (const index of secondArrayMap.keys()){
+        for (const index of Ability.secondArrayMap.keys()){
             if (!orderedIndexes.includes(index)){
                 orderedIndexes.push(index);
             }
         }
 
         for (const index of orderedIndexes){
-            let attribute = secondArrayMap.get(index);
+            let attribute = Ability.secondArrayMap.get(index);
             let value = this[attribute];
             if (value !== undefined && value !== null) {
                 //Avoid adding extra quotes to strings
                 if (typeof value !== "string"){
                     value = JSON.stringify(value);
                 }
-                script += "\n"
-                + `_root.hackMove["${index}"] = ${value};`;
+                script += "\r\n"
+                + `_root.hackMove[${index}] = ${value};`;
             }
         }
 
