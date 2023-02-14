@@ -1,49 +1,32 @@
 //Defined in frame_42/DoAction_6
 
-/** @type {Array<keyof Ability>} */
-const parameterArray = [
-    "name",
-    "canTargetSelf",
-    "canTargetEnemy",
-    "canTargetAlly",
-    "focusCost",
-    "flatHPCost",
-    "cooldown",
-    "skillAmount",
-    "accuracyMultiplier",
-    "projectileType",
-    "color",
-    "animation",
-    "animationVFX",
-    "moveType",
-    "unknownParam14", //unknown but it's always 1
-    "percentHPCost",
-    "localeNameId",
-    "soundFX"
-];
-
-/** @type {Map<number, keyof Ability>} */
-const abilityArrayMapper = new Map();
-abilityArrayMapper.set(0, "element");
-abilityArrayMapper.set(2, "strengthScale");
-abilityArrayMapper.set(4, "instinctScale");
-abilityArrayMapper.set(6, "speedScale");
-abilityArrayMapper.set(7, "critChanceMultiplier");
-abilityArrayMapper.set(9, "flatModifier");
-abilityArrayMapper.set(11, "focusScale");
-abilityArrayMapper.set(12, "healthScale");
-abilityArrayMapper.set(13, "buffId");
-abilityArrayMapper.set(14, "buffApplyChance");
-abilityArrayMapper.set(15, "dispelElementArray");
-abilityArrayMapper.set(16, "dispelCount");
-abilityArrayMapper.set(17, "description");
-abilityArrayMapper.set(19, "dispelPositive");
-abilityArrayMapper.set(21, "buffTarget");
-abilityArrayMapper.set(23, "buffElementRequirement");
-abilityArrayMapper.set(24, "buffElementReqCount");
-abilityArrayMapper.set(25, "baseMultiplier");
-
 class Ability {
+
+    /** @type {Array<keyof Ability>} */
+    static parameterArray = [
+        "name",
+        "canTargetSelf",
+        "canTargetEnemy",
+        "canTargetAlly",
+        "focusCost",
+        "flatHPCost",
+        "cooldown",
+        "skillAmount",
+        "accuracyMultiplier",
+        "projectileType",
+        "color",
+        "animation",
+        "animationVFX",
+        "moveType",
+        "unknownParam14", //unknown but it's always 1
+        "percentHPCost",
+        "localeNameId",
+        "soundFX"
+    ];
+
+    /** @type {Map<number, keyof Ability>} */
+    static secondArrayMap = new Map();
+
 	constructor(parameters){
         //Identifiers
         this.name = null; //Internal name
@@ -109,7 +92,7 @@ class Ability {
     }
 
     convertToScript(){
-        let baseParamList = parameterArray
+        let baseParamList = Ability.parameterArray
             .map(attribute => this[attribute])
             .filter(value => value !== undefined && value !== null);
 
@@ -118,14 +101,14 @@ class Ability {
             + ");";
         
         let orderedIndexes = this.attributeOrder;
-        for (const index of abilityArrayMapper.keys()){
+        for (const index of secondArrayMap.keys()){
             if (!orderedIndexes.includes(index)){
                 orderedIndexes.push(index);
             }
         }
 
         for (const index of orderedIndexes){
-            let attribute = abilityArrayMapper.get(index);
+            let attribute = secondArrayMap.get(index);
             let value = this[attribute];
             if (value !== undefined && value !== null) {
                 //Avoid adding extra quotes to strings
@@ -174,7 +157,7 @@ class Ability {
             return "No Tooltip assigned";
         }
         const replacerFunc = function(_, index, percent) {
-            const value = this[abilityArrayMapper.get(+index)];
+            const value = this[secondArrayMap.get(+index)];
             const num = isNaN(value) ? value : Math.round(value * 100);
             return "\"" + num + (percent ? "%" : "") + "\"";
         }.bind(this);
@@ -196,7 +179,7 @@ class Ability {
             }
             match = /_root\.hackMove\[(\d+)\]/.exec(part);
             if (match !== null){
-                return this[abilityArrayMapper.get(+match[1])];
+                return this[secondArrayMap.get(+match[1])];
             }
             if (/^[A-Za-z_]/.test(part)){
                 return part;
@@ -220,7 +203,7 @@ class Ability {
         if (!this.attributeOrder.includes(attributeIndex)){
             this.attributeOrder.push(attributeIndex);
         }
-        const attributeName = abilityArrayMapper.get(attributeIndex);
+        const attributeName = secondArrayMap.get(attributeIndex);
         let tmpVal = value;
         try {
             /*
@@ -243,3 +226,23 @@ class Ability {
         }
     }
 }
+
+Ability.secondArrayMap
+    .set(0, "element")
+    .set(2, "strengthScale")
+    .set(4, "instinctScale")
+    .set(6, "speedScale")
+    .set(7, "critChanceMultiplier")
+    .set(9, "flatModifier")
+    .set(11, "focusScale")
+    .set(12, "healthScale")
+    .set(13, "buffId")
+    .set(14, "buffApplyChance")
+    .set(15, "dispelElementArray")
+    .set(16, "dispelCount")
+    .set(17, "description")
+    .set(19, "dispelPositive")
+    .set(21, "buffTarget")
+    .set(23, "buffElementRequirement")
+    .set(24, "buffElementReqCount")
+    .set(25, "baseMultiplier")
