@@ -96,6 +96,9 @@ function renderBuff(buff){
 
     element.querySelector(".buffName").textContent = buff.localizedName(gameData.langStrings);
     element.querySelector(".buffId").textContent = buff.id;
+    let buffType = buff.attributes.get(20);
+    buffType = buffType === undefined ? "effect" : buffType === 1 ? "buff" : "debuff";
+    element.querySelector(".buffElement").textContent = buff.element + " " + buffType;
     element.querySelector(".buffDesc").textContent = buff.localizedDescription(gameData.langStrings);
 
     const dataEl = element.querySelector(".buffData");

@@ -114,7 +114,7 @@ Buff.attributeMap
     .set(16, ["Duration", v => v > 0 ? `${v} turn(s)` : "Passive"]) //mandatory
     .set(17, ["Stunned", _ => null])
     .set(19, ["Flat shield", identity])
-    .set(20, ["Buff or debuff", v => v === 1 ? "buff" : "debuff"])
+    //.set(20, ["Buff or debuff", v => v === 1 ? "buff" : "debuff"])
     .set(23, ["Element piercing", toPercentSigned])
     .set(24, ["Element defence", toPercentSigned])
     //Skip 25
@@ -141,4 +141,4 @@ Buff.attributeMap
     .set(47, ["Periodic healing received", toPercentSigned])
     .set(48, ["Periodic damage done", toPercentSigned])
     .set(49, ["Maximum focus", identity])
-    .set(50, ["Silenced", v => null])
+    .set(50, ["Silenced", _ => null])
