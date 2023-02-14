@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Convert the raw script into `Ability` instances where applicable 
  * while keeping other pieces of the original code

@@ -1,3 +1,4 @@
+"use strict";
 function toPercent(value){
     if (typeof value === "number"){
         //Keeps one decimal on the final percentage

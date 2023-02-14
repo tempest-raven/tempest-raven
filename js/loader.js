@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Attempts to load the vanilla scripts into localStorage
  * @param {string} key the localStorage key

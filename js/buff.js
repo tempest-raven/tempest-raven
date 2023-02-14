@@ -1,3 +1,4 @@
+"use strict";
 //Defined in frame_42/DoAction_10
 
 class Buff {
