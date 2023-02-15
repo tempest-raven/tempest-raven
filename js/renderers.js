@@ -62,9 +62,15 @@ function renderAbility(ability){
         element.querySelector(".abilityDispelPositive").classList.toggle("hidden", ability.dispelPositive === 1);
     }
 
-    if (ability.accuracyMultiplier !== 1 || ability.critChanceMultiplier){
+    if (ability.projectileType === "Shock" 
+    || ability.accuracyMultiplier !== 1 
+    || ability.critChanceMultiplier){
         element.querySelector(".abilityHitModifiers").classList.remove("hidden");
-        element.querySelector(".abilityAccuracy").textContent = toPercent(ability.accuracyMultiplier);
+        if (ability.projectileType === "Shock"){
+            element.querySelector(".abilityAccuracy").textContent = "Unavoidable";
+        } else {
+            element.querySelector(".abilityAccuracy").textContent = toPercent(ability.accuracyMultiplier) + " accuracy";
+        }
         element.querySelector(".abilityCritChance").textContent = toPercent(ability.critChanceMultiplier ?? 1);
     }
     
