@@ -63,15 +63,18 @@ function renderAbility(ability){
     }
 
     if (ability.projectileType === "Shock" 
-    || ability.accuracyMultiplier !== 1 
-    || ability.critChanceMultiplier){
+    || ability.accuracyMultiplier !== 1){
         element.querySelector(".abilityHitModifiers").classList.remove("hidden");
         if (ability.projectileType === "Shock"){
             element.querySelector(".abilityAccuracy").textContent = "Unavoidable";
         } else {
             element.querySelector(".abilityAccuracy").textContent = toPercent(ability.accuracyMultiplier) + " accuracy";
-        }
-        element.querySelector(".abilityCritChance").textContent = toPercent(ability.critChanceMultiplier ?? 1);
+        } 
+    }
+
+    if (ability.critChanceMultiplier) {
+        element.querySelector(".abilityCritDisplay").classList.remove("hidden");
+        element.querySelector(".abilityCritChance").textContent = toPercent(ability.critChanceMultiplier);
     }
     
     if (ability.focusScale){
