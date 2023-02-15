@@ -71,7 +71,7 @@ function renderAbility(ability){
     if (ability.focusScale){
         element.querySelector(".abilityFocusScale").classList.remove("hidden");
         element.querySelector(".abilityFocusMulti").textContent = toPercent(ability.focusScale);
-        element.querySelector(".abilityBaseMulti").textContent = toPercent(ability.baseMultiplier);
+        element.querySelector(".abilityBaseMulti").textContent = toPercent(ability.baseMultiplier ?? 0);
     }
 
     if (ability.buffId){

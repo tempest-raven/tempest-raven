@@ -1,3 +1,5 @@
+/* Core */
+
 html {
     font-family: Arial, Helvetica, sans-serif;
     cursor: default;
@@ -15,9 +17,34 @@ a {
     max-width: 20%;
 }
 
-#abilityTemplate, #buffTemplate {
-    display: none;
+/* Colors */
+
+.Physical {
+    color: #C40000;
 }
+.Magic {
+    color: #FB95C8;
+}
+.Ice {
+    color: #68CBF4;
+}
+.Fire {
+    color: #FF6600;
+}
+.Lightning {
+    color: #FFCC00;
+}
+.Earth {
+    color: #856B47;
+}
+.Shadow {
+    color: #664D80;
+}
+.Poison {
+    color: #508349;
+}
+
+/* Game-like element display */
 
 .displayTitle, .displaySubTitle {
     border: 1px solid black;
@@ -65,6 +92,8 @@ a {
     overflow-wrap: break-word;
 }
 
+/* Element specific layouts */
+
 #content .ability, #content .buff {
     width: 19%;
     vertical-align: top;
@@ -85,6 +114,8 @@ a {
     text-decoration: underline;
     cursor: pointer;
 }
+
+/* High priority */
 
 .hidden {
     display: none;

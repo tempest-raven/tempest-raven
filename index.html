@@ -18,76 +18,183 @@
 	<div id="loader">
 		
 	</div>
-	<div class="ability" id="abilityTemplate">
-		<div class="abilityTitle displayTitle">
-			<span class="abilityName">Auto Swing</span>
-			<span class="abilityId">0</span>
-		</div>
-		<div class="abilityCost displayCost">This move costs nothing</div>
-		<div class="abilityDesc displayDesc1">Hit the enemy.</div>
-		<div class="abilityData displayDesc2">
-			<div class="abilityElement">Physical</div>
-			<div class="abilityTargets"></div>
-			<div class="abilityEffect hidden" x-effect="Full Damage">
-				Deal <span class="abilityScale"></span> damage
-			</div>
-			<div class="abilityEffect hidden" x-effect="Focus">
-				Grant <span class="abilityScale"></span> focus
-			</div>
-			<div class="abilityEffect hidden" x-effect="Heal">
-				Restore <span class="abilityScale"></span>
-			</div>
-			<div class="abilityEffect hidden" x-effect="Attack">
-				<!--Shatter Bolt uses this, do not remove-->
-			</div>
-			<div class="abilityRequirements hidden">
-				Requires 
-				<span class="abilityReqCount"></span> 
-				<span class="abilityReqType"></span> 
-				type buff(s) on the target
-			</div>
-			<div class="abilityDispel hidden">
-				Dispel 
-				<span class="abilityDispelCount"></span> 
-				<span class="abilityDispelArray"></span> 
-				<span class="abilityDispelPositive">de</span>buff(s)
-			</div>
-			<div class="abilityHitModifiers hidden">
-				<span class="abilityAccuracy"></span> accuracy, 
-				<span class="abilityCritChance"></span> critical strike chance multiplier
-			</div>
-			<div class="abilityFocusScale hidden">
-				Scales with 
-				<span class="abilityFocusMulti">100%</span> of current focus 
-				+ <span class="abilityBaseMulti">100%</span>
-			</div>
-			<div class="abilityBuff hidden">
-				<span class="abilityBuffChance">100%</span> 
-				chance to apply the 
-				<span class="abilityBuffId" tooltip-type="buff" tooltip-data="AUTOREGEN">AUTOREGEN</span> 
-				buff to <span class="abilityBuffTarget">self</span> on hit
-			</div>
-		</div>
-	</div>
-	<div class="buff" id="buffTemplate">
-		<div class="buffName displayTitle"></div>
-		<div class="buffElement displaySubTitle"></div>
-		<div class="buffDesc displayDesc1"></div>
-		<div class="buffData displayDesc2">
-			ID: <span class="buffId"></span>
-			<div class="buffAttributes hidden">
-				<span class="attributeId"></span>
-				<span class="attributeValue"></span>
-			</div>
-		</div>
-	</div>
 	<div id="content">
 		<div class="contentPage hidden" id="abilityList"></div>
-		<div class="contentPage hidden" id="editAbility"></div>
+		<div class="contentPage" id="editAbility">
+			<form id="abilityForm">
+				<input type="hidden" name="id">
+				<input disabled="disabled" name="name">
+				<input name="localeNameId">
+				<select name="element">
+					<option value="Physical">Physical</option>
+					<option value="Magic">Magic/Cosmic</option>
+					<option value="Ice">Ice</option>
+					<option value="Fire">Fire</option>
+					<option value="Lightning">Lightning</option>
+					<option value="Earth">Earth</option>
+					<option value="Shadow">Shadow</option>
+					<option value="Poison">Poison</option>
+				</select>
+				<div>
+					<input type="number" name="focusCost">
+					<input type="number" name="flatHPCost">
+					<input type="number" name="percentHPCost">
+				</div>
+				<input type="number" name="cooldown" placeholder="0">
+				<input type="number" name="skillAmount" placeholder="1">
+				<select name="moveType">
+					<option value="Full Damage">Full Damage</option>
+					<option value="Focus">Focus</option>
+					<option value="Heal">Heal</option>
+				</select>
+				<div>
+					<input type="checkbox" name="canTargetSelf">
+					<input type="checkbox" name="canTargetEnemy">
+					<input type="checkbox" name="canTargetAlly">
+				</div>
+				<div>
+					<input type="number" name="flatModifier">
+					<input type="number" name="strengthScale">
+					<input type="number" name="instinctScale">
+					<input type="number" name="speedScale">
+					<input type="number" name="healthScale">
+				</div>
+				<div>
+					<input type="number" name="accuracyMultiplier">
+					<input type="number" name="critChanceMultiplier">
+				</div>
+				<div>
+					<input type="number" name="baseMultiplier">
+					<input type="number" name="focusScale">
+				</div>
+				<div>
+					<input type="number" name="buffElementReqCount">
+					<select name="buffElementRequirement">
+						<option value="Physical">Physical</option>
+						<option value="Magic">Magic/Cosmic</option>
+						<option value="Ice">Ice</option>
+						<option value="Fire">Fire</option>
+						<option value="Lightning">Lightning</option>
+						<option value="Earth">Earth</option>
+						<option value="Shadow">Shadow</option>
+						<option value="Poison">Poison</option>
+					</select>
+				</div>
+				<div>
+					<input list="buff" name="buffId">
+					<input type="number" name="buffApplyChance" min="0" max="100">
+					<input type="radio" name="buffTarget" value="">
+					<input type="radio" name="buffTarget" value="0">
+					<input type="radio" name="buffTarget" value="1">
+				</div>
+				<div>
+					<input type="number" name="dispelCount">
+					<select multiple name="dispelElementArray">
+						<option value="Physical">Physical</option>
+						<option value="Magic">Magic/Cosmic</option>
+						<option value="Ice">Ice</option>
+						<option value="Fire">Fire</option>
+						<option value="Lightning">Lightning</option>
+						<option value="Earth">Earth</option>
+						<option value="Shadow">Shadow</option>
+						<option value="Poison">Poison</option>
+					</select>
+					<input type="radio" name="dispelPositive" value="">
+					<input type="radio" name="dispelPositive" value="1">
+					<input type="radio" name="dispelPositive" value="-1">
+				</div>
+				<div>
+					<select name="projectileType">
+						<option value="Melee">Melee</option>
+						<option value="Shock">Shock</option>
+						<option value="Missile">Missile</option>
+					</select>
+					<input type="color" name="color">
+					<input type="text" name="animation">
+					<input type="text" name="animationVFX">
+					<input type="text" name="soundFX">
+				</div>
+			</form>
+		</div>
 		<div class="contentPage hidden" id="buffList"></div>
 		<div class="contentPage hidden" id="editBuff"></div>
 	</div>
-	<div id="tooltip" class="hidden" style="left: 0px; top: 0px;"></div>
+	<div class="hidden templates">
+		<div class="ability" id="abilityTemplate">
+			<div class="abilityTitle displayTitle">
+				<span class="abilityName">Auto Swing</span>
+				<span class="abilityId">0</span>
+			</div>
+			<div class="abilityCost displayCost">This move costs nothing</div>
+			<div class="abilityDesc displayDesc1">Hit the enemy.</div>
+			<div class="abilityData displayDesc2">
+				<div class="abilityElement">Physical</div>
+				<div class="abilityTargets"></div>
+				<div class="abilityEffect hidden" x-effect="Full Damage">
+					Deal <span class="abilityScale"></span> damage
+				</div>
+				<div class="abilityEffect hidden" x-effect="Focus">
+					Grant <span class="abilityScale"></span> focus
+				</div>
+				<div class="abilityEffect hidden" x-effect="Heal">
+					Restore <span class="abilityScale"></span>
+				</div>
+				<div class="abilityEffect hidden" x-effect="Attack">
+					<!--Shatter Bolt uses this, do not remove-->
+				</div>
+				<div class="abilityRequirements hidden">
+					Requires 
+					<span class="abilityReqCount"></span> 
+					<span class="abilityReqType"></span> 
+					type buff(s) on the target
+				</div>
+				<div class="abilityDispel hidden">
+					Dispel 
+					<span class="abilityDispelCount"></span> 
+					<span class="abilityDispelArray"></span> 
+					<span class="abilityDispelPositive">de</span>buff(s)
+				</div>
+				<div class="abilityHitModifiers hidden">
+					<span class="abilityAccuracy"></span> accuracy, 
+					<span class="abilityCritChance"></span> critical strike chance multiplier
+				</div>
+				<div class="abilityFocusScale hidden">
+					Scales with 
+					<span class="abilityFocusMulti">100%</span> of current focus 
+					+ <span class="abilityBaseMulti">100%</span>
+				</div>
+				<div class="abilityBuff hidden">
+					<span class="abilityBuffChance">100%</span> 
+					chance to apply the 
+					<span class="abilityBuffId" tooltip-type="buff" tooltip-data="AUTOREGEN">AUTOREGEN</span> 
+					buff to <span class="abilityBuffTarget">self</span> on hit
+				</div>
+			</div>
+		</div>
+		<div class="buff" id="buffTemplate">
+			<div class="buffName displayTitle"></div>
+			<div class="buffElement displaySubTitle"></div>
+			<div class="buffDesc displayDesc1"></div>
+			<div class="buffData displayDesc2">
+				ID: <span class="buffId"></span>
+				<div class="buffAttributes hidden">
+					<span class="attributeId"></span>
+					<span class="attributeValue"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<datalist id="elements">
+		<option value="Physical">Physical</option>
+		<option value="Magic">Magic/Cosmic</option>
+		<option value="Ice">Ice</option>
+		<option value="Fire">Fire</option>
+		<option value="Lightning">Lightning</option>
+		<option value="Earth">Earth</option>
+		<option value="Shadow">Shadow</option>
+		<option value="Poison">Poison</option>
+	</datalist>
+	<div id="tooltip" class="hidden"></div>
 	<script type="text/javascript" src="js/utility.js"></script>
 
 	<script type="text/javascript" src="js/ability.js"></script>
