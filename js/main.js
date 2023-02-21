@@ -30,8 +30,7 @@ document.addEventListener("mouseover", event => {
     const element = dataMap[tooltipType].get(tooltipData);
     const tooltip = document.getElementById("tooltip");
     tooltip.appendChild(fn(element));
-    tooltip.style.left = event.clientX + 10 + "px";
-    tooltip.style.top = event.clientY + 10 + "px";
+    moveTooltip(event.clientX, event.clientY);
     tooltip.classList.remove("hidden");
 });
 
@@ -54,15 +53,14 @@ document.addEventListener("mousemove", event => {
     if (!target.getAttribute || target.getAttribute("tooltip-type") === null){
         return false;
     }
-    const tooltip = document.getElementById("tooltip");
-    tooltip.style.left = event.clientX + 10 + "px";
-    tooltip.style.top = event.clientY + 10 + "px";
+    moveTooltip(event.clientX, event.clientY);
 });
 
 /** @type {Awaited<ReturnType<initLoad>>} */
 let gameData;
 window.addEventListener('DOMContentLoaded', async (event) => {
-    gameData = await initLoad();
+    loadHTML();
+    gameData = await loadGameScripts();
     const abilityEl = document.getElementById("abilityList");
     gameData.abilities.forEach(a => abilityEl.appendChild(renderAbility(a)));
     

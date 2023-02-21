@@ -12,7 +12,7 @@ async function loadScriptIntoStorage(key, filepath){
     }
 }
 
-async function initLoad(){
+async function loadGameScripts(){
     await loadScriptIntoStorage("langStrings", "data/scripts/frame_1/DoAction.as");
     await loadScriptIntoStorage("abilityScript", "data/scripts/frame_42/DoAction_6.as");
     await loadScriptIntoStorage("buffScript", "data/scripts/frame_42/DoAction_10.as");
@@ -44,4 +44,10 @@ async function initLoad(){
         buffs: buffList,
         buffScript: buffsWithScript
     };
+}
+
+function loadHTML(){
+    fetch("abilityForm.html")
+        .then(response => response.text())
+        .then(html => document.getElementById("editAbility").innerHTML = html)
 }

@@ -3,12 +3,20 @@
 html {
     font-family: Arial, Helvetica, sans-serif;
     cursor: default;
-    background-color: black;
-    color: white;
+    /*background-color: black;
+    color: white;*/
 }
 
 a {
     cursor: pointer;
+}
+
+label:not(.inline), textarea {
+    display: block;
+}
+
+textarea {
+    width: 100%;
 }
 
 #tooltip {
@@ -92,6 +100,17 @@ a {
     overflow-wrap: break-word;
 }
 
+input, textarea {
+    background: transparent;
+    color: inherit;
+    /*border-width: 1px;*/
+}
+
+input.num, input.percent {
+    width: 4em;
+    text-align: right;
+}
+
 /* Element specific layouts */
 
 #content .ability, #content .buff {
@@ -113,6 +132,10 @@ a {
     font-weight: bold;
     text-decoration: underline;
     cursor: pointer;
+}
+
+form {
+    max-width: 50%;
 }
 
 /* High priority */

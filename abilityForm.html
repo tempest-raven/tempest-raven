@@ -1,0 +1,205 @@
+<form id="abilityForm">
+    <div class="displayTitle">
+        <label>Display name: <input name="localeNameId"></label>
+        <input type="hidden" class="abilityId" name="id">
+    </div>
+    <div class="displaySubTitle">
+        Internal name: <input disabled="disabled" name="name">
+    </div>
+    <div class="displayCost">
+        Costs
+        <label class="inline"><input name="focusCost" class="num" placeholder="0"> Focus</label>,
+        <label class="inline"><input name="flatHPCost" class="num" placeholder="0"> Health</label> and
+        <label class="inline"><input name="percentHPCost" class="percent" placeholder="0">% of Total Health</label>
+    </div>
+    <div>
+        <fieldset>
+            <legend>Core settings</legend>
+            <label>
+                In-game description
+                <textarea name="description" placeholder="No Tooltip assigned"></textarea>
+            </label>
+            
+            <label>
+                Element
+                <select name="element">
+                    <option value="Physical">Physical</option>
+                    <option value="Magic">Magic/Cosmic</option>
+                    <option value="Ice">Ice</option>
+                    <option value="Fire">Fire</option>
+                    <option value="Lightning">Lightning</option>
+                    <option value="Earth">Earth</option>
+                    <option value="Shadow">Shadow</option>
+                    <option value="Poison">Poison</option>
+                </select>
+            </label>
+            
+            <label>
+                Cooldown
+                <input name="cooldown" class="num" placeholder="0">
+            </label>
+            <label>
+                Maximum amount on ability wheel
+                <input name="skillAmount" class="num" placeholder="1">
+            </label>
+            <label>
+                Move type
+                <select name="moveType">
+                    <option value="Full Damage">Damage</option>
+                    <option value="Focus">Focus change</option>
+                    <option value="Heal">Heal</option>
+                </select>
+            </label>
+            <label>
+                Movement type
+                <select name="projectileType">
+                    <option value="Melee">Melee</option>
+                    <option value="Shock">Instant ("Shock")</option>
+                    <option value="Missile">Projectile</option>
+                </select>
+                <small>Shock makes the ability undodgeable</small>
+            </label>
+            <fieldset>
+                <legend>Targets</legend>
+                <label>
+                    <input type="checkbox" name="canTargetSelf">
+                    Self
+                </label>
+                <label>
+                    <input type="checkbox" name="canTargetEnemy">
+                    Enemies
+                </label>
+                <label>
+                    <input type="checkbox" name="canTargetAlly">
+                    Allies
+                </label>
+            </fieldset>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Scalings</legend>
+            <label>
+                Base value
+                <input name="flatModifier" class="num" placeholder="0">
+            </label>
+            <label>
+                Strength
+                <input name="strengthScale" class="percent" placeholder="0">%
+            </label>
+            <label>
+                Instinct
+                <input name="instinctScale" class="percent" placeholder="0">%
+            </label>
+            <label>
+                Speed
+                <input name="speedScale" class="percent" placeholder="0">%
+            </label>
+            <label>
+                Max health
+                <input name="healthScale" class="percent" placeholder="0">%
+            </label>
+        </fieldset>
+        <fieldset>
+            <label>
+                Accuracy modifier
+                <input name="accuracyMultiplier" class="percent" placeholder="100">%
+            </label>
+            <label>
+                Critical chance multiplier
+                <input name="critChanceMultiplier" class="percent" placeholder="100">%
+            </label>
+        </fieldset>
+        <fieldset>
+            <legend>Focus scaling moves</legend>
+            <label>
+                Base multiplier
+                <input name="baseMultiplier" class="percent" placeholder="100">%
+                <small>(Effectiveness at 0 Focus)</small>
+            </label>
+            <label>
+                Focus scaling
+                <input name="focusScale" class="percent" placeholder="0">%
+                <small>(This gets added to the base multiplier bases on focus)</small>
+            </label>
+            
+        </fieldset>
+        <fieldset>
+            <legend>Buff requirements</legend>
+            <label class="inline">
+                Requires 
+                <input name="buffElementReqCount" placeholder="0">
+            </label>
+            <select name="buffElementRequirement">
+                <option value="">-</option>
+                <option value="Physical">Physical</option>
+                <option value="Magic">Magic/Cosmic</option>
+                <option value="Ice">Ice</option>
+                <option value="Fire">Fire</option>
+                <option value="Lightning">Lightning</option>
+                <option value="Earth">Earth</option>
+                <option value="Shadow">Shadow</option>
+                <option value="Poison">Poison</option>
+            </select>
+            buff on the target to cast
+        </fieldset>
+        <fieldset>
+            <legend>Buff effects</legend>
+            <label class="inline">
+                On hit, has a <input name="buffApplyChance" class="percent" placeholder="0" min="0" max="100">% chance
+            </label>
+            <label class="inline">
+                to apply the <input list="buff" name="buffId" placeholder="BUFFID"> buff on
+            </label>
+            <div>
+                <label class="inline">
+                    <input type="radio" name="buffTarget" value="0">
+                    the target
+                </label>
+                <label class="inline">
+                    <input type="radio" name="buffTarget" value="1">
+                    self
+                </label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Dispel</legend>
+            <label class="inline">Dispels <input name="dispelCount" class="num"></label>
+            <label class="inline"><input type="radio" name="dispelPositive" value="1"> buffs</label>
+            <label class="inline"><input type="radio" name="dispelPositive" value="-1"> debuffs</label>
+            from the target.
+            <div>
+                The dispelled buffs can be from the following elements:
+                <select multiple name="dispelElementArray" size="8">
+                    <option value="Physical">Physical</option>
+                    <option value="Magic">Magic/Cosmic</option>
+                    <option value="Ice">Ice</option>
+                    <option value="Fire">Fire</option>
+                    <option value="Lightning">Lightning</option>
+                    <option value="Earth">Earth</option>
+                    <option value="Shadow">Shadow</option>
+                    <option value="Poison">Poison</option>
+                </select>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Visual effects</legend>
+            <label>
+                Color <input type="color" name="color">
+            </label>
+            <label>
+                Animation <input type="text" name="animation">
+            </label>
+            <label>
+                Animation VFX<input type="text" name="animationVFX">
+            </label>
+            <label>
+                Sound effect <input type="text" name="soundFX">
+            </label>
+            
+        </fieldset>
+    </div>
+    <div>
+        <button type="button">Discard all changes</button>
+        <button type="submit">Save</button>
+    </div>
+</form>
