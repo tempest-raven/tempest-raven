@@ -64,6 +64,7 @@ textarea {
         rgb(200, 200, 200) 75%, 
         rgb(255, 255, 255) 100%
     );
+    overflow: auto;
 }
 
 .displayTitle {
@@ -100,6 +101,8 @@ textarea {
     overflow-wrap: break-word;
 }
 
+/* Form elements */ 
+
 input, textarea {
     background: transparent;
     color: inherit;
@@ -124,7 +127,12 @@ input.num, input.percent {
     color: rgb(70, 70, 70);
     font-weight: normal;
     float: right;
-    text-align: right;
+    /*text-align: right;*/
+}
+
+.abilityEdit {
+    float: right;
+    font-size: 10px;
 }
 
 .abilityBuffId {

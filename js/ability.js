@@ -37,7 +37,7 @@ class Ability {
         this.attributeOrder = [];
 
         //Important data
-        this.element = null; //Physical by default
+        this.element = `"Physical"`; //Physical by default
         this.cooldown = null;
         this.skillAmount = null;
         this.moveType = null; //Full Damage, Focus, Heal
@@ -77,6 +77,7 @@ class Ability {
 
         //Other skill data
         this.unknownParam14; //Unused
+        this.unknownParam22; //Set to 1 in rare skills
         
         //Localized text
         this.localeNameId = null;
@@ -244,6 +245,7 @@ Ability.secondArrayMap
     .set(17, "description")
     .set(19, "dispelPositive")
     .set(21, "buffTarget")
+    .set(22, "unknownParam22")
     .set(23, "buffElementRequirement")
     .set(24, "buffElementReqCount")
     .set(25, "baseMultiplier")

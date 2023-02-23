@@ -56,7 +56,47 @@ document.addEventListener("mousemove", event => {
     moveTooltip(event.clientX, event.clientY);
 });
 
-/** @type {Awaited<ReturnType<initLoad>>} */
+document.addEventListener("click", event => {
+    /** @type {HTMLElement} */
+    let target = event.target;
+    if (!target.classList.contains("abilityEdit")){
+        return false;
+    }
+    let abilityId = +target.getAttribute("x-abilityId");
+    let ability = gameData.abilities.get(abilityId);
+    let form = document.getElementById("abilityForm");
+    console.log(ability);
+    for (let [name, value] of Object.entries(ability)){
+        if (["attributeOrder", "unknownParam14", "unknownParam22"].includes(name)){
+            continue;
+        }
+        console.log(name, value);
+        let radios = form.querySelectorAll(`[type="radio"][name="${name}"]`);
+        radios.forEach(el => el.checked = el.value == value);
+        if (radios.length > 0){
+            continue;
+        }
+        let el = form.querySelector(`[name="${name}"]`);
+        if (el.getAttribute("type") === "checkbox"){
+            el.checked = el.value == value;
+            continue;
+        }
+        if (el.tagName === "SELECT" && el.multiple){
+            let options = el.selectedOptions;
+        }
+        
+        el.value = value;
+    }
+    document.querySelectorAll(".contentPage").forEach(el => el.classList.add("hidden"));
+    document.querySelector(".contentPage#editAbility").classList.remove("hidden");
+})
+
+document.addEventListener("click", event => {
+    console.log(2);
+    return false;
+})
+
+/** @type {Awaited<ReturnType<loadGameScripts>>} */
 let gameData;
 window.addEventListener('DOMContentLoaded', async (event) => {
     loadHTML();

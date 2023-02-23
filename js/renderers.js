@@ -12,6 +12,7 @@ function renderAbility(ability){
     const element = document.getElementById("abilityTemplate").cloneNode(true);
     element.removeAttribute("id");
     element.setAttribute("x-abilityId", ability.id);
+    element.querySelector(".abilityEdit").setAttribute("x-abilityId", ability.id);
     element.querySelector(".abilityId").textContent = ability.id;
     element.querySelector(".abilityTitle").title = "Localized name: " + ability.localizedName(gameData.langStrings);
     element.querySelector(".abilityName").textContent = ability.name;

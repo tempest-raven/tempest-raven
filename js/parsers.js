@@ -6,6 +6,25 @@
  * @returns {Array<Ability | string>} The parsed script
  */
 function parseAbilityScript(rawScript){
+    /* 
+    Minor injection 
+    This will allow defining proper skill names 
+    without needing to edit multiple files
+    */
+    let original =
+    `short[17] = _root.KrinLang[KLangChoosen].SKILLNAME[r];`;
+    let replacement = 
+    `if (r == 0)
+    {
+        short[17] = a;
+    }
+    else
+    {
+        var localisedString = _root.KrinLang[KLangChoosen].SKILLNAME[r];
+        short[17] = localizedString;
+    }`;
+    rawScript.replace(original, replacement);
+    /* end injection */
     let lines = rawScript.split("\r\n");
     let abilityId = 0;
     let lastAbility = null;

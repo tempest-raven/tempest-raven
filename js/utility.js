@@ -28,3 +28,13 @@ function toPercent(value){
         return value;
     }
 }
+
+function tryToNumber(value){
+    if (typeof value === "number"){
+        return value;
+    }
+    if (/^\d+.?\d*$/.test(value)){
+        return +value;
+    }
+    return value;
+}

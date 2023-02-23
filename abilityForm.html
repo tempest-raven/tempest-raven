@@ -1,10 +1,8 @@
 <form id="abilityForm">
     <div class="displayTitle">
-        <label>Display name: <input name="localeNameId"></label>
+        <label>Name: <input name="name"></label>
         <input type="hidden" class="abilityId" name="id">
-    </div>
-    <div class="displaySubTitle">
-        Internal name: <input disabled="disabled" name="name">
+        <input type="hidden" name="localeNameId">
     </div>
     <div class="displayCost">
         Costs
@@ -23,14 +21,14 @@
             <label>
                 Element
                 <select name="element">
-                    <option value="Physical">Physical</option>
-                    <option value="Magic">Magic/Cosmic</option>
-                    <option value="Ice">Ice</option>
-                    <option value="Fire">Fire</option>
-                    <option value="Lightning">Lightning</option>
-                    <option value="Earth">Earth</option>
-                    <option value="Shadow">Shadow</option>
-                    <option value="Poison">Poison</option>
+                    <option value="&quot;Physical&quot;">Physical</option>
+                    <option value="&quot;Magic&quot;">Magic/Cosmic</option>
+                    <option value="&quot;Ice&quot;">Ice</option>
+                    <option value="&quot;Fire&quot;">Fire</option>
+                    <option value="&quot;Lightning&quot;">Lightning</option>
+                    <option value="&quot;Earth&quot;">Earth</option>
+                    <option value="&quot;Shadow&quot;">Shadow</option>
+                    <option value="&quot;Poison&quot;">Poison</option>
                 </select>
             </label>
             
@@ -62,15 +60,15 @@
             <fieldset>
                 <legend>Targets</legend>
                 <label>
-                    <input type="checkbox" name="canTargetSelf">
+                    <input type="checkbox" name="canTargetSelf" value="1">
                     Self
                 </label>
                 <label>
-                    <input type="checkbox" name="canTargetEnemy">
+                    <input type="checkbox" name="canTargetEnemy" value="1">
                     Enemies
                 </label>
                 <label>
-                    <input type="checkbox" name="canTargetAlly">
+                    <input type="checkbox" name="canTargetAlly" value="1">
                     Allies
                 </label>
             </fieldset>
