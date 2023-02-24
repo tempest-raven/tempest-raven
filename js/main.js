@@ -65,26 +65,32 @@ document.addEventListener("click", event => {
     let abilityId = +target.getAttribute("x-abilityId");
     let ability = gameData.abilities.get(abilityId);
     let form = document.getElementById("abilityForm");
-    console.log(ability);
+    form.reset();
     for (let [name, value] of Object.entries(ability)){
-        if (["attributeOrder", "unknownParam14", "unknownParam22"].includes(name)){
+        const el = form.elements[name];
+        if (el === undefined){
             continue;
         }
-        console.log(name, value);
-        let radios = form.querySelectorAll(`[type="radio"][name="${name}"]`);
-        radios.forEach(el => el.checked = el.value == value);
-        if (radios.length > 0){
+        
+        if (Array.isArray(value)){
+            for (const checkbox of el){
+                checkbox.checked = value.includes(checkbox.value);
+            }
             continue;
         }
-        let el = form.querySelector(`[name="${name}"]`);
-        if (el.getAttribute("type") === "checkbox"){
+        if (el.type === "checkbox") {
             el.checked = el.value == value;
             continue;
         }
-        if (el.tagName === "SELECT" && el.multiple){
-            let options = el.selectedOptions;
+        if (el.type === "color"){
+            el.value = value.replace("0x", "#");
+            continue;
         }
-        
+        if (el.classList 
+            && el.classList.contains("percent")
+            && isNumeric(value)){
+            value = value * 100;
+        }
         el.value = value;
     }
     document.querySelectorAll(".contentPage").forEach(el => el.classList.add("hidden"));

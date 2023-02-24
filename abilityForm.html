@@ -117,7 +117,7 @@
             <label>
                 Focus scaling
                 <input name="focusScale" class="percent" placeholder="0">%
-                <small>(This gets added to the base multiplier bases on focus)</small>
+                <small>(This gets added to the base multiplier based on current focus)</small>
             </label>
             
         </fieldset>
@@ -125,32 +125,32 @@
             <legend>Buff requirements</legend>
             <label class="inline">
                 Requires 
-                <input name="buffElementReqCount" placeholder="0">
+                <input name="buffElementReqCount" class="num" placeholder="0">
             </label>
             <select name="buffElementRequirement">
                 <option value="">-</option>
-                <option value="Physical">Physical</option>
-                <option value="Magic">Magic/Cosmic</option>
-                <option value="Ice">Ice</option>
-                <option value="Fire">Fire</option>
-                <option value="Lightning">Lightning</option>
-                <option value="Earth">Earth</option>
-                <option value="Shadow">Shadow</option>
-                <option value="Poison">Poison</option>
+                <option value="&quot;Physical&quot;">Physical</option>
+                <option value="&quot;Magic&quot;">Magic/Cosmic</option>
+                <option value="&quot;Ice&quot;">Ice</option>
+                <option value="&quot;Fire&quot;">Fire</option>
+                <option value="&quot;Lightning&quot;">Lightning</option>
+                <option value="&quot;Earth&quot;">Earth</option>
+                <option value="&quot;Shadow&quot;">Shadow</option>
+                <option value="&quot;Poison&quot;">Poison</option>
             </select>
             buff on the target to cast
         </fieldset>
         <fieldset>
             <legend>Buff effects</legend>
             <label class="inline">
-                On hit, has a <input name="buffApplyChance" class="percent" placeholder="0" min="0" max="100">% chance
+                On hit, has a <input name="buffApplyChance" class="percent" placeholder="100" min="0" max="100">% chance
             </label>
             <label class="inline">
-                to apply the <input list="buff" name="buffId" placeholder="BUFFID"> buff on
+                to apply the <input list="buff" name="buffId" placeholder="&quot;BUFFID&quot;"> buff on
             </label>
             <div>
                 <label class="inline">
-                    <input type="radio" name="buffTarget" value="0">
+                    <input type="radio" name="buffTarget" value="0" checked="checked">
                     the target
                 </label>
                 <label class="inline">
@@ -167,16 +167,16 @@
             from the target.
             <div>
                 The dispelled buffs can be from the following elements:
-                <select multiple name="dispelElementArray" size="8">
-                    <option value="Physical">Physical</option>
-                    <option value="Magic">Magic/Cosmic</option>
-                    <option value="Ice">Ice</option>
-                    <option value="Fire">Fire</option>
-                    <option value="Lightning">Lightning</option>
-                    <option value="Earth">Earth</option>
-                    <option value="Shadow">Shadow</option>
-                    <option value="Poison">Poison</option>
-                </select>
+                <div>
+                    <label><input type="checkbox" name="dispelElementArray" value="Physical">Physical</label>
+                    <label><input type="checkbox" name="dispelElementArray" value="Magic">Magic/Cosmic</label>
+                    <label><input type="checkbox" name="dispelElementArray" value="Ice">Ice</label>
+                    <label><input type="checkbox" name="dispelElementArray" value="Fire">Fire</label>
+                    <label><input type="checkbox" name="dispelElementArray" value="Lightning">Lightning</label>
+                    <label><input type="checkbox" name="dispelElementArray" value="Earth">Earth</label>
+                    <label><input type="checkbox" name="dispelElementArray" value="Shadow">Shadow</label>
+                    <label><input type="checkbox" name="dispelElementArray" value="Poison">Poison</label>
+                </div>
             </div>
         </fieldset>
         <fieldset>
@@ -188,7 +188,7 @@
                 Animation <input type="text" name="animation">
             </label>
             <label>
-                Animation VFX<input type="text" name="animationVFX">
+                Animation VFX <input type="text" name="animationVFX">
             </label>
             <label>
                 Sound effect <input type="text" name="soundFX">

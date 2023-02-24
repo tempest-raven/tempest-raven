@@ -29,12 +29,7 @@ function toPercent(value){
     }
 }
 
-function tryToNumber(value){
-    if (typeof value === "number"){
-        return value;
-    }
-    if (/^\d+.?\d*$/.test(value)){
-        return +value;
-    }
-    return value;
+// https://stackoverflow.com/questions/18082/validate-decimal-numbers-in-javascript-isnumeric/174921#174921
+function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
 }
