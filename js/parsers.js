@@ -23,7 +23,7 @@ function parseAbilityScript(rawScript){
         var localisedString = _root.KrinLang[KLangChoosen].SKILLNAME[r];
         short[17] = localizedString;
     }`;
-    rawScript.replace(original, replacement);
+    rawScript = rawScript.replace(original, replacement);
     /* end injection */
     let lines = rawScript.split("\r\n");
     let abilityId = 0;

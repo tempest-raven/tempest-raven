@@ -28,7 +28,7 @@ class Ability {
     /** @type {Map<number, keyof Ability>} */
     static secondArrayMap = new Map();
 
-	constructor(parameters){
+	constructor(parameters = []){
         //Identifiers
         this.name = null; //Internal name
         this.id = null; //Not explicitly defined, auto-incremented
@@ -37,7 +37,7 @@ class Ability {
         this.attributeOrder = [];
 
         //Important data
-        this.element = `"Physical"`; //Physical by default
+        this.element = null; //Physical by default
         this.cooldown = null;
         this.skillAmount = null;
         this.moveType = null; //Full Damage, Focus, Heal
@@ -71,7 +71,7 @@ class Ability {
         this.buffTarget = null;//1 for self, 0 for target
 
         //Dispel effects
-        this.dispelElementArray = null;
+        this.dispelElementArray = [];
         this.dispelCount = null;
         this.dispelPositive = null;//1 for buffs, -1 for debuffs
 
@@ -112,7 +112,9 @@ class Ability {
         for (const index of orderedIndexes){
             let attribute = Ability.secondArrayMap.get(index);
             let value = this[attribute];
-            if (value !== undefined && value !== null) {
+            //Exclude undefined, null and empty arrays
+            if (value !== undefined && value !== null
+                && (!Array.isArray(value) || value.length > 0)) {
                 //Avoid adding extra quotes to strings
                 if (typeof value !== "string"){
                     value = JSON.stringify(value);

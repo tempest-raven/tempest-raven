@@ -1,8 +1,8 @@
 <form id="abilityForm">
     <div class="displayTitle">
         <label>Name: <input name="name"></label>
-        <input type="hidden" class="abilityId" name="id">
-        <input type="hidden" name="localeNameId">
+        <input class="hidden" name="id">
+        <input class="hidden" name="localeNameId" value="0">
     </div>
     <div class="displayCost">
         Costs
@@ -60,15 +60,15 @@
             <fieldset>
                 <legend>Targets</legend>
                 <label>
-                    <input type="checkbox" name="canTargetSelf" value="1">
+                    <input type="checkbox" name="canTargetSelf" value="1" x-unchecked="0">
                     Self
                 </label>
                 <label>
-                    <input type="checkbox" name="canTargetEnemy" value="1">
+                    <input type="checkbox" name="canTargetEnemy" value="1" x-unchecked="0">
                     Enemies
                 </label>
                 <label>
-                    <input type="checkbox" name="canTargetAlly" value="1">
+                    <input type="checkbox" name="canTargetAlly" value="1" x-unchecked="0">
                     Allies
                 </label>
             </fieldset>
@@ -168,14 +168,14 @@
             <div>
                 The dispelled buffs can be from the following elements:
                 <div>
-                    <label><input type="checkbox" name="dispelElementArray" value="Physical">Physical</label>
-                    <label><input type="checkbox" name="dispelElementArray" value="Magic">Magic/Cosmic</label>
-                    <label><input type="checkbox" name="dispelElementArray" value="Ice">Ice</label>
-                    <label><input type="checkbox" name="dispelElementArray" value="Fire">Fire</label>
-                    <label><input type="checkbox" name="dispelElementArray" value="Lightning">Lightning</label>
-                    <label><input type="checkbox" name="dispelElementArray" value="Earth">Earth</label>
-                    <label><input type="checkbox" name="dispelElementArray" value="Shadow">Shadow</label>
-                    <label><input type="checkbox" name="dispelElementArray" value="Poison">Poison</label>
+                    <label class="inline"><input type="checkbox" x-array="true" name="dispelElementArray" value="Physical">Physical</label>
+                    <label class="inline"><input type="checkbox" x-array="true" name="dispelElementArray" value="Magic">Magic/Cosmic</label>
+                    <label class="inline"><input type="checkbox" x-array="true" name="dispelElementArray" value="Ice">Ice</label>
+                    <label class="inline"><input type="checkbox" x-array="true" name="dispelElementArray" value="Fire">Fire</label>
+                    <label class="inline"><input type="checkbox" x-array="true" name="dispelElementArray" value="Lightning">Lightning</label>
+                    <label class="inline"><input type="checkbox" x-array="true" name="dispelElementArray" value="Earth">Earth</label>
+                    <label class="inline"><input type="checkbox" x-array="true" name="dispelElementArray" value="Shadow">Shadow</label>
+                    <label class="inline"><input type="checkbox" x-array="true" name="dispelElementArray" value="Poison">Poison</label>
                 </div>
             </div>
         </fieldset>

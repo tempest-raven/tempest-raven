@@ -1,60 +1,18 @@
 "use strict";
 
+function showPage(pagename){
+    document.querySelectorAll(".contentPage").forEach(el => el.classList.add("hidden"));
+    document.querySelector(".contentPage#" + pagename).classList.remove("hidden");
+}
+
 document.getElementById("navbar").addEventListener("click", event => {
     /** @type {HTMLElement} */
     let target = event.target;
     if (!target.classList.contains("navbutton")){
         return false;
     }
-    document.querySelectorAll(".contentPage").forEach(el => el.classList.add("hidden"));
-    document.querySelector(".contentPage#" + target.getAttribute("x-view")).classList.remove("hidden");
+    showPage(target.getAttribute("x-page"));
 })
-
-document.addEventListener("mouseover", event => {
-    /** @type {HTMLElement} */
-    let target = event.target;
-    if (!target.getAttribute || target.getAttribute("tooltip-type") === null){
-        return false;
-    }
-    let tooltipType = target.getAttribute("tooltip-type");
-    let tooltipData = target.getAttribute("tooltip-data");
-    const functionMap = {
-        "ability": renderAbility,
-        "buff": renderBuff
-    }
-    const dataMap = {
-        "ability": gameData.abilities,
-        "buff": gameData.buffs
-    }
-    const fn = functionMap[tooltipType];
-    const element = dataMap[tooltipType].get(tooltipData);
-    const tooltip = document.getElementById("tooltip");
-    tooltip.appendChild(fn(element));
-    moveTooltip(event.clientX, event.clientY);
-    tooltip.classList.remove("hidden");
-});
-
-document.addEventListener("mouseout", event => {
-    /** @type {HTMLElement} */
-    let target = event.target;
-    if (!target.getAttribute || target.getAttribute("tooltip-type") === null){
-        return false;
-    }
-    const tooltip = document.getElementById("tooltip");
-    tooltip.classList.add("hidden");
-    while (tooltip.firstChild){
-        tooltip.removeChild(tooltip.lastChild);
-    }
-})
-
-document.addEventListener("mousemove", event => {
-    /** @type {HTMLElement} */
-    let target = event.target;
-    if (!target.getAttribute || target.getAttribute("tooltip-type") === null){
-        return false;
-    }
-    moveTooltip(event.clientX, event.clientY);
-});
 
 document.addEventListener("click", event => {
     /** @type {HTMLElement} */
@@ -89,17 +47,73 @@ document.addEventListener("click", event => {
         if (el.classList 
             && el.classList.contains("percent")
             && isNumeric(value)){
-            value = value * 100;
+            value = Math.round(+value * 100);
         }
         el.value = value;
     }
-    document.querySelectorAll(".contentPage").forEach(el => el.classList.add("hidden"));
-    document.querySelector(".contentPage#editAbility").classList.remove("hidden");
+    showPage("editAbility");
 })
 
-document.addEventListener("click", event => {
-    console.log(2);
-    return false;
+document.addEventListener("submit", event => {
+    event.preventDefault();
+
+    /** @type {HTMLFormElement} */
+    const form = event.target;
+    if (form.getAttribute("id") !== "abilityForm") {
+        return false;
+    }
+    /** @type {Ability} */
+    let ability;
+    let id = form.elements.namedItem("id").value;
+    if (id === ""){
+        ability = new Ability();
+        let index = gameData.abilityScript.length;
+        while (id === "" || index > 0) {
+            const element = gameData.abilityScript[index];
+            if (element instanceof Ability){
+                id = element.id + 1;
+            }
+            index--;
+        }
+        ability.id = id;
+        gameData.abilities.set(id, ability);
+        gameData.abilityScript.push(ability);
+    } else {
+        ability = gameData.abilities.get(+id);
+    }
+    const data = new FormData(form);
+    const formElements = Array.from(form.elements)
+        .filter(e => e.name && e.name !== "id");
+    for (let element of formElements){
+        let name = element.name;
+        let value = element.value;
+        if (element.type === "checkbox"
+        && !element.checked) {
+            value = element.getAttribute("x-unchecked");
+        }
+        if (element.type === "radio"
+        && !element.checked) {
+            continue;
+        }
+        if (element.getAttribute("x-array") !== null){
+            value = data.getAll(name);
+        }
+        if (element.classList.contains("percent")
+            && isNumeric(value)){
+            value = +value / 100;
+        }
+        if (isNumeric(value)){
+            value = +value;
+        }
+        if (element.type === "color"){
+            value = value.replace("#", "0x");
+        }
+        if (value === "") {
+            value = null;
+        }
+        ability[name] = value;
+    }
+    showPage("abilityList");
 })
 
 /** @type {Awaited<ReturnType<loadGameScripts>>} */
