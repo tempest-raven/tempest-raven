@@ -13,10 +13,17 @@ async function loadScriptIntoStorage(key, filepath){
 }
 
 async function loadGameScripts(){
-    await loadScriptIntoStorage("langStrings", "data/scripts/frame_1/DoAction.as");
-    await loadScriptIntoStorage("abilityScript", "data/scripts/frame_42/DoAction_6.as");
-    await loadScriptIntoStorage("buffScript", "data/scripts/frame_42/DoAction_10.as");
-    
+    const files = [
+        ["langStrings", "data/sonny2/scripts/frame_1/DoAction.as"],
+        ["abilityScript", "data/sonny2/scripts/frame_42/DoAction_6.as"],
+        ["buffScript", "data/sonny2/scripts/frame_42/DoAction_10.as"]
+    ];
+
+    //Load all files in parallel and wait till all are done loading
+    await Promise.all(files.map(params => loadScriptIntoStorage(...params)));
+}
+
+function processGameData(){
     let langStrings = parseLangScript(localStorage.getItem("langStrings"));
     /** @type {Map<number, Ability>} */
     let abilityList = new Map();

@@ -120,10 +120,25 @@ document.addEventListener("submit", event => {
 let gameData;
 window.addEventListener('DOMContentLoaded', async (event) => {
     loadHTML();
-    gameData = await loadGameScripts();
-    const abilityEl = document.getElementById("abilityList");
+    /*const abilityEl = document.getElementById("abilityList");
     gameData.abilities.forEach(a => abilityEl.appendChild(renderAbility(a)));
     
     const buffEl = document.getElementById("buffList");
-    gameData.buffs.forEach(a => buffEl.appendChild(renderBuff(a)));
+    gameData.buffs.forEach(a => buffEl.appendChild(renderBuff(a)));*/
+    
+    document.getElementById("loader").classList.add("hidden");
+    let files = ["langStrings", "abilityScript", "buffScript"];
+    if (files.some(str => localStorage.getItem(str) === null)){
+        document.getElementById("welcome").classList.remove("hidden");
+    } else {
+        gameData = processGameData();
+        document.getElementById("content").classList.remove("hidden");
+    }
+});
+
+document.getElementById("loadSonny2").addEventListener("click", async _ => {
+    await loadGameScripts();
+    gameData = processGameData();
+    document.getElementById("welcome").classList.add("hidden");
+    document.getElementById("content").classList.remove("hidden");
 });
