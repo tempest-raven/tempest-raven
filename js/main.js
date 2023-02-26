@@ -113,18 +113,21 @@ document.addEventListener("submit", event => {
         }
         ability[name] = value;
     }
+    const abilityEl = document.getElementById("abilityList");
+    const currentRender = abilityEl.querySelector(`[x-abilityId="${id}"]`)
+    if (currentRender){
+        currentRender.replaceWith(renderAbility(ability));
+    } else {
+        abilityEl.appendChild(renderAbility(ability));
+    }
+    localStorage.setItem("abilityScript", generateScript(gameData.abilityScript));
     showPage("abilityList");
 })
 
-/** @type {Awaited<ReturnType<loadGameScripts>>} */
+/** @type {Awaited<ReturnType<processGameData>>} */
 let gameData;
 window.addEventListener('DOMContentLoaded', async (event) => {
-    loadHTML();
-    /*const abilityEl = document.getElementById("abilityList");
-    gameData.abilities.forEach(a => abilityEl.appendChild(renderAbility(a)));
-    
-    const buffEl = document.getElementById("buffList");
-    gameData.buffs.forEach(a => buffEl.appendChild(renderBuff(a)));*/
+    loadForms();
     
     document.getElementById("loader").classList.add("hidden");
     let files = ["langStrings", "abilityScript", "buffScript"];
@@ -132,13 +135,53 @@ window.addEventListener('DOMContentLoaded', async (event) => {
         document.getElementById("welcome").classList.remove("hidden");
     } else {
         gameData = processGameData();
-        document.getElementById("content").classList.remove("hidden");
+        populateData();
     }
 });
 
 document.getElementById("loadSonny2").addEventListener("click", async _ => {
     await loadGameScripts();
     gameData = processGameData();
+    populateData();
+});
+
+function populateData(){
+    const abilityEl = document.getElementById("abilityList");
+    const buffEl = document.getElementById("buffList");
+
+    gameData.abilities.forEach(a => abilityEl.appendChild(renderAbility(a)));
+    gameData.buffs.forEach(b => buffEl.appendChild(renderBuff(b)));
+
     document.getElementById("welcome").classList.add("hidden");
     document.getElementById("content").classList.remove("hidden");
-});
+}
+
+function processGameData(){
+    let langStrings = parseLangScript(localStorage.getItem("langStrings"));
+    /** @type {Map<number, Ability>} */
+    let abilityList = new Map();
+    /** @type {Map<string, Buff>} */
+    let buffList = new Map();
+
+    
+    let abilitiesWithScript = parseAbilityScript(localStorage.getItem("abilityScript"));
+    abilitiesWithScript
+        .filter(e => typeof e !== "string")
+        .forEach(a => {
+            abilityList.set(a.id, a);
+        });
+    
+    let buffsWithScript = parseBuffScript(localStorage.getItem("buffScript"));
+    buffsWithScript
+        .filter(e => typeof e !== "string")
+        .forEach(b => {
+            buffList.set(b.id, b);
+        });
+    return {
+        langStrings: langStrings,
+        abilities: abilityList,
+        abilityScript: abilitiesWithScript,
+        buffs: buffList,
+        buffScript: buffsWithScript
+    };
+}

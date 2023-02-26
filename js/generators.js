@@ -1,10 +1,10 @@
 "use strict";
 /**
  * 
- * @param {Array<Ability | string>} abilitiesWithScript 
+ * @param {Array<{convertToScript: (() => string)} | string>} mixedScriptArray 
  */
-function generateAbilityScript(abilitiesWithScript){
-    return abilitiesWithScript.map(element => {
+function generateScript(mixedScriptArray){
+    return mixedScriptArray.map(element => {
         if (typeof element === "string") {
             return element;
         } else {

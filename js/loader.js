@@ -23,37 +23,7 @@ async function loadGameScripts(){
     await Promise.all(files.map(params => loadScriptIntoStorage(...params)));
 }
 
-function processGameData(){
-    let langStrings = parseLangScript(localStorage.getItem("langStrings"));
-    /** @type {Map<number, Ability>} */
-    let abilityList = new Map();
-    /** @type {Map<string, Buff>} */
-    let buffList = new Map();
-
-    
-    let abilitiesWithScript = parseAbilityScript(localStorage.getItem("abilityScript"));
-    abilitiesWithScript
-        .filter(e => typeof e !== "string")
-        .forEach(a => {
-            abilityList.set(a.id, a);
-        });
-    
-    let buffsWithScript = parseBuffScript(localStorage.getItem("buffScript"));
-    buffsWithScript
-        .filter(e => typeof e !== "string")
-        .forEach(b => {
-            buffList.set(b.id, b);
-        });
-    return {
-        langStrings: langStrings,
-        abilities: abilityList,
-        abilityScript: abilitiesWithScript,
-        buffs: buffList,
-        buffScript: buffsWithScript
-    };
-}
-
-function loadHTML(){
+function loadForms(){
     fetch("abilityForm.html")
         .then(response => response.text())
         .then(html => document.getElementById("editAbility").innerHTML = html)
