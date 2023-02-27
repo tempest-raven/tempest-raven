@@ -67,8 +67,8 @@ document.addEventListener("submit", event => {
     let id = form.elements.namedItem("id").value;
     if (id === ""){
         ability = new Ability();
-        let index = gameData.abilityScript.length;
-        while (id === "" || index > 0) {
+        let index = gameData.abilityScript.length - 1;
+        while (id === "" && index > 0) {
             const element = gameData.abilityScript[index];
             if (element instanceof Ability){
                 id = element.id + 1;
@@ -106,7 +106,7 @@ document.addEventListener("submit", event => {
             value = +value;
         }
         if (element.type === "color"){
-            value = value.replace("#", "0x");
+            value = value.toUpperCase().replace("#", "0x");
         }
         if (value === "") {
             value = null;
@@ -121,6 +121,7 @@ document.addEventListener("submit", event => {
         abilityEl.appendChild(renderAbility(ability));
     }
     localStorage.setItem("abilityScript", generateScript(gameData.abilityScript));
+    form.reset();
     showPage("abilityList");
 })
 

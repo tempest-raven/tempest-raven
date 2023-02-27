@@ -1,14 +1,15 @@
 <form id="abilityForm">
     <div class="displayTitle">
-        <label>Name: <input name="name"></label>
+        <label>Name: <input name="name" required></label>
         <input class="hidden" name="id">
         <input class="hidden" name="localeNameId" value="0">
+        <input class="hidden" name="unknownParam14" value="1">
     </div>
     <div class="displayCost">
         Costs
-        <label class="inline"><input name="focusCost" class="num" placeholder="0"> Focus</label>,
-        <label class="inline"><input name="flatHPCost" class="num" placeholder="0"> Health</label> and
-        <label class="inline"><input name="percentHPCost" class="percent" placeholder="0">% of Total Health</label>
+        <label class="inline"><input name="focusCost" class="num" value="0" required> Focus</label>,
+        <label class="inline"><input name="flatHPCost" class="num" value="0" required> Health</label> and
+        <label class="inline"><input name="percentHPCost" class="percent" value="0" required>% of Total Health</label>
     </div>
     <div>
         <fieldset>
@@ -34,15 +35,15 @@
             
             <label>
                 Cooldown
-                <input name="cooldown" class="num" placeholder="0">
+                <input name="cooldown" class="num" value="0" required>
             </label>
             <label>
                 Maximum amount on ability wheel
-                <input name="skillAmount" class="num" placeholder="1">
+                <input name="skillAmount" class="num" value="1" required>
             </label>
             <label>
                 Move type
-                <select name="moveType">
+                <select name="moveType" required>
                     <option value="Full Damage">Damage</option>
                     <option value="Focus">Focus change</option>
                     <option value="Heal">Heal</option>
@@ -50,7 +51,7 @@
             </label>
             <label>
                 Movement type
-                <select name="projectileType">
+                <select name="projectileType" required>
                     <option value="Melee">Melee</option>
                     <option value="Shock">Instant ("Shock")</option>
                     <option value="Missile">Projectile</option>
@@ -100,7 +101,7 @@
         <fieldset>
             <label>
                 Accuracy modifier
-                <input name="accuracyMultiplier" class="percent" placeholder="100">%
+                <input name="accuracyMultiplier" class="percent" value="100" required>%
             </label>
             <label>
                 Critical chance multiplier
@@ -182,16 +183,16 @@
         <fieldset>
             <legend>Visual effects</legend>
             <label>
-                Color <input type="color" name="color">
+                Color <input type="color" name="color" value="#FFFFFF">
             </label>
             <label>
-                Animation <input type="text" name="animation">
+                Animation <input type="text" name="animation" required>
             </label>
             <label>
-                Animation VFX <input type="text" name="animationVFX">
+                Animation VFX <input type="text" name="animationVFX" required>
             </label>
             <label>
-                Sound effect <input type="text" name="soundFX">
+                Sound effect <input type="text" name="soundFX" required>
             </label>
             
         </fieldset>
