@@ -10,5 +10,5 @@ function generateScript(mixedScriptArray){
         } else {
             return element.convertToScript();
         }
-    }).join("\r\n");
+    }).join("\n");
 }

@@ -6,6 +6,7 @@
  * @returns {Array<Ability | string>} The parsed script
  */
 function parseAbilityScript(rawScript){
+    rawScript = rawScript.replace(/\r/g, "");
     /* 
     Minor injection 
     This will allow defining proper skill names 
@@ -25,7 +26,7 @@ function parseAbilityScript(rawScript){
     }`;
     rawScript = rawScript.replace(original, replacement);
     /* end injection */
-    let lines = rawScript.split("\r\n");
+    let lines = rawScript.split("\n");
     let abilityId = 0;
     let lastAbility = null;
     let parseArray = [];
@@ -61,7 +62,8 @@ function parseAbilityScript(rawScript){
  * @returns {Array<Buff | string>} The parsed script
  */
 function parseBuffScript(rawScript){
-    let lines = rawScript.split("\r\n");
+    rawScript = rawScript.replace(/\r/g, "");
+    let lines = rawScript.split("\n");
     let lastBuff = null;
     let parseArray = [];
     for (const line of lines) {
@@ -85,7 +87,8 @@ function parseBuffScript(rawScript){
 }
 
 function parseLangScript(rawScript){
-    let lines = rawScript.split("\r\n");
+    rawScript = rawScript.replace(/\r/g, "");
+    let lines = rawScript.split("\n");
     let parsed = {};
     for (const line of lines) {
         /** @type {RegExpMatchArray | null} */

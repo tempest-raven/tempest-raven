@@ -30,7 +30,7 @@ class Buff {
                 if (typeof value !== "string"){
                     value = JSON.stringify(value);
                 }
-                script += "\r\n"
+                script += "\n"
                 + `_root.hackMove2[${index}] = ${value};`;
             }
         }
