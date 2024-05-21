@@ -1,6 +1,50 @@
-/data/sonny2/buttons/**
-/data/sonny2/images/**
-/data/sonny2/morphshapes/**
-/data/sonny2/sounds/**
-/data/sonny2/texts/**
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Project specific
+/assets/data/sonny2/buttons/**
+/assets/data/sonny2/images/**
+/assets/data/sonny2/morphshapes/**
+/assets/data/sonny2/sounds/**
+/assets/data/sonny2/texts/**
 notes.txt
