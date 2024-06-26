@@ -1,0 +1,1 @@
+export type pseudoBool = 0 | 1

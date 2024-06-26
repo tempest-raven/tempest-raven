@@ -1,0 +1,54 @@
+<div class="ability" id="abilityTemplate">
+    <div class="abilityTitle displayTitle">
+        <span class="abilityName">Auto Swing</span>
+        <span class="abilityId">0</span> 
+        <button class="abilityEdit">Edit</button>
+    </div>
+    <div class="abilityCost displayCost">This move costs nothing</div>
+    <div class="abilityDesc displayDesc1">Hit the enemy.</div>
+    <div class="abilityData displayDesc2">
+        <div class="abilityElement">Physical</div>
+        <div class="abilityTargets"></div>
+        <div class="abilityEffect hidden" x-effect="Full Damage">
+            Deal <span class="abilityScale"></span> damage
+        </div>
+        <div class="abilityEffect hidden" x-effect="Focus">
+            Grant <span class="abilityScale"></span> focus
+        </div>
+        <div class="abilityEffect hidden" x-effect="Heal">
+            Restore <span class="abilityScale"></span>
+        </div>
+        <div class="abilityEffect hidden" x-effect="Attack">
+            <!--Shatter Bolt uses this, do not remove-->
+        </div>
+        <div class="abilityRequirements hidden">
+            Requires 
+            <span class="abilityReqCount"></span> 
+            <span class="abilityReqType"></span> 
+            type buff(s) on the target
+        </div>
+        <div class="abilityDispel hidden">
+            Dispel 
+            <span class="abilityDispelCount"></span> 
+            <span class="abilityDispelArray"></span> 
+            <span class="abilityDispelPositive">de</span>buff(s)
+        </div>
+        <div class="abilityHitModifiers hidden">
+            <span class="abilityAccuracy"></span>
+        </div>
+        <div class="abilityCritDisplay hidden">
+            <span class="abilityCritChance"></span> critical strike chance multiplier
+        </div>
+        <div class="abilityFocusScale hidden">
+            Scales with 
+            <span class="abilityFocusMulti">100%</span> of current focus 
+            + <span class="abilityBaseMulti">100%</span>
+        </div>
+        <div class="abilityBuff hidden">
+            <span class="abilityBuffChance">100%</span> 
+            chance to apply the 
+            <span class="abilityBuffId" tooltip-type="buff" tooltip-data="AUTOREGEN">AUTOREGEN</span> 
+            buff to <span class="abilityBuffTarget">self</span> on hit
+        </div>
+    </div>
+</div>
