@@ -117,6 +117,7 @@ input.num, input.percent {
 /* Element specific layouts */
 
 #content .ability, #content .buff {
+    box-sizing: border-box;
     width: 19%;
     vertical-align: top;
     display: inline-block;

@@ -73,7 +73,7 @@ export class Ability {
         public color: string,
         public animation: string,
         public animationVFX: string,
-        public moveType: "Full Damage" | "Focus" | "Heal" | string,
+        public moveType: "Full Damage" | "Focus" | "Heal" | "Attack", //attack is unintended
         public unknownParam14: any, //unknown but it's always 1
         public percentHPCost: number,
         public localeNameId: number,

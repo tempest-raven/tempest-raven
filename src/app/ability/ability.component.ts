@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Ability } from '../ability';
 
 @Component({
   selector: 'app-ability',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './ability.component.css'
 })
 export class AbilityComponent {
-
+  abilityList: Ability[] = []
 }
