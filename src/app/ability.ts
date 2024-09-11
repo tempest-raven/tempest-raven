@@ -172,14 +172,7 @@ export class Ability {
             as this will throw for assignments using variables
             such as in most descriptions and some shadow/ice moves
             */
-            JSON.parse(value);
-            /*
-            Preserve quotes around simple string assignments
-            while still processing numbers and arrays
-            */
-            if (!value.startsWith('"')){
-                tmpVal = JSON.parse(value);
-            }
+            tmpVal = JSON.parse(value);
         } catch (e) {
             //Nothing to do here
         } finally {
