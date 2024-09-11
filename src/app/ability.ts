@@ -165,6 +165,12 @@ export class Ability {
             this.customAttributes.set(attributeIndex, value);
             return;
         }
+        //Add some robustness if values are pulled from *other* hackMoves
+        let match: ReturnType<String["match"]>;
+        if (match = value.match(/^_root.hackMove\[(\d+)\]/)){
+            let attributeName = Ability.secondArrayMap.get(+match[1])!;
+            value = "" + this[attributeName];
+        }
         let tmpVal = value;
         try {
             /*
