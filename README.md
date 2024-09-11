@@ -1,6 +1,6 @@
-# SonnyDataBrowser
+# Sonny Data Browser
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7 and then updated to version 18.2.2.
 
 ## Development server
 
