@@ -25,9 +25,6 @@ export class Ability {
     ] as const;
 
     static secondArrayMap: Map<number, keyof Ability> = new Map();
-    static idIncrement = 1; //because we skip "None"
-
-    id: number = 0;
 
     element: sonnyElement = "Physical"; //0
     strengthBonus = 0; //1 (unused)
@@ -60,6 +57,7 @@ export class Ability {
     customAttributes: Map<number, any> = new Map();
     
 	constructor(
+        public id: number,
         public internalName: string,
         public canTargetSelf: pseudoBool,
         public canTargetEnemy: pseudoBool,
@@ -79,10 +77,6 @@ export class Ability {
         public localeNameId: number,
         public soundFX: string
     ){
-        //Identifiers
-        this.internalName = "None"; //Internal name
-        this.id = Ability.idIncrement; //Not explicitly defined, auto-incremented
-        Ability.idIncrement++;
 
         //we do this one because the cost string could be overwrote in theory
         this.rawCostString = this.getCostString();
