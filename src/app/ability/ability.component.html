@@ -1,54 +1,87 @@
+@if (ability){
 <div class="ability" id="abilityTemplate">
     <div class="abilityTitle displayTitle">
-        <span class="abilityName">Auto Swing</span>
-        <span class="abilityId">0</span> 
-        <button class="abilityEdit">Edit</button>
+        <span class="abilityName">{{ability.internalName}}</span>
+        <span class="abilityId">{{ability.id}}</span> 
     </div>
-    <div class="abilityCost displayCost">This move costs nothing</div>
-    <div class="abilityDesc displayDesc1">Hit the enemy.</div>
+    <div class="abilityCost displayCost">{{ability.getCostString()}}</div>
+    <div class="abilityDesc displayDesc1">{{ability.descriptionCode}}</div>
     <div class="abilityData displayDesc2">
-        <div class="abilityElement">Physical</div>
-        <div class="abilityTargets"></div>
-        <div class="abilityEffect hidden" x-effect="Full Damage">
-            Deal <span class="abilityScale"></span> damage
+        <div class="abilityElement">{{ability.element}} element</div>
+        <div class="abilityTargets">Can target 
+            @if (ability.canTargetSelf && ability.canTargetAlly && ability.canTargetEnemy){
+                anything
+            } @else if (ability.canTargetSelf && ability.canTargetAlly) {
+                a friendly target
+            } @else {
+                {{ability.canTargetSelf ? "self":""}} {{ability.canTargetAlly ? "other ally":""}} {{ability.canTargetEnemy ? "enemy":""}}
+            }
+            
         </div>
-        <div class="abilityEffect hidden" x-effect="Focus">
-            Grant <span class="abilityScale"></span> focus
-        </div>
-        <div class="abilityEffect hidden" x-effect="Heal">
-            Restore <span class="abilityScale"></span>
-        </div>
-        <div class="abilityEffect hidden" x-effect="Attack">
-            <!--Shatter Bolt uses this, do not remove-->
-        </div>
-        <div class="abilityRequirements hidden">
-            Requires 
-            <span class="abilityReqCount"></span> 
-            <span class="abilityReqType"></span> 
-            type buff(s) on the target
-        </div>
-        <div class="abilityDispel hidden">
-            Dispel 
-            <span class="abilityDispelCount"></span> 
-            <span class="abilityDispelArray"></span> 
-            <span class="abilityDispelPositive">de</span>buff(s)
-        </div>
-        <div class="abilityHitModifiers hidden">
-            <span class="abilityAccuracy"></span>
-        </div>
-        <div class="abilityCritDisplay hidden">
-            <span class="abilityCritChance"></span> critical strike chance multiplier
-        </div>
-        <div class="abilityFocusScale hidden">
-            Scales with 
-            <span class="abilityFocusMulti">100%</span> of current focus 
-            + <span class="abilityBaseMulti">100%</span>
-        </div>
-        <div class="abilityBuff hidden">
-            <span class="abilityBuffChance">100%</span> 
-            chance to apply the 
-            <span class="abilityBuffId" tooltip-type="buff" tooltip-data="AUTOREGEN">AUTOREGEN</span> 
-            buff to <span class="abilityBuffTarget">self</span> on hit
-        </div>
+        @switch (ability.moveType) {
+            @case ("Full Damage") {
+                <div class="abilityEffect">
+                    Deal <span class="abilityScale">{{ability | abilityScale}}</span> damage
+                </div>
+            }
+            @case ("Focus") {
+                <div class="abilityEffect">
+                    Grant <span class="abilityScale">{{ability.flatModifier}}</span> focus
+                </div>
+            }
+            @case ("Heal") {
+                <div class="abilityEffect">
+                    Restore <span class="abilityScale">{{ability | abilityScale}}</span> health
+                </div>
+            }
+            @default {
+                <div class="abilityEffect"></div>
+            }
+        }
+        @if (ability.buffElementReqCount > 0){
+            <div class="abilityRequirements">
+                Requires {{ability.buffElementReqCount}} {{ability.buffElementRequirement}} type buff(s) on the target
+            </div>
+        }
+        @if (ability.dispelCount > 0 && ability.dispelElementArray[0] != 0) {
+            <div class="abilityDispel">
+                Dispel {{ability.dispelCount}} 
+                @for (dispelElement of ability.dispelElementArray; track dispelElement){
+                    {{dispelElement}}{{$last ? "" : ", "}}
+                }
+                {{ability.dispelPositive == 1 ? "buff(s)" : "debuff(s)"}}
+            </div>
+        }
+        @if (ability.projectileType === "Shock"){
+            <div class="abilityHitModifiers">
+                Unavoidable
+            </div>
+        }
+        @if (ability.projectileType !== "Shock" && ability.accuracyMultiplier != 1){
+            <div class="abilityHitModifiers">
+                <span class="abilityAccuracy">{{ability.accuracyMultiplier | percent}} accuracy</span>
+            </div>
+        }
+        @if (ability.critChanceBonus){
+            <div class="abilityCritDisplay">
+                +<span class="abilityCritChance">{{ability.critChanceBonus * 0.15 | percent:"1.0-2"}}</span> base critical chance bonus
+            </div>
+        }
+        @if (ability.baseMultiplier != 1){
+            <div class="abilityFocusScale">
+                Scales with 
+                <span class="abilityFocusMulti">{{ability.focusScale | percent}}</span> of current focus 
+                + <span class="abilityBaseMulti">{{ability.baseMultiplier | percent}}</span>
+            </div>
+        }
+        @if (ability.buffApplyChance > 0 && ability.buffId !== 0){
+            <div class="abilityBuff">
+                <span class="abilityBuffChance">{{ability.buffApplyChance | percent}}</span> 
+                chance to apply the 
+                <span class="abilityBuffId" tooltip-type="buff" [attr.tooltip-data]="ability.buffId">{{ability.buffId}}</span> 
+                buff to <span class="abilityBuffTarget">{{ability.buffSelfTarget ? "self" : "target"}}</span> on hit
+            </div>
+        }
     </div>
 </div>
+}

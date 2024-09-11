@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { AbilityComponent } from './ability/ability.component';
+import { AbilityListComponent } from './ability-list/ability-list.component';
 
 export const routes: Routes = [
-    { path: "abilities", component: AbilityComponent }
+    { path: "abilities", component: AbilityListComponent },
+    { path: "ability/:id", component: AbilityComponent },
+    { path: "", redirectTo: "abilities", pathMatch: "full"}
 ];

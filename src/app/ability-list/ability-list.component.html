@@ -1,0 +1,5 @@
+@for (ability of abilityList.values(); track ability.id){
+    <app-ability [linkedAbility]="ability.id"></app-ability>
+} @empty {
+    <p>We couldn't load the ability list :&lpar;</p>
+}

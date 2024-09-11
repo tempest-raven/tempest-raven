@@ -1,0 +1,21 @@
+.ability, .buff {
+    box-sizing: border-box;
+    width: 19%;
+    vertical-align: top;
+    display: inline-block;
+    margin: 3px;
+}
+
+.abilityId {
+    color: rgb(70, 70, 70);
+    font-weight: normal;
+    float: right;
+    /*text-align: right;*/
+}
+
+.abilityBuffId {
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
