@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Ability } from '../ability';
 import { AbilityService } from '../services/ability.service';
 import { PercentPipe } from '@angular/common';
-import { AbilityScalePipe } from '../ability-scale.pipe';
+import { AbilityScalePipe } from '../pipes/ability-scale.pipe';
 
 @Component({
   selector: 'app-ability',
