@@ -12,32 +12,35 @@
             @if (ability.canTargetSelf && ability.canTargetAlly && ability.canTargetEnemy){
                 anything
             } @else if (ability.canTargetSelf && ability.canTargetAlly) {
-                a friendly target
+                a friendly unit
             } @else {
                 {{ability.canTargetSelf ? "self":""}} {{ability.canTargetAlly ? "other ally":""}} {{ability.canTargetEnemy ? "enemy":""}}
             }
             
         </div>
-        @switch (ability.moveType) {
-            @case ("Full Damage") {
-                <div class="abilityEffect">
-                    Deal <span class="abilityScale">{{ability | abilityScale}}</span> damage
-                </div>
-            }
-            @case ("Focus") {
-                <div class="abilityEffect">
-                    Grant <span class="abilityScale">{{ability.flatModifier}}</span> focus
-                </div>
-            }
-            @case ("Heal") {
-                <div class="abilityEffect">
-                    Restore <span class="abilityScale">{{ability | abilityScale}}</span> health
-                </div>
-            }
-            @default {
-                <div class="abilityEffect"></div>
+        @if (ability.strengthScale || ability.instinctScale || ability.speedScale || ability.healthScale || ability.flatModifier){
+            @switch (ability.moveType) {
+                @case ("Full Damage") {
+                    <div class="abilityEffect">
+                        Deal damage equal to <span class="abilityScale">{{ability | abilityScale}}</span>
+                    </div>
+                }
+                @case ("Focus") {
+                    <div class="abilityEffect">
+                        Grant <span class="abilityScale">{{ability.flatModifier}}</span> focus
+                    </div>
+                }
+                @case ("Heal") {
+                    <div class="abilityEffect">
+                        Restore health equal to <span class="abilityScale">{{ability | abilityScale}}</span>
+                    </div>
+                }
+                @default {
+                    <div class="abilityEffect"></div>
+                }
             }
         }
+        
         @if (ability.buffElementReqCount > 0){
             <div class="abilityRequirements">
                 Requires {{ability.buffElementReqCount}} {{ability.buffElementRequirement}} type buff(s) on the target
@@ -76,10 +79,24 @@
         }
         @if (ability.buffApplyChance > 0 && ability.buffId !== 0){
             <div class="abilityBuff">
-                <span class="abilityBuffChance">{{ability.buffApplyChance | percent}}</span> 
-                chance to apply the 
-                <span class="abilityBuffId" tooltip-type="buff" [attr.tooltip-data]="ability.buffId">{{ability.buffId}}</span> 
-                buff to <span class="abilityBuffTarget">{{ability.buffSelfTarget ? "self" : "target"}}</span> on hit
+                @if (ability.buffSelfTarget || !(ability.canTargetAlly || ability.canTargetEnemy)){
+                    @if (ability.buffApplyChance < 1){
+                        <span class="abilityBuffChance">{{ability.buffApplyChance | percent}}</span> chance to gain
+                    } @else {
+                        Gain
+                    }
+                    <span class="abilityBuffId" tooltip-type="buff" [attr.tooltip-data]="ability.buffId">{{ability.buffId}}</span>
+                    {{ ability.canTargetEnemy && ability.projectileType !== "Shock" ? "on hit" : "" }}
+                } @else {
+                    @if (ability.buffApplyChance < 1){
+                        <span class="abilityBuffChance">{{ability.buffApplyChance | percent}}</span> chance to apply 
+                    } @else {
+                        Apply 
+                    }
+                    <span class="abilityBuffId" tooltip-type="buff" [attr.tooltip-data]="ability.buffId">{{ability.buffId}}</span>  
+                    to the target {{ability.projectileType !== "Shock" ? "on hit" : ""}}
+                }
+                
             </div>
         }
     </div>
