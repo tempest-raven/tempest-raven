@@ -19,3 +19,8 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+.abilityTitle {
+    display: block;
+    text-decoration: none;
+}

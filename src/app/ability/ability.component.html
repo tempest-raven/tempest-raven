@@ -1,9 +1,9 @@
 @if (ability){
 <div class="ability" id="abilityTemplate">
-    <div class="abilityTitle displayTitle">
+    <a class="abilityTitle displayTitle" [routerLink]="addLink ? ['/ability', ability.id, ability.internalName] : null">
         <span class="abilityName">{{ability.internalName}}</span>
         <span class="abilityId">{{ability.id}}</span> 
-    </div>
+    </a>
     <div class="abilityCost displayCost">{{ability.getCostString()}}</div>
     <div class="abilityDesc displayDesc1">{{ability.descriptionCode}}</div>
     <div class="abilityData displayDesc2">

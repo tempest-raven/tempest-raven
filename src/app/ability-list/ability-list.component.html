@@ -1,7 +1,5 @@
 @for (ability of abilityList.values(); track ability.id){
-    <a [routerLink]="['/ability', ability.id]">
-        <app-ability [abilityId]="ability.id"></app-ability>
-    </a>
+    <app-ability [abilityId]="ability.id" [addLink]="true"></app-ability>
     
 } @empty {
     <h1>Loading abilities...</h1>
