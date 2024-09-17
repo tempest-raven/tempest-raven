@@ -62,7 +62,7 @@
         }
         @if (ability.critChanceBonus){
             <div class="abilityCritDisplay">
-                <span class="abilityCritChance" title="Varies with caster and target level, and target elemental defense">+{{ability.critChanceBonus * 0.15 | percent:"1.0-2"}}</span> critical strike chance
+                <span class="abilityCritChance" title="Varies with caster and target level, and target elemental defense">{{ability.critChanceBonus * 0.15 | signedPercent:"1.0-2"}}</span> critical strike chance
             </div>
         }
         @if (ability.baseMultiplier != 1){

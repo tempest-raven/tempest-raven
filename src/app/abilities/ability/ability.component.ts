@@ -4,11 +4,12 @@ import { AbilityService } from '../ability.service';
 import { PercentPipe } from '@angular/common';
 import { AbilityScalePipe } from '../ability-scale.pipe';
 import { RouterLink } from '@angular/router';
+import { SignedPercentPipe } from '../../shared/signed-percent.pipe';
 
 @Component({
   selector: 'app-ability',
   standalone: true,
-  imports: [PercentPipe, AbilityScalePipe, RouterLink],
+  imports: [PercentPipe, SignedPercentPipe, AbilityScalePipe, RouterLink],
   templateUrl: './ability.component.html',
   styleUrl: './ability.component.css'
 })
