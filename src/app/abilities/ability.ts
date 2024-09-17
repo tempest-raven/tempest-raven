@@ -1,5 +1,4 @@
-import { sonnyElement } from "./sonnyElement";
-import { pseudoBool } from "./types";
+import { pseudoBool, sonnyElement } from "../shared/types";
 
 export class Ability {
 

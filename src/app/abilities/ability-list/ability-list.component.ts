@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbilityService } from '../services/ability.service';
+import { AbilityService } from '../ability.service';
 import { Ability } from '../ability';
 import { AbilityComponent } from "../ability/ability.component";
 import { RouterLink } from '@angular/router';

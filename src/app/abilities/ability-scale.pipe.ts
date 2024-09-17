@@ -1,5 +1,5 @@
 import { Inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
-import { Ability } from '../ability';
+import { Ability } from './ability';
 import { formatPercent } from '@angular/common';
 
 @Pipe({

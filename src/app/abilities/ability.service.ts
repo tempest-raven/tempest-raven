@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Ability } from '../ability';
+import { Ability } from './ability';
 
 @Injectable({
   providedIn: 'root'
