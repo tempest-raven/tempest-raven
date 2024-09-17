@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbilityService } from '../services/ability.service';
 import { Ability } from '../ability';
 import { AbilityComponent } from "../ability/ability.component";
@@ -10,11 +10,17 @@ import { AbilityComponent } from "../ability/ability.component";
   templateUrl: './ability-list.component.html',
   styleUrl: './ability-list.component.css'
 })
-export class AbilityListComponent {
-  abilityList: Map<number, Ability>;
+export class AbilityListComponent implements OnInit {
+  abilityList: Map<number, Ability> = new Map();
 
   constructor(private abilityService: AbilityService){
-    this.abilityList = abilityService.getAll();
-    console.log(this.abilityList);
+    
   }
+
+  ngOnInit(): void {
+    this.abilityService.request.then(response => {
+      this.abilityList = response;
+    });
+  }
+
 }

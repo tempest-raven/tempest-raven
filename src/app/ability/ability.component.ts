@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, numberAttribute, OnInit } from '@angular/core';
 import { Ability } from '../ability';
 import { AbilityService } from '../services/ability.service';
 import { PercentPipe } from '@angular/common';
@@ -11,13 +11,15 @@ import { AbilityScalePipe } from '../pipes/ability-scale.pipe';
   templateUrl: './ability.component.html',
   styleUrl: './ability.component.css'
 })
-export class AbilityComponent {
-  @Input({required: true}) linkedAbility: number = 0;
+export class AbilityComponent implements OnInit {
+  @Input({required: true, transform: numberAttribute}) abilityId: number = 0;
   public ability: Ability | undefined;
 
-  constructor(private abilityService: AbilityService){}
+  constructor(private abilityService: AbilityService){
+    
+  }
 
-  ngOnChanges(){
-    this.ability = this.abilityService.get(this.linkedAbility);
+  ngOnInit(){
+    this.abilityService.request.then(response => this.ability = response.get(this.abilityId));
   }
 }

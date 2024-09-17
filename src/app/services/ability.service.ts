@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { retry } from 'rxjs';
 import { Ability } from '../ability';
 
 @Injectable({
@@ -9,32 +7,13 @@ import { Ability } from '../ability';
 export class AbilityService {
   private static scriptLocation = "assets/data/sonny2/scripts/frame_42/DoAction_6.as";
   public abilityList = new Map<number, Ability>();
+  public request;
 
-  constructor(private http: HttpClient) {
-    http.get(AbilityService.scriptLocation, {responseType: "text"}).pipe(
-      retry({
-        count: 2,
-        delay: 500
-      })
-    ).subscribe({
-      next: res => {
-        this.parseAbilityScript(res);
-      },
-      error(err) {
-        //TODO
-      },
-    });
+  constructor() {
+    this.request = fetch(AbilityService.scriptLocation).then(res => res.text()).then(rawScript => this.parseAbilityScript(rawScript)); 
   }
 
-  get(id: number){
-    return this.abilityList.get(id);
-  }
-
-  getAll(){
-    return this.abilityList;
-  }
-
-  private parseAbilityScript(rawScript: string){
+  private parseAbilityScript(rawScript: string): Map<number, Ability>{
     rawScript = rawScript.replace(/\r/g, "");
     let lines = rawScript.split("\n");
     let lastAbilityId = 0;
@@ -67,6 +46,7 @@ export class AbilityService {
           lastAbilityId = +match[1];
       }
     }
+    return this.abilityList;
   }
 }
 

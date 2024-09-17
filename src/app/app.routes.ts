@@ -4,6 +4,6 @@ import { AbilityListComponent } from './ability-list/ability-list.component';
 
 export const routes: Routes = [
     { path: "abilities", component: AbilityListComponent },
-    { path: "ability/:id", component: AbilityComponent },
+    { path: "ability/:abilityId", component: AbilityComponent },
     { path: "", redirectTo: "abilities", pathMatch: "full"}
 ];
