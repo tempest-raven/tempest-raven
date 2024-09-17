@@ -8,31 +8,26 @@
     <div class="abilityDesc displayDesc1">{{ability.descriptionCode}}</div>
     <div class="abilityData displayDesc2">
         <div class="abilityElement">{{ability.element}} element</div>
-        <div class="abilityTargets">Can target 
-            @if (ability.canTargetSelf && ability.canTargetAlly && ability.canTargetEnemy){
-                anything
-            } @else if (ability.canTargetSelf && ability.canTargetAlly) {
-                a friendly unit
-            } @else {
-                {{ability.canTargetSelf ? "self":""}} {{ability.canTargetAlly ? "other ally":""}} {{ability.canTargetEnemy ? "enemy":""}}
-            }
-            
+        <div class="abilityTargets">Targets:  
+            <input type="checkbox" disabled [checked]="ability.canTargetSelf">Self
+            <input type="checkbox" disabled [checked]="ability.canTargetAlly">Ally
+            <input type="checkbox" disabled [checked]="ability.canTargetEnemy">Enemy
         </div>
         @if (ability.strengthScale || ability.instinctScale || ability.speedScale || ability.healthScale || ability.flatModifier){
             @switch (ability.moveType) {
                 @case ("Full Damage") {
                     <div class="abilityEffect">
-                        Deal damage equal to <span class="abilityScale">{{ability | abilityScale}}</span>
+                        Damage: <span class="abilityScale">{{ability | abilityScale}}</span>
                     </div>
                 }
                 @case ("Focus") {
                     <div class="abilityEffect">
-                        Grant <span class="abilityScale">{{ability.flatModifier}}</span> focus
+                        {{ability.flatModifier >= 0 ? "Grant" : "Drain"}} <span class="abilityScale">{{ability.flatModifier}}</span> focus
                     </div>
                 }
                 @case ("Heal") {
                     <div class="abilityEffect">
-                        Restore health equal to <span class="abilityScale">{{ability | abilityScale}}</span>
+                        Healing: <span class="abilityScale">{{ability | abilityScale}}</span>
                     </div>
                 }
                 @default {
@@ -67,7 +62,7 @@
         }
         @if (ability.critChanceBonus){
             <div class="abilityCritDisplay">
-                +<span class="abilityCritChance">{{ability.critChanceBonus * 0.15 | percent:"1.0-2"}}</span> base critical chance bonus
+                <span class="abilityCritChance" title="Varies with caster and target level, and target elemental defense">+{{ability.critChanceBonus * 0.15 | percent:"1.0-2"}}</span> critical strike chance
             </div>
         }
         @if (ability.baseMultiplier != 1){

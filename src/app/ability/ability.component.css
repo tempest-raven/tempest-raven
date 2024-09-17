@@ -24,3 +24,8 @@
     display: block;
     text-decoration: none;
 }
+
+.abilityCritChance {
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+}
