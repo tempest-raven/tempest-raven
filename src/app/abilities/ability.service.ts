@@ -13,6 +13,11 @@ export class AbilityService {
     this.request = fetch(AbilityService.scriptLocation).then(res => res.text()).then(rawScript => this.parseAbilityScript(rawScript)); 
   }
 
+  /**
+   * Convert the raw script into `Ability` instances
+   * @param rawScript The script to be parsed
+   * @returns The parsed script
+   */
   private parseAbilityScript(rawScript: string): Map<number, Ability>{
     rawScript = rawScript.replace(/\r/g, "");
     let lines = rawScript.split("\n");
