@@ -1,0 +1,5 @@
+@for (buff of buffList.values(); track buff.id){
+    <app-buff [buffId]="buff.id" [addLink]="true"></app-buff>
+} @empty {
+    <h1>Loading buffs...</h1>
+}
