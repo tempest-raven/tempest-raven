@@ -80,18 +80,16 @@
                     } @else {
                         Gain
                     }
-                    <a [routerLink]="['/buff', ability.buffId]" class="abilityBuffId" tooltip-type="buff" [attr.tooltip-data]="ability.buffId">{{ability.buffId}}</a>
-                    {{ ability.canTargetEnemy && ability.projectileType !== "Shock" ? "on hit" : "" }}
+                    
                 } @else {
                     @if (ability.buffApplyChance < 1){
                         <span class="abilityBuffChance">{{ability.buffApplyChance | percent}}</span> chance to apply 
                     } @else {
                         Apply 
                     }
-                    <a [routerLink]="['/buff', ability.buffId]" class="abilityBuffId" tooltip-type="buff" [attr.tooltip-data]="ability.buffId">{{ability.buffId}}</a>  
-                    to the target {{ability.projectileType !== "Shock" ? "on hit" : ""}}
                 }
-                
+                <a [routerLink]="['/buff', ability.buffId]" class="abilityBuffId" [tooltip]="buffComponent" [tooltipData]="{buffId: ability.buffId}" tooltip-type="buff" [attr.tooltip-data]="ability.buffId">{{ability.buffId}}</a>
+                {{ ability.canTargetEnemy && ability.projectileType !== "Shock" ? "on hit" : "" }}
             </div>
         }
     </div>

@@ -5,11 +5,21 @@ import { PercentPipe } from '@angular/common';
 import { AbilityScalePipe } from '../ability-scale.pipe';
 import { RouterLink } from '@angular/router';
 import { SignedPercentPipe } from '../../shared/signed-percent.pipe';
+import { BuffComponent } from '../../buffs/buff/buff.component';
+import { TooltipDirective } from '../../shared/tooltip.directive';
+import { BuffService } from '../../buffs/buff.service';
 
 @Component({
   selector: 'app-ability',
   standalone: true,
-  imports: [PercentPipe, SignedPercentPipe, AbilityScalePipe, RouterLink],
+  imports: [
+    PercentPipe, 
+    SignedPercentPipe, 
+    AbilityScalePipe, 
+    RouterLink, 
+    BuffComponent, 
+    TooltipDirective
+  ],
   templateUrl: './ability.component.html',
   styleUrl: './ability.component.css'
 })
@@ -17,8 +27,12 @@ export class AbilityComponent implements OnInit {
   @Input({required: true, transform: numberAttribute}) abilityId: number = 0;
   @Input({transform: booleanAttribute}) addLink: boolean = false;
   public ability: Ability | undefined;
+  buffComponent = BuffComponent;
 
-  constructor(private abilityService: AbilityService){
+  constructor(
+    private abilityService: AbilityService,
+    private buffService: BuffService
+  ){
     
   }
 
