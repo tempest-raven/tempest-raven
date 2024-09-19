@@ -19,7 +19,7 @@ textarea {
     width: 100%;
 }
 
-#tooltip {
+#tooltip, .tooltip {
     position: fixed;
     opacity: 95%;
     max-width: 20%;
