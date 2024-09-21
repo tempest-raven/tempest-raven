@@ -1,4 +1,4 @@
-import { pseudoBool, sonnyElement } from "../shared/types";
+import { languageObject, pseudoBool, sonnyElement, sonnyLanguage } from "../shared/types";
 
 export class Ability {
 
@@ -24,6 +24,7 @@ export class Ability {
     ] as const;
 
     static secondArrayMap: Map<number, keyof Ability> = new Map();
+    static langStrings: languageObject;
 
     element: sonnyElement = "Physical"; //0
     strengthBonus = 0; //1 (unused)
@@ -76,7 +77,6 @@ export class Ability {
         public localeNameId: number,
         public soundFX: string
     ){
-
         //we do this one because the cost string could be overwrote in theory
         this.rawCostString = this.getCostString();
         //this.initializeData(parameters);
@@ -111,7 +111,7 @@ export class Ability {
         }
     }*/
 
-    localizedDescription(langStrings: { [x: string]: { [x: string]: any; }; }){
+    localizedDescription(language: sonnyLanguage = "ENGLISH"){
         if (!this.descriptionCode) {
             return "No Tooltip assigned";
         }
@@ -134,7 +134,8 @@ export class Ability {
                 if (match[1] === "1"){
                     match[1] = "";
                 }
-                return langStrings["SKILLTIP" + match[1]][match[2]];
+                const skilltip = "SKILLTIP" + match[1] as "SKILLTIP" | "SKILLTIP2" | "SKILLTIP3";
+                return Ability.langStrings[language][skilltip]![+match[2]];
             }
             match = /_root\.hackMove\[(\d+)\]/.exec(part);
             if (match !== null){
@@ -149,8 +150,8 @@ export class Ability {
         return parsedParts.join("");
     }
 
-    localizedName(langStrings: { [x: string]: { [x: string]: any; }; }){
-        return langStrings["SKILLNAME"][this.localeNameId];
+    localizedName(language: sonnyLanguage = "ENGLISH"){
+        return Ability.langStrings[language]["SKILLNAME"]![this.localeNameId];
     }
 
     /**
@@ -159,6 +160,10 @@ export class Ability {
      * @param {string} value The raw value to be assigned
      */
     setAttribute(attributeIndex: number, value: string){
+        if (attributeIndex === 17){
+            this.descriptionCode = value;
+            return;
+        }
         const attributeName = Ability.secondArrayMap.get(attributeIndex);
         if (attributeName === undefined){
             this.customAttributes.set(attributeIndex, value);

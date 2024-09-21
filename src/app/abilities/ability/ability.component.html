@@ -1,11 +1,18 @@
 @if (ability){
 <div class="ability" id="abilityTemplate">
     <a class="abilityTitle displayTitle" [routerLink]="addLink ? ['/ability', ability.id, ability.internalName] : null">
-        <span class="abilityName">{{ability.internalName}}</span>
+        <span class="abilityName">
+            @if (ability.localeNameId !== 0 || ability.internalName === "Vicious Strike"){
+                {{ability.localizedName()}}
+            } @else {
+                <span class="internalName" title="Internal name, no translation provided">{{ability.internalName}}</span>
+            }
+            
+        </span>
         <span class="abilityId">{{ability.id}}</span> 
     </a>
     <div class="abilityCost displayCost">{{ability.getCostString()}}</div>
-    <div class="abilityDesc displayDesc1">{{ability.descriptionCode}}</div>
+    <div class="abilityDesc displayDesc1">{{ability.localizedDescription()}}</div>
     <div class="abilityData displayDesc2">
         <div class="abilityElement">{{ability.element}} element</div>
         <div class="abilityTargets">Targets:  

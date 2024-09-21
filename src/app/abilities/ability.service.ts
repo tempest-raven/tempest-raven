@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Ability } from './ability';
+import { SonnyTranslationService } from '../sonny-translation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,18 @@ export class AbilityService {
   public abilityList = new Map<number, Ability>();
   public request;
 
-  constructor() {
-    this.request = fetch(AbilityService.scriptLocation).then(res => res.text()).then(rawScript => this.parseAbilityScript(rawScript)); 
+  constructor(private translationService: SonnyTranslationService) {
+    translationService.request.then(strings => {
+      
+    });
+    const requests = Promise.all([
+      translationService.request, 
+      fetch(AbilityService.scriptLocation).then(res => res.text())
+    ]).then(([langStrings, abilityScript]) => {
+      Ability.langStrings = langStrings;
+      return this.parseAbilityScript(abilityScript);
+    });
+    this.request = requests;
   }
 
   /**

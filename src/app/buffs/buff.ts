@@ -1,7 +1,8 @@
-import { sonnyElement } from "../shared/types";
+import { languageObject, sonnyElement, sonnyLanguage } from "../shared/types";
 
 export class Buff {
     static attributeMap: Map<number, [string, (_: number) => number | string | null]> = new Map();
+    static langStrings: languageObject;
     public attributes: Map<number, string | number> = new Map();
 
     constructor(
@@ -12,7 +13,7 @@ export class Buff {
 
     }
 
-    localizedDescription(langStrings: { [x: string]: { [x: string]: any; }; }){
+    localizedDescription(language: sonnyLanguage = "ENGLISH"){
         let description = this.attributes.get(25) as string | undefined;
         if (description === undefined) {
             return "No description";
@@ -33,7 +34,8 @@ export class Buff {
         let parsedParts = parts.map((part: string) => {
             let match = /BUFF_DESC(\d)\[(\d+)\]/.exec(part);
             if (match !== null){
-                return langStrings["AUX" + match[1]][match[2]];
+                const aux = "AUX" + match[1] as "AUX1" | "AUX2" | "AUX3";
+                return Buff.langStrings[language][aux]![+match[2]];
             }
             match = /_root\.hackMove2\[(\d+)\]/.exec(part);
             if (match !== null){
@@ -48,10 +50,10 @@ export class Buff {
         return parsedParts.join("");
     }
 
-    localizedName(langStrings: { [x: string]: any[]; }){
+    localizedName(language: sonnyLanguage = "ENGLISH"){
         let match = /BUFF_NAME\[(\d+)\]/.exec(this.name);
         if (match !== null){
-            return langStrings["AU"][+match[1]];
+            return Buff.langStrings[language]["AU"]![+match[1]];
         }
         return this.name;
     }

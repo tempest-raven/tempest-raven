@@ -1,6 +1,12 @@
 @if (buff){
 <div class="buff" id="buffTemplate">
-  <div class="buffName displayTitle">{{buff.id}}</div>
+  <div class="buffName displayTitle">
+    @if (buff.attributes.get(16) === -1){
+      {{buff.id}}
+    } @else {
+      {{buff.localizedName()}}
+    }
+  </div>
   <div class="buffElement displaySubTitle">
     {{buff.element}} 
     @switch (buff.attributes.get(20)) {
@@ -15,7 +21,7 @@
       }
     }
   </div>
-  <div class="buffDesc displayDesc1">{{buff.attributes.get(25)}}</div>
+  <div class="buffDesc displayDesc1">{{buff.localizedDescription()}}</div>
   <div class="buffData displayDesc2">
     ID: <span class="buffId">{{buff.id}}</span>
     @for (attribute of buff.attributes; track attribute[0];) {

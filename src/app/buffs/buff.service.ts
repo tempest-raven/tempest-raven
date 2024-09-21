@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Buff } from './buff';
+import { SonnyTranslationService } from '../sonny-translation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,14 @@ export class BuffService {
   public buffList = new Map<string, Buff>();
   public request;
 
-  constructor() {
+  constructor(private translationService: SonnyTranslationService) {
+    const requests = Promise.all([
+      translationService.request, 
+      fetch(BuffService.scriptLocation).then(res => res.text())
+    ]).then(([langStrings, buffScript]) => {
+      Buff.langStrings = langStrings;
+      return this.parseBuffScript(buffScript);
+    });
     this.request = fetch(BuffService.scriptLocation).then(res => res.text()).then(rawScript => this.parseBuffScript(rawScript)); 
   }
 
