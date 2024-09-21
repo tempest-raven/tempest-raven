@@ -14,10 +14,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'Sonny data browser' title`, () => {
+  it(`should have the 'Tempest Raven' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Sonny data browser');
+    expect(app.title).toEqual('Tempest Raven');
   });
 
   it('should render title', () => {

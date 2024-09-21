@@ -1,6 +1,6 @@
-# Sonny Data Browser
+# Tempest Raven
 
-The Sonny Data Browser is a platform that lets you consult detailed internal data about the [Sonny 2 flash game](https://armorgames.com/play/2900/sonny-2) published by [Armor Games](https://armorgames.com/). It is published under the [MIT License](./LICENSE.txt).
+Tempest Raven is a platform that lets you consult detailed internal data about the [Sonny 2 flash game](https://armorgames.com/play/2900/sonny-2) published by [Armor Games](https://armorgames.com/). It is published under the [MIT License](./LICENSE.txt).
 
 ## Features
 
