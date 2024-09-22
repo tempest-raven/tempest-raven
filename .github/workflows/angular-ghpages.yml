@@ -27,13 +27,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Angular deploy for tempest-raven
-      uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.4.0
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        github_access_token: ${{ secrets.GITHUB_TOKEN }} # see the Configuration section for how you can create secrets
-        build_configuration: production # The build environment for the app. please look configurations in your angular.json
-        base_href: /tempest-raven/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
-        deploy_branch: gh-pages # The branch the action should deploy to.
-        angular_dist_build_folder: dist/browser # The folder where your project is supposed to be after running ng build by the action.
+        node-version: 20
+    - run: npm ci
+    - run: ng deploy #npm test
     
