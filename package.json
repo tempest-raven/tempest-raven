@@ -1,6 +1,6 @@
 {
-  "name": "sonny-data-browser",
-  "version": "0.0.0",
+  "name": "tempest-raven",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

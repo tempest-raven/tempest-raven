@@ -31,6 +31,8 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 20
-    - run: npm ci
-    - run: ng deploy #npm test
+    - run: |
+      npm ci
+      ng deploy
+    #- run: npm test
     
