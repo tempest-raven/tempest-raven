@@ -1,0 +1,7 @@
+.buffList app-buff {
+    vertical-align: top;
+    display: inline-block;
+    padding: 3px;
+    box-sizing: border-box;
+    width: 20%;
+}

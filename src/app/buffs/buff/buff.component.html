@@ -1,0 +1,52 @@
+@if (buff){
+<div class="buff" id="buffTemplate">
+  <div class="buffName displayTitle">
+    @if (buff.attributes.get(16) === -1){
+      {{buff.id}}
+    } @else {
+      {{buff.localizedName()}}
+    }
+  </div>
+  <div class="buffElement displaySubTitle">
+    {{buff.element}} 
+    @switch (buff.attributes.get(20)) {
+      @case (1) {
+        buff
+      }
+      @case (-1) {
+        debuff
+      }
+      @default {
+        effect
+      }
+    }
+  </div>
+  <div class="buffDesc displayDesc1">{{buff.localizedDescription()}}</div>
+  <div class="buffData displayDesc2">
+    ID: <span class="buffId">{{buff.id}}</span>
+    @for (attribute of buff.attributes; track attribute[0];) {
+      @let key = attribute[0];
+      @let value = +attribute[1];
+      @if (key !== 20 && key !== 25){
+        @let mapResult = attributeMap.get(key);
+        @if (mapResult){
+          @let attributeName = mapResult[0];
+          @let transformedValue = mapResult[1](value);
+          <div class="buffAttributes">
+            <span class="attributeId">{{attributeName}}</span>
+            @if(transformedValue){
+              : 
+              <span class="attributeValue">{{mapResult[1](value)}}</span>
+            }
+          </div>  
+        } @else {
+          <div class="buffAttributes">
+            <span class="attributeId">{{key}}</span>: 
+            <span class="attributeValue">{{value}}</span>
+          </div>
+        }
+      }
+    }
+  </div>
+</div> 
+}

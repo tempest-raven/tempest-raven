@@ -1,0 +1,104 @@
+@if (ability){
+<div class="ability" id="abilityTemplate">
+    <a class="abilityTitle displayTitle" [routerLink]="addLink ? ['/ability', ability.id, ability.internalName] : null">
+        <span class="abilityName">
+            @if (ability.localeNameId !== 0 || ability.internalName === "Vicious Strike"){
+                {{ability.localizedName()}}
+            } @else {
+                <span class="internalName" title="Internal name, no translation provided">{{ability.internalName}}</span>
+            }
+            
+        </span>
+        <span class="abilityId">{{ability.id}}</span> 
+    </a>
+    <div class="abilityCost displayCost">{{ability.getCostString()}}</div>
+    <div class="abilityDesc displayDesc1">{{ability.localizedDescription()}}</div>
+    <div class="abilityData displayDesc2">
+        <div class="abilityElement">{{ability.element}} element</div>
+        <div class="abilityTargets">Targets:  
+            <input type="checkbox" disabled [checked]="ability.canTargetSelf">Self
+            <input type="checkbox" disabled [checked]="ability.canTargetAlly">Ally
+            <input type="checkbox" disabled [checked]="ability.canTargetEnemy">Enemy
+        </div>
+        @if (ability.strengthScale || ability.instinctScale || ability.speedScale || ability.healthScale || ability.flatModifier){
+            @switch (ability.moveType) {
+                @case ("Full Damage") {
+                    <div class="abilityEffect">
+                        Damage: <span class="abilityScale">{{ability | abilityScale}}</span>
+                    </div>
+                }
+                @case ("Focus") {
+                    <div class="abilityEffect">
+                        {{ability.flatModifier >= 0 ? "Grant" : "Drain"}} <span class="abilityScale">{{ability.flatModifier}}</span> focus
+                    </div>
+                }
+                @case ("Heal") {
+                    <div class="abilityEffect">
+                        Healing: <span class="abilityScale">{{ability | abilityScale}}</span>
+                    </div>
+                }
+                @default {
+                    <div class="abilityEffect"></div>
+                }
+            }
+        }
+        
+        @if (ability.buffElementReqCount > 0){
+            <div class="abilityRequirements">
+                Requires {{ability.buffElementReqCount}} {{ability.buffElementRequirement}} type buff(s) on the target
+            </div>
+        }
+        @if (ability.dispelCount > 0 && ability.dispelElementArray[0] != 0) {
+            <div class="abilityDispel">
+                Dispel {{ability.dispelCount}} 
+                @for (dispelElement of ability.dispelElementArray; track dispelElement){
+                    {{dispelElement}}{{$last ? "" : ", "}}
+                }
+                {{ability.dispelPositive == 1 ? "buff(s)" : "debuff(s)"}}
+            </div>
+        }
+        @if (ability.projectileType === "Shock"){
+            <div class="abilityHitModifiers">
+                Unavoidable
+            </div>
+        }
+        @if (ability.projectileType !== "Shock" && ability.accuracyMultiplier != 1){
+            <div class="abilityHitModifiers">
+                <span class="abilityAccuracy">{{ability.accuracyMultiplier | percent}} accuracy</span>
+            </div>
+        }
+        @if (ability.critChanceBonus){
+            <div class="abilityCritDisplay">
+                <span class="abilityCritChance" title="Varies with caster and target level, and target elemental defense">{{ability.critChanceBonus * 0.15 | signedPercent:"1.0-2"}}</span> critical strike chance
+            </div>
+        }
+        @if (ability.baseMultiplier != 1){
+            <div class="abilityFocusScale">
+                Scales with 
+                <span class="abilityFocusMulti">{{ability.focusScale | percent}}</span> of current focus 
+                + <span class="abilityBaseMulti">{{ability.baseMultiplier | percent}}</span>
+            </div>
+        }
+        @if (ability.buffApplyChance > 0 && ability.buffId !== 0){
+            <div class="abilityBuff">
+                @if (ability.buffSelfTarget || !(ability.canTargetAlly || ability.canTargetEnemy)){
+                    @if (ability.buffApplyChance < 1){
+                        <span class="abilityBuffChance">{{ability.buffApplyChance | percent}}</span> chance to gain
+                    } @else {
+                        Gain
+                    }
+                    
+                } @else {
+                    @if (ability.buffApplyChance < 1){
+                        <span class="abilityBuffChance">{{ability.buffApplyChance | percent}}</span> chance to apply 
+                    } @else {
+                        Apply 
+                    }
+                }
+                <a [routerLink]="['/buff', ability.buffId]" class="abilityBuffId" [tooltip]="buffComponent" [tooltipData]="{buffId: ability.buffId}" tooltip-type="buff" [attr.tooltip-data]="ability.buffId">{{ability.buffId}}</a>
+                {{ ability.canTargetEnemy && ability.projectileType !== "Shock" ? "on hit" : "" }}
+            </div>
+        }
+    </div>
+</div>
+}

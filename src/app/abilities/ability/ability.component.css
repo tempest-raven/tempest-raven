@@ -1,0 +1,27 @@
+.abilityId {
+    color: rgb(70, 70, 70);
+    font-weight: normal;
+    float: right;
+    /*text-align: right;*/
+}
+
+.abilityBuffId {
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.abilityTitle {
+    display: block;
+    text-decoration: none;
+}
+
+.abilityCritChance {
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+}
+
+.internalName {
+    font-style: italic;
+}
