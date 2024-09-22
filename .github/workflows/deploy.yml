@@ -33,10 +33,10 @@ jobs:
         node-version: 20
     - name: CI and deploy
       env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         npm install -g @angular/cli
         npm ci
-        ng deploy
+        ng deploy --name=${{ github.actor }} --email=${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com
     #- run: npm test
     
