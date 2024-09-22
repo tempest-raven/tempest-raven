@@ -3,20 +3,16 @@
 html {
     font-family: Arial, Helvetica, sans-serif;
     cursor: default;
-    /*background-color: black;
-    color: white;*/
+    background-color: #cccccc;
+    /*color: white;*/
+}
+
+body {
+    margin: 0;
 }
 
 a {
     cursor: pointer;
-}
-
-label:not(.inline), textarea {
-    display: block;
-}
-
-textarea {
-    width: 100%;
 }
 
 #tooltip, .tooltip {

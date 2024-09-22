@@ -1,0 +1,32 @@
+/* Define the main Navigation block */
+.navbar {
+    display: block;
+    height: 50px;
+    /*line-height: 50px;*/
+    background-color: #333;
+}
+
+/* Remove bullets, margin and padding */
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar li {
+    float: left; /* Or you can use display: inline; */
+}
+
+/* Define the block styling for the links */
+.navbar li a {
+    display: inline-block;
+    text-align: center;
+    padding: 16px 16px;
+    color: white;
+}
+
+/* This is optional, however if you want to display the 
+active link differently apply a background to it */
+.navbar li a.active {
+    background-color: #3786e1;
+}
