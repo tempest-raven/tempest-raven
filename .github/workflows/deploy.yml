@@ -32,7 +32,7 @@ jobs:
       with:
         node-version: 20
     - run: |
-      npm ci
-      ng deploy
+        npm ci
+        ng deploy
     #- run: npm test
     
