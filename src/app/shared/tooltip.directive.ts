@@ -35,7 +35,7 @@ export class TooltipDirective<T extends typeof Component> {
     this.applicationRef.attachView(this.containedComponent.hostView);
     this.containedComponent.changeDetectorRef.detectChanges();
   }
-
+  @HostListener('click')
   @HostListener('mouseleave') onMouseLeave(){
     //this.containedComponent.changeDetectorRef.detach()
     //this.applicationRef.detachView(this.containedComponent.hostView);
