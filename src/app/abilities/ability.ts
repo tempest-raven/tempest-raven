@@ -25,6 +25,29 @@ export class Ability {
 
     static secondArrayMap: Map<number, keyof Ability> = new Map();
     static langStrings: languageObject;
+    private static substitutions: Array<[string, number]> = [
+        ["iceStr_x1", 0.25],
+        ["iceStr_x2", 0.25],
+        ["iceStr_x3", 0.25],
+        ["iceStr_x4", 0.25],
+        ["iceMag_START", 25],
+        ["iceMag_x1", 0.25],
+        ["iceMag_x2", 0.5],
+        ["iceMag_x3", 1],
+        ["iceMag_x4", 2],
+        ["superStr_x1", 2.5],
+        ["superStr_x2", 2.6],
+        ["superStr_x3", 2.7],
+        ["superStr_x4", 2.8],
+        ["superStr_y1", 2.6],
+        ["superStr_y2", 2.8],
+        ["superStr_y3", 3],
+        ["superStr_y4", 3.2],
+        ["superStr_z1", 1.5],
+        ["superStr_z2", 1.7],
+        ["superStr_z3", 1.9],
+        ["superStr_z4", 2.1],
+    ];
 
     element: sonnyElement = "Physical"; //0
     strengthBonus = 0; //1 (unused)
@@ -160,6 +183,9 @@ export class Ability {
      * @param {string} value The raw value to be assigned
      */
     setAttribute(attributeIndex: number, value: string){
+        for (let [varName, varValue] of Ability.substitutions){
+            value = value.replace(varName, "" + varValue);
+        }
         if (attributeIndex === 17){
             this.descriptionCode = value;
             return;
