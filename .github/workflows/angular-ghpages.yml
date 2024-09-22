@@ -11,7 +11,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -38,9 +38,9 @@ jobs:
         with:
           # Upload entire repository
           path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      #- name: Deploy to GitHub Pages
+      #  id: deployment
+      #  uses: actions/deploy-pages@v4
       - name: Angular Deploy gh-pages Actions
         # You may pin to the exact commit or the version.
         # uses: AhsanAyaz/angular-deploy-gh-pages-actions@2272ef32f364bc80d8680ee03d8e58f126156c31
@@ -57,7 +57,7 @@ jobs:
           # branch on which the angular build will be deployed
           #deploy_branch: # optional, default is gh-pages
           # The folder in which `ng build` provides its output. This is the folder which will be deployed to the `deploy_branch`.
-          #angular_dist_build_folder: # optional, default is dist
+          angular_dist_build_folder: dist/tempest-raven # optional, default is dist
           # If the action should run 'ng lint'
           #run_lint: # optional
           # Will not fail the step if anything fails
