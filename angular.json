@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tempest-raven",
+            "outputPath": "dist/",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -57,10 +57,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "sonny-data-browser:build:production"
+              "buildTarget": "tempest-raven:build:production"
             },
             "development": {
-              "buildTarget": "sonny-data-browser:build:development"
+              "buildTarget": "tempest-raven:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -68,7 +68,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "sonny-data-browser:build"
+            "buildTarget": "tempest-raven:build"
           }
         },
         "test": {

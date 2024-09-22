@@ -22,44 +22,21 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
-      #- name: Deploy to GitHub Pages
-      #  id: deployment
-      #  uses: actions/deploy-pages@v4
-      - name: Angular Deploy gh-pages Actions
-        # You may pin to the exact commit or the version.
-        # uses: AhsanAyaz/angular-deploy-gh-pages-actions@2272ef32f364bc80d8680ee03d8e58f126156c31
-        uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.4.0
-        with:
-          # Github access token token used to deploy on gh_pages. You can find it on Github.
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-          # The directory of the angular project, in which all the commands will run
-          #angular_project_dir: # optional, default is ./
-          # Build configuration for the angular app
-          #build_configuration: # optional, default is production
-          # base href for the app
-          #base_href: # optional, default is /
-          # branch on which the angular build will be deployed
-          #deploy_branch: # optional, default is gh-pages
-          # The folder in which `ng build` provides its output. This is the folder which will be deployed to the `deploy_branch`.
-          angular_dist_build_folder: dist/tempest-raven # optional, default is dist
-          # If the action should run 'ng lint'
-          #run_lint: # optional
-          # Will not fail the step if anything fails
-          #skip_failure: # optional
+    - uses: actions/checkout@v3
+    - name: Angular deploy for tempest-raven
+      uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.4.0
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }} # see the Configuration section for how you can create secrets
+        build_configuration: production # The build environment for the app. please look configurations in your angular.json
+        base_href: /tempest-raven/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
+        deploy_branch: gh-pages # The branch the action should deploy to.
+        angular_dist_build_folder: dist/tempest-raven/browser # The folder where your project is supposed to be after running ng build by the action.
+
+permissions:
+  contents: write # Allow write permission to GITHUB_TOKEN to commit to deploy branch.
           
