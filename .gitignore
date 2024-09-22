@@ -4,3 +4,5 @@
 /data/sonny2/sounds/**
 /data/sonny2/texts/**
 notes.txt
+.angular
+node_modules
