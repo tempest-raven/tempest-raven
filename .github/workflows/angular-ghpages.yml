@@ -38,5 +38,5 @@ jobs:
         angular_dist_build_folder: dist/tempest-raven/browser # The folder where your project is supposed to be after running ng build by the action.
 
 permissions:
-  contents: write # Allow write permission to GITHUB_TOKEN to commit to deploy branch.
+  contents: write # Allow write permission to GITHUB_TOKEN to commit to deploy branch. 
           
