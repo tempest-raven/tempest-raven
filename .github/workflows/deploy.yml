@@ -31,7 +31,12 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 20
-    - run: npm ci
-    - run: node ./node_modules/@angular/cli/bin/ng.js deploy
+    - name: CI and deploy
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        npm install -g @angular/cli
+        npm ci
+        ng deploy
     #- run: npm test
     
