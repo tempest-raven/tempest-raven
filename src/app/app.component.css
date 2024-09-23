@@ -23,6 +23,11 @@
     text-align: center;
     padding: 16px 16px;
     color: white;
+    text-decoration: none;
+}
+
+.navbar li a:hover {
+    background-color: #90bcee;
 }
 
 /* This is optional, however if you want to display the 

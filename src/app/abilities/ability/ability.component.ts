@@ -1,7 +1,7 @@
 import { booleanAttribute, Component, Input, numberAttribute, OnInit } from '@angular/core';
 import { Ability } from '../ability';
 import { AbilityService } from '../ability.service';
-import { PercentPipe } from '@angular/common';
+import { NgClass, PercentPipe } from '@angular/common';
 import { AbilityScalePipe } from '../ability-scale.pipe';
 import { RouterLink } from '@angular/router';
 import { SignedPercentPipe } from '../../shared/signed-percent.pipe';
@@ -13,6 +13,7 @@ import { BuffService } from '../../buffs/buff.service';
   selector: 'app-ability',
   standalone: true,
   imports: [
+    NgClass,
     PercentPipe, 
     SignedPercentPipe, 
     AbilityScalePipe, 

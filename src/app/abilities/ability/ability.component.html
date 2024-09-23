@@ -1,16 +1,26 @@
 @if (ability){
 <div class="ability" id="abilityTemplate">
-    <a class="abilityTitle displayTitle" [routerLink]="addLink ? ['/ability', ability.id, ability.internalName] : null">
-        <span class="abilityName">
-            @if (ability.localeNameId !== 0 || ability.internalName === "Vicious Strike"){
-                {{ability.localizedName()}}
+    <div class="abilityTitle displayTitle">
+        
+        <a class="abilityName" [routerLink]="addLink ? ['/ability', ability.id, ability.internalName] : null">
+            @let abilityHasLocaleName = (ability.localeNameId !== 0 || ability.internalName === "Vicious Strike") && ability.id >= 100;
+            @if (abilityHasLocaleName){
+                {{ability.localizedName()}} 
+                <span class="right">
+                    @if (ability.localizedName() !== ability.internalName){
+                        <span [ngClass]="{internalName: true, small: abilityHasLocaleName}" title="Internal name">{{ability.internalName}} </span>
+                    }
+                    <span class="abilityId">{{ability.id}}</span> 
+                </span>
             } @else {
-                <span class="internalName" title="Internal name, no translation provided">{{ability.internalName}}</span>
+                <span [ngClass]="{internalName: true, small: abilityHasLocaleName}" title="Internal name">{{ability.internalName}}</span>
+                <span class="right">
+                    <span class="abilityId">{{ability.id}}</span> 
+                </span>
             }
-            
-        </span>
-        <span class="abilityId">{{ability.id}}</span> 
-    </a>
+        </a>
+        
+    </div>
     <div class="abilityCost displayCost">{{ability.getCostString()}}</div>
     <div class="abilityDesc displayDesc1">{{ability.localizedDescription()}}</div>
     <div class="abilityData displayDesc2">

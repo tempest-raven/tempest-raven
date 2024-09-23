@@ -1,7 +1,10 @@
+.ability {
+    max-width: 40vw;
+}
+
 .abilityId {
     color: rgb(70, 70, 70);
     font-weight: normal;
-    float: right;
     /*text-align: right;*/
 }
 
@@ -12,9 +15,14 @@
     cursor: pointer;
 }
 
+.abilityName:link, .abilityName:visited {
+    color: darkblue;
+}
+
 .abilityTitle {
     display: block;
-    text-decoration: none;
+    color: initial;
+    /* text-decoration: none; */
 }
 
 .abilityCritChance {
@@ -24,4 +32,13 @@
 
 .internalName {
     font-style: italic;
+}
+
+.right {
+    float: right;
+}
+
+.small {
+    font-size: x-small;
+    color: rgb(50, 50, 50);
 }
