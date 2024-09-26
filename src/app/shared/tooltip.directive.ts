@@ -22,7 +22,6 @@ export class TooltipDirective<T extends typeof Component> {
       document.body.appendChild(tooltipEl);
     }
     this.tooltipEl = tooltipEl;
-    console.log("constructed");
   }
 
   @HostListener('mouseenter') onMouseEnter(){
