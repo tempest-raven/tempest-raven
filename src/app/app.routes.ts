@@ -5,10 +5,10 @@ import { BuffComponent } from './buffs/buff/buff.component';
 import { BuffListComponent } from './buffs/buff-list/buff-list.component';
 
 export const routes: Routes = [
-    { path: "abilities", component: AbilityListComponent },
+    { path: "abilities", component: AbilityListComponent, title: "Abilities", data: { navigation: true } },
     { path: "ability/:abilityId/:slug", component: AbilityComponent },
     { path: "ability/:abilityId", component: AbilityComponent },
-    { path: "buffs", component: BuffListComponent },
+    { path: "buffs", component: BuffListComponent, title: "Buffs", data: { navigation: true } },
     { path: "buff/:buffId/:slug", component: BuffComponent },
     { path: "buff/:buffId", component: BuffComponent },
     { path: "", redirectTo: "abilities", pathMatch: "full"}
