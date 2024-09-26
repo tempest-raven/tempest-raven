@@ -10,9 +10,6 @@
       @for (route of routes; track route) {
         <a mat-list-item [routerLink]="route.path" routerLinkActive #rla="routerLinkActive" [activated]="rla.isActive" >{{route.title ?? "No title"}}</a>
       }
-      
-      <!--a mat-list-item [routerLink]="['/buffs']" routerLinkActive #rlab="routerLinkActive" [activated]="rlab.isActive">Buffs</a-->
-      <!--a mat-list-item href="#">Link 3</a-->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
