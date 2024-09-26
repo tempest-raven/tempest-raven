@@ -1,14 +1,16 @@
 /* Core */
 
 html {
-    font-family: Arial, Helvetica, sans-serif;
     cursor: default;
-    background-color: #cccccc;
+    /*background-color: #cccccc;*/
     /*color: white;*/
+    height: 100%;
 }
 
 body {
+    height: 100%;
     margin: 0;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 a:active {
