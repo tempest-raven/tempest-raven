@@ -33,8 +33,6 @@ export class NavigationComponent {
   public activatedRoute = inject(ActivatedRoute);
   public routes = routes.filter(r => r.data && r.data["navigation"]);
 
-  constructor(){ console.log(this.activatedRoute)}
-
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),

@@ -45,7 +45,6 @@ export class TooltipDirective<T extends typeof Component> {
   @HostListener('mousemove', ['$event']) onMouseMove(ev: MouseEvent){
     const x = ev.clientX;
     const y = ev.clientY;
-    //console.log(x, y);
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     if (x / windowWidth < 0.8){
