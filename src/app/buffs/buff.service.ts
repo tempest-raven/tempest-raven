@@ -18,7 +18,7 @@ export class BuffService {
       Buff.langStrings = langStrings;
       return this.parseBuffScript(buffScript);
     });
-    this.request = fetch(BuffService.scriptLocation).then(res => res.text()).then(rawScript => this.parseBuffScript(rawScript)); 
+    this.request = requests; 
   }
 
   /**

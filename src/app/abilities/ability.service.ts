@@ -11,9 +11,6 @@ export class AbilityService {
   public request;
 
   constructor(private translationService: SonnyTranslationService) {
-    translationService.request.then(strings => {
-      
-    });
     const requests = Promise.all([
       translationService.request, 
       fetch(AbilityService.scriptLocation).then(res => res.text())
