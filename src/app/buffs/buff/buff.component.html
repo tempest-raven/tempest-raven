@@ -1,11 +1,14 @@
 @if (buff){
 <div class="buff" id="buffTemplate">
-  <div class="buffName displayTitle">
-    @if (buff.attributes.get(16) === -1){
-      {{buff.id}}
-    } @else {
-      {{buff.localizedName()}}
-    }
+  <div class="displayTitle">
+    <a class="buffName" [routerLink]="addLink ? ['/buff', buff.id] : null">
+      <!-- Passives -->
+      @if (buff.attributes.get(16) === -1){ 
+        {{buff.id}}
+      } @else {
+        {{buff.localizedName()}}
+      }
+    </a>
   </div>
   <div class="buffElement displaySubTitle">
     {{buff.element}} 

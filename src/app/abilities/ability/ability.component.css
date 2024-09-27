@@ -11,16 +11,6 @@
     cursor: pointer;
 }
 
-.abilityName:link, .abilityName:visited {
-    color: darkblue;
-}
-
-.abilityTitle {
-    display: block;
-    color: initial;
-    /* text-decoration: none; */
-}
-
 .abilityCritChance {
     text-decoration-line: underline;
     text-decoration-style: dotted;

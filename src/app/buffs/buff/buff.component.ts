@@ -2,11 +2,14 @@ import { booleanAttribute, Component, Input, OnInit } from '@angular/core';
 import { Buff } from '../buff';
 import { BuffService } from '../buff.service';
 import { formatPercent } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-buff',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './buff.component.html',
   styleUrl: './buff.component.css'
 })

@@ -74,6 +74,10 @@ body {
     margin-bottom: 2px;
 }
 
+.displayTitle a:link, .displayTitle a:visited {
+    color: darkblue;
+}
+
 .displayCost {
     border: 1px solid black;
     color: black;
