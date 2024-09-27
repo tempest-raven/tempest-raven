@@ -3,11 +3,16 @@ import { AbilityService } from '../ability.service';
 import { Ability } from '../ability';
 import { AbilityComponent } from "../ability/ability.component";
 import { RouterLink } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-ability-list',
   standalone: true,
-  imports: [AbilityComponent, RouterLink],
+  imports: [
+    AbilityComponent, 
+    RouterLink,
+    MatProgressSpinnerModule
+  ],
   templateUrl: './ability-list.component.html',
   styleUrl: './ability-list.component.css'
 })

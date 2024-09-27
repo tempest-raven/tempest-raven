@@ -13,14 +13,18 @@ body {
     font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
-a:active {
-    color: lightblue;
-}
+/* General */
 
 #tooltip, .tooltip {
     position: fixed;
     opacity: 95%;
     max-width: 20%;
+}
+
+.gridDisplay {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, auto));
+    gap: 3px;
 }
 
 /* Colors */
