@@ -29,6 +29,18 @@ While it is possible for the following features to be added, at this stage of th
 - Support for [Sonny (2017)](https://store.steampowered.com/app/586750/Sonny/) data. Sonny 2017 is made from scratch, and uses a different engine (Unity), and as such, its data structure isn't compatible at all with the flash games' data
 - Animations and character models. Implementing those without resorting to hand-made images and GIFs is likely to be (very) difficult. 
 
+## Play Sonny and Sonny 2
+
+You can play both Sonny games:
+- Directly on https://armorgames.com : [Sonny](https://armorgames.com/play/505/sonny) — [Sonny 2](https://armorgames.com/play/2900/sonny-2)
+  - Easiest method, but lower compatibility (mostly minor visual glitches) because of the usage of the Ruffle emulator
+- Via [Flashpoint archive](https://flashpointarchive.org/)
+  - Also access many other web games with high compatibility, but requires a few GB of disk space just for the base install
+- Through the [Flash Player projector (archive.org link)](https://archive.org/details/flashplayer32_0r0_363_win_sa) + a local copy of the game files. Download links directly from armorgames.com: [Sonny](https://cache.armorgames.com/files/games/sonny-505.swf) — [Sonny 2](https://cache.armorgames.com/files/games/sonny-2-2900.swf)
+  - Best method to preserve high compatibility *and* disk space, and can load modded versions, but requires some manual set-up
+- NEW: On Steam : [Sonny Legacy Collection](https://store.steampowered.com/app/2757720/Sonny_Legacy_Collection/)
+  - Achievement support, high compatibility and improved performance, but is a paid game. ☕ Support the devs!
+
 ## Other ressources
 
 If you like Sonny, check out these links!
