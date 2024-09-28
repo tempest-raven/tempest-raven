@@ -1,0 +1,13 @@
+<div class="gridDisplay">
+    @if (component){
+        @for (element of elementList.values(); track element.id){
+            <ng-container *ngComponentOutlet="component;
+                                              inputs: {elementId: element.id, addLink: true}">
+
+            </ng-container>
+        } @empty {
+            <mat-spinner></mat-spinner>
+        }
+    }
+    
+</div>

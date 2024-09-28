@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Ability } from './ability';
 import { SonnyTranslationService } from '../sonny-translation.service';
+import { requestService } from '../shared/types';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AbilityService {
+export class AbilityService implements requestService {
   private static scriptLocation = "assets/data/sonny2/scripts/frame_42/DoAction_6.as";
   public abilityList = new Map<number, Ability>();
   public request;

@@ -62,7 +62,7 @@ export class BuffComponent implements OnInit {
     [50, ["Silenced", (_: any) => null]],
   ]);
 
-  @Input({required: true}) buffId: string = "";
+  @Input({required: true}) elementId: string = "";
   @Input({transform: booleanAttribute}) addLink: boolean = false;
   public attributeMap = BuffComponent._attributeMap;
   public buff: Buff | undefined;
@@ -70,6 +70,6 @@ export class BuffComponent implements OnInit {
   constructor(private buffService: BuffService){}
 
   ngOnInit(){
-    this.buffService.request.then(response => this.buff = response.get(this.buffId));
+    this.buffService.request.then(response => this.buff = response.get(this.elementId));
   }
 }

@@ -105,7 +105,7 @@
                         Apply 
                     }
                 }
-                <a [routerLink]="['/buff', ability.buffId]" class="abilityBuffId" [tooltip]="buffComponent" [tooltipData]="{buffId: ability.buffId}" tooltip-type="buff" [attr.tooltip-data]="ability.buffId">{{ability.buffId}}</a>
+                <a [routerLink]="['/buff', ability.buffId]" class="abilityBuffId" [tooltip]="buffComponent" [tooltipData]="{elementId: ability.buffId}" tooltip-type="buff" [attr.tooltip-data]="ability.buffId">{{ability.buffId}}</a>
                 {{ ability.canTargetEnemy && ability.projectileType !== "Shock" ? "on hit" : "" }}
             </div>
         }

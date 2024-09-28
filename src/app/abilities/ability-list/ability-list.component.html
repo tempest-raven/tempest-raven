@@ -1,7 +1,0 @@
-<div class="abilityList gridDisplay">
-    @for (ability of abilityList.values(); track ability.id){
-        <app-ability [abilityId]="ability.id" [addLink]="true"></app-ability>
-    } @empty {
-        <mat-spinner></mat-spinner>
-    }
-</div>

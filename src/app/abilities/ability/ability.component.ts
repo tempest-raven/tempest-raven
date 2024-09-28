@@ -25,7 +25,7 @@ import { BuffService } from '../../buffs/buff.service';
   styleUrl: './ability.component.css'
 })
 export class AbilityComponent implements OnInit {
-  @Input({required: true, transform: numberAttribute}) abilityId: number = 0;
+  @Input({required: true, transform: numberAttribute}) elementId: number = 0;
   @Input({transform: booleanAttribute}) addLink: boolean = false;
   public ability: Ability | undefined;
   buffComponent = BuffComponent;
@@ -38,6 +38,6 @@ export class AbilityComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.abilityService.request.then(response => this.ability = response.get(this.abilityId));
+    this.abilityService.request.then(response => this.ability = response.get(this.elementId));
   }
 }

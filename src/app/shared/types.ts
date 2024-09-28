@@ -1,3 +1,7 @@
+import { Type, ProviderToken } from "@angular/core";
+
+export type elementListData = { component: Type<any>, service: ProviderToken<requestService> };
+export type requestService = { request: Promise<Map<number | string, {id: any}>>}
 export type pseudoBool = 0 | 1;
 export type sonnyElement = "Physical" | "Magic" | "Ice" | "Fire" | "Lightning" | "Earth" | "Shadow" | "Poison";
 export type sonnyLanguage = "ENGLISH" | "GERMAN";

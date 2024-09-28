@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Buff } from './buff';
 import { SonnyTranslationService } from '../sonny-translation.service';
+import { requestService } from '../shared/types';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BuffService {
+export class BuffService implements requestService {
   private static scriptLocation = "assets/data/sonny2/scripts/frame_42/DoAction_10.as";
   public buffList = new Map<string, Buff>();
   public request;
