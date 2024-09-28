@@ -1,4 +1,4 @@
-import { Component, Injectable, Injector, OnInit, ProviderToken, Type } from '@angular/core';
+import { Component, inject, Injectable, Injector, OnInit, ProviderToken, Type } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Observable } from 'rxjs';
@@ -20,16 +20,12 @@ export class ElementListComponent implements OnInit {
   public component: Type<any> | undefined;
   public elementList: Awaited<requestService["request"]> = new Map();
 
-  constructor(private activatedRoute: ActivatedRoute, private injector: Injector){
+  constructor(private activatedRoute: ActivatedRoute){
     let data = this.activatedRoute.data as Observable<elementListData>;
     data.subscribe({
       next: async (data) => {
         this.component = data.component;
-        this.elementList = await this.injector.get(data.service).request;
-        
-        //if (data.service instanceof AbilityService)
-        //data.service.request
-        //new value.component()
+        this.elementList = await inject(data.service).request;
       },
     })
   }
