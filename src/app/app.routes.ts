@@ -12,7 +12,7 @@ export const routes: Routes = [
             navigation: true, 
             component: AbilityComponent, 
             service: AbilityService 
-        } as elementListData
+        } as elementListData<number>
     },
     { path: "ability/:elementId/:slug", component: AbilityComponent, title: s => s.params["slug"] },
     { path: "ability/:elementId", component: AbilityComponent, title: s => "Ability ID " + s.params["elementId"] },
@@ -21,7 +21,7 @@ export const routes: Routes = [
             navigation: true, 
             component: BuffComponent, 
             service: BuffService
-        } as elementListData
+        } as elementListData<string>
     },
     { path: "buff/:elementId/:slug", component: BuffComponent, title: s => s.params["slug"] },
     { path: "buff/:elementId", component: BuffComponent, title: s => "Buff ID " + s.params["elementId"] },

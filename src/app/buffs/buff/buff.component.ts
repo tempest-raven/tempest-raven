@@ -3,6 +3,7 @@ import { Buff } from '../buff';
 import { BuffService } from '../buff.service';
 import { formatPercent } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { elementComponent } from '../../shared/types';
 
 @Component({
   selector: 'app-buff',
@@ -13,7 +14,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './buff.component.html',
   styleUrl: './buff.component.css'
 })
-export class BuffComponent implements OnInit {
+export class BuffComponent implements elementComponent<string>, OnInit {
   private static identity = (_: any) => _;
   private static toPercent = (v: number) => formatPercent(v, "en-US");
   private static toPercentSigned = (v: number) => (v > 0 ? "+" : "") + BuffComponent.toPercent(v);

@@ -8,6 +8,7 @@ import { SignedPercentPipe } from '../../shared/signed-percent.pipe';
 import { BuffComponent } from '../../buffs/buff/buff.component';
 import { TooltipDirective } from '../../shared/tooltip.directive';
 import { BuffService } from '../../buffs/buff.service';
+import { elementComponent } from '../../shared/types';
 
 @Component({
   selector: 'app-ability',
@@ -24,7 +25,7 @@ import { BuffService } from '../../buffs/buff.service';
   templateUrl: './ability.component.html',
   styleUrl: './ability.component.css'
 })
-export class AbilityComponent implements OnInit {
+export class AbilityComponent implements elementComponent<number>, OnInit {
   @Input({required: true, transform: numberAttribute}) elementId: number = 0;
   @Input({transform: booleanAttribute}) addLink: boolean = false;
   public ability: Ability | undefined;
