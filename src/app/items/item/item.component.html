@@ -2,11 +2,16 @@
   <div>
     <div [class]="['displayTitle', 'rarity' + item.rarity]">
       <a class="buffName" [routerLink]="addLink ? ['/item', item.id] : null">
-        @if (item.localizedName()){
-          {{item.localizedName()}}
-        } @else {
-          <span class="unnamed">No item name</span>
-        }
+        <span>
+          @if (item.localizedName()){
+            {{item.localizedName()}}
+          } @else {
+            <span class="unnamed">No item name</span>
+          }
+        </span>
+        <span class="right">
+          <span class="itemId">{{item.id}}</span> 
+        </span>
       </a>
     </div>
     <div class="displaySubTitle">
