@@ -144,7 +144,7 @@ export class Item {
   }
   
   sellPrice(){
-    return Math.ceil(this.buyPrice() / 6.65);
+    return Math.ceil(this.buyPrice() * 0.15);
   }
   
 }
