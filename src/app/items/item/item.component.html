@@ -1,0 +1,38 @@
+@if (item) {
+  <div>
+    <div [class]="['displayTitle', 'rarity' + item.rarity]">
+      <a class="buffName" [routerLink]="addLink ? ['/item', item.id] : null">
+        @if (item.itemName()){
+          {{item.itemName()}}
+        } @else {
+          <span class="unnamed">No item name</span>
+        }
+      </a>
+    </div>
+    <div class="displaySubTitle">
+      {{item.fullLevelRequirement()}}
+    </div>
+    <div class="displayDesc3">
+      @let stats = item.rawStats;
+      @if (stats.SpeedUP){
+        <div>Speed {{stats.SpeedUP | signedNumber }}</div>
+      }
+      @if (stats.MagicUP){
+        <div>Magic {{stats.MagicUP | signedNumber }}</div>
+      }
+      @if (stats.StrengthUP){
+        <div>Strength {{stats.StrengthUP | signedNumber }}</div>
+      }
+      @if (stats.HealthUP){
+        <div>Health {{stats.HealthUP | signedNumber }}</div>
+      }
+      @if (stats.FocusUP){
+        <div>Focus {{stats.FocusUP | signedNumber }}</div>
+      }
+    </div>
+    <div class="displayDesc1">
+      <div>Buy price: €0</div>
+      <div>Sell price: €0</div>
+    </div>
+  </div> 
+}
