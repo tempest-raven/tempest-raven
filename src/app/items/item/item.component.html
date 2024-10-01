@@ -34,6 +34,16 @@
       @if (stats.FocusUP){
         <div>Focus {{item.focus | signedNumber }}</div>
       }
+      @for (per of item.piercing; track per){
+        @if (per){
+          <div>{{item.elementArray[$index]}} Piercing {{per | signedNumber}}</div>
+        }
+      }
+      @for (def of item.defense; track def){
+        @if (def){
+          <div>{{item.elementArray[$index]}} Defence {{def | signedNumber}}</div>
+        }
+      }
       @if (item.flavorText()){
         <div class="displayFlavor">{{item.flavorText()}}</div>
       }
