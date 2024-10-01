@@ -10,3 +10,7 @@
 .unnamed {
     font-style: italic;
 }
+
+.internal {
+    color: rgb(200, 200, 200);
+}

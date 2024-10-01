@@ -6,7 +6,7 @@
           @if (item.localizedName()){
             {{item.localizedName()}}
           } @else {
-            <span class="unnamed">No item name</span>
+            <span class="unnamed" title="This item has no translation">{{item.internalName}}</span>
           }
         </span>
         <span class="right">
@@ -46,6 +46,9 @@
       }
       @if (item.flavorText()){
         <div class="displayFlavor">{{item.flavorText()}}</div>
+      }
+      @if (item.localizedName() && item.localizedName() !== item.internalName){
+        <div class="internal">Internal name: {{item.internalName}}</div>
       }
     </div>
     <div class="displayDesc1">
