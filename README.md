@@ -6,16 +6,17 @@ Tempest Raven is a platform that lets you consult detailed internal data about t
 
 ### Current features
 
-- View ability data
-- View buff data
+- View all abilities
+- View all buffs
+- View all items (including many unused ones)
 - Share links for any specific data (for example the rank 3 of Vicious Strike)
 
 ### Planned or upcoming features
 
 In no particular order:
+- Adding in-game sprites when possible (items, units, buffs, ability icons)
 - Support for the in-game English and German translations
 - Support for [Sonny](https://armorgames.com/play/505/sonny) data
-- Adding items
 - Adding units
 - Adding fights
 - Adding class ability trees
