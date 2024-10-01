@@ -10,7 +10,7 @@ export class SignedPercentPipe implements PipeTransform {
 
   transform(value: number, digitsInfo?: string): string {
     const formattedNumber = formatPercent(value, this._locale, digitsInfo);
-    return value > 0 ? "+" + formattedNumber : formattedNumber;
+    return value >= 0 ? "+" + formattedNumber : formattedNumber;
   }
 
 }

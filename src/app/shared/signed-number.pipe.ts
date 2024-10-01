@@ -10,7 +10,7 @@ export class SignedNumberPipe implements PipeTransform {
 
   transform(value: number, digitsInfo?: string): string {
     const formattedNumber = formatNumber(value, this._locale, digitsInfo);
-    return value > 0 ? "+" + formattedNumber : formattedNumber;
+    return value >= 0 ? "+" + formattedNumber : formattedNumber;
   }
 
 }
