@@ -2,8 +2,8 @@
   <div>
     <div [class]="['displayTitle', 'rarity' + item.rarity]">
       <a class="buffName" [routerLink]="addLink ? ['/item', item.id] : null">
-        @if (item.itemName()){
-          {{item.itemName()}}
+        @if (item.localizedName()){
+          {{item.localizedName()}}
         } @else {
           <span class="unnamed">No item name</span>
         }
@@ -15,19 +15,19 @@
     <div class="displayDesc3">
       @let stats = item.rawStats;
       @if (stats.SpeedUP){
-        <div>Speed {{stats.SpeedUP | signedNumber }}</div>
+        <div>Speed {{item.speed | signedNumber }}</div>
       }
       @if (stats.MagicUP){
-        <div>Magic {{stats.MagicUP | signedNumber }}</div>
+        <div>Instinct {{item.magic | signedNumber }}</div>
       }
       @if (stats.StrengthUP){
-        <div>Strength {{stats.StrengthUP | signedNumber }}</div>
+        <div>Strength {{item.strength | signedNumber }}</div>
       }
       @if (stats.HealthUP){
-        <div>Health {{stats.HealthUP | signedNumber }}</div>
+        <div>Vitality {{item.vitality | signedNumber }}</div>
       }
       @if (stats.FocusUP){
-        <div>Focus {{stats.FocusUP | signedNumber }}</div>
+        <div>Focus {{item.focus | signedNumber }}</div>
       }
     </div>
     <div class="displayDesc1">
