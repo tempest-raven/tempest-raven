@@ -46,6 +46,10 @@ export class Item {
     
   }
 
+  itemName(language: sonnyLanguage = "ENGLISH"): string | undefined {
+    return Item.langStrings[language]["ITEMNAME"]![this.id];
+  }
+
   private className(language: sonnyLanguage = "ENGLISH"){
     if (this.classRequirement === 0){
       return "";
@@ -60,6 +64,11 @@ export class Item {
     return Item.langStrings[language]["ITEMSS"]![this.equipSlot - 2];
   }
 
+  fullLevelRequirement(language: sonnyLanguage = "ENGLISH"){
+    let lang = Item.langStrings[language];
+    return `${lang["MENU"]![0]}${this.levelRequirement} ${this.className(language)} ${this.slotName(language)}`;
+  }
+
   flavorText(language: sonnyLanguage = "ENGLISH"){
     let text = Item.langStrings[language]["ITEMSAY"]![this.id] as string | 0;
     if (text === 0){
@@ -68,13 +77,20 @@ export class Item {
     return text;
   }
 
-  fullLevelRequirement(language: sonnyLanguage = "ENGLISH"){
-    let lang = Item.langStrings[language];
-    return `${lang["MENU"]![0]}${this.levelRequirement} ${this.className(language)} ${this.slotName(language)}`;
+  respecValue(level: number){
+    return 10 * Math.pow(level,1.5);
   }
 
-  itemName(language: sonnyLanguage = "ENGLISH"): string | undefined {
-    return Item.langStrings[language]["ITEMNAME"]![this.id];
+  buyPrice(){
+    if(this.equipSlot < 2){
+        return Math.round(this.sellPriceMultiplier * this.respecValue(this.levelRequirement) * 3);
+    } else {
+        return Math.round(this.sellPriceMultiplier * (Item.slotWeights[this.equipSlot] * 2.5) * this.respecValue(this.levelRequirement) * 3);
+    }
+  }
+
+  sellPrice(){
+    return Math.ceil(this.buyPrice() / 6.65);
   }
 
 }
