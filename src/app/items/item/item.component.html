@@ -34,6 +34,9 @@
       @if (stats.FocusUP){
         <div>Focus {{item.focus | signedNumber }}</div>
       }
+      @if (item.flavorText()){
+        <div class="displayFlavor">{{item.flavorText()}}</div>
+      }
     </div>
     <div class="displayDesc1">
       <div>Buy price: €{{item.buyPrice()}}</div>
