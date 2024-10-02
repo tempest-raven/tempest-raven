@@ -14,3 +14,11 @@
 .internal {
     color: rgb(200, 200, 200);
 }
+
+.displayDesc3 {
+    margin-bottom: 2px;
+}
+
+.displayDesc3 > div {
+    padding-bottom: 3px;
+}

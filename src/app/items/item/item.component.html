@@ -47,11 +47,11 @@
       @if (item.flavorText()){
         <div class="displayFlavor">{{item.flavorText()}}</div>
       }
+    </div>
+    <div class="displayDesc1">
       @if (item.localizedName() && item.localizedName() !== item.internalName){
         <div class="internal">Internal name: {{item.internalName}}</div>
       }
-    </div>
-    <div class="displayDesc1">
       <div>Buy price: €{{item.buyPrice()}}</div>
       <div>Sell price: €{{item.sellPrice() }}</div>
     </div>
