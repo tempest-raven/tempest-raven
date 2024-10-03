@@ -39,7 +39,7 @@ export class TooltipDirective<T extends typeof Component> {
     //this.containedComponent.changeDetectorRef.detach()
     //this.applicationRef.detachView(this.containedComponent.hostView);
     //this.containedComponent.destroy();
-    //this.tooltipEl.classList.add("hidden");
+    this.tooltipEl.classList.add("hidden");
   }
 
   @HostListener('mousemove', ['$event']) onMouseMove(ev: MouseEvent){
