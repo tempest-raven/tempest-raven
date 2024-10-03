@@ -39,7 +39,7 @@ export class TooltipDirective<T extends typeof Component> {
     //this.containedComponent.changeDetectorRef.detach()
     //this.applicationRef.detachView(this.containedComponent.hostView);
     //this.containedComponent.destroy();
-    this.tooltipEl.classList.add("hidden");
+    //this.tooltipEl.classList.add("hidden");
   }
 
   @HostListener('mousemove', ['$event']) onMouseMove(ev: MouseEvent){
@@ -52,7 +52,7 @@ export class TooltipDirective<T extends typeof Component> {
         this.tooltipEl.style.right = "";
     } else {
         this.tooltipEl.style.left = "";
-        this.tooltipEl.style.right = windowWidth - (x + 10) + "px";
+        this.tooltipEl.style.right = windowWidth - (x - 10) + "px";
     }
 
     if (y / windowHeight < 0.8){
@@ -60,7 +60,7 @@ export class TooltipDirective<T extends typeof Component> {
         this.tooltipEl.style.bottom = "";
     } else {
         this.tooltipEl.style.top = "";
-        this.tooltipEl.style.bottom = windowHeight - (y + 10) + "px";
+        this.tooltipEl.style.bottom = windowHeight - (y - 10) + "px";
     }
   }
 

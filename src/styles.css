@@ -19,6 +19,7 @@ body {
     position: fixed;
     opacity: 95%;
     max-width: 20%;
+    z-index: 1;
 }
 
 .gridDisplay {
