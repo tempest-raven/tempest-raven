@@ -34,12 +34,12 @@
       @if (stats.FocusUP){
         <div>Focus {{item.focus | signedNumber }}</div>
       }
-      @for (per of item.piercing; track per){
+      @for (per of item.piercing; track $index){
         @if (per){
           <div>{{item.elementArray[$index]}} Piercing {{per | signedNumber}}</div>
         }
       }
-      @for (def of item.defense; track def){
+      @for (def of item.defense; track $index){
         @if (def){
           <div>{{item.elementArray[$index]}} Defence {{def | signedNumber}}</div>
         }
