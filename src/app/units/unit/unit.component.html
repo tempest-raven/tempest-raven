@@ -11,41 +11,48 @@
         <div>Agression AI:</div>
         <div class="horizontalBar">
           @let agressiveSize = 100 - unit.agressiveHP();
-          <div class="agressive" [style]="'width: ' + agressiveSize + '%;'">
-            @if (agressiveSize >= 30){
-              &gt; {{unit.agressiveHP()}}% HP
-            } @else if (agressiveSize >= 20) {
-              &gt; {{unit.agressiveHP()}}%
-            } @else if (agressiveSize <= 5){
+          @if (agressiveSize > 0){
+            <div class="agressive" [style]="'width: ' + agressiveSize + '%;'">
+              @if (agressiveSize >= 30){
+                &gt; {{unit.agressiveHP()}}% HP
+              } @else if (agressiveSize >= 20) {
+                &gt; {{unit.agressiveHP()}}%
+              } @else if (agressiveSize <= 5){
 
-            }
-            @else {
-              {{unit.agressiveHP()}}
-            }
-          </div>
-          <div class="mixed" [style]="'width: ' + unit.middleHP() + '%;'">
-            @if (unit.middleHP() >= 40){
-              {{unit.defensiveHP()}}% - {{unit.agressiveHP()}}%
-            } @else if (unit.middleHP() >= 25) {
-              {{unit.defensiveHP()}}-{{unit.agressiveHP()}}%
-            } @else if (unit.middleHP() >= 20) {
-              {{unit.defensiveHP()}}-{{unit.agressiveHP()}}
-            } @else {
-              
-            }
-          </div>
-          <div class="defensive" [style]="'width: ' + unit.defensiveHP() + '%;'">
-            @if (unit.defensiveHP() >= 30){
-              &lt; {{unit.defensiveHP()}}% HP
-            } @else if (unit.defensiveHP() >= 20) {
-              &lt; {{unit.defensiveHP()}}%
-            } @else if (unit.defensiveHP() <= 5){
+              }
+              @else {
+                {{unit.agressiveHP()}}
+              }
+            </div>
+          }
+          
+          @if (unit.middleHP() > 0){
+            <div class="mixed" [style]="'width: ' + unit.middleHP() + '%;'">
+              @if (unit.middleHP() >= 40){
+                {{unit.defensiveHP()}}% - {{unit.agressiveHP()}}%
+              } @else if (unit.middleHP() >= 25) {
+                {{unit.defensiveHP()}}-{{unit.agressiveHP()}}%
+              } @else if (unit.middleHP() >= 20) {
+                {{unit.defensiveHP()}}-{{unit.agressiveHP()}}
+              } @else {
+                
+              }
+            </div>
+          }
+          @if (unit.defensiveHP() > 0){
+            <div class="defensive" [style]="'width: ' + unit.defensiveHP() + '%;'">
+              @if (unit.defensiveHP() >= 30){
+                &lt; {{unit.defensiveHP()}}% HP
+              } @else if (unit.defensiveHP() >= 20) {
+                &lt; {{unit.defensiveHP()}}%
+              } @else if (unit.defensiveHP() <= 5){
 
-            }
-            @else {
-              {{unit.defensiveHP()}}
-            }
-          </div>
+              }
+              @else {
+                {{unit.defensiveHP()}}
+              }
+            </div>
+          }
         </div>
         <!--div>Chance to use: {{unit.middleHPrandomness()}}%</div-->
       </div>

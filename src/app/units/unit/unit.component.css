@@ -21,11 +21,19 @@
   /*border-radius: 0.6em;*/
 }
 
+.horizontalBar > div:first-child {
+  border-top-left-radius: 0.6em;
+  border-bottom-left-radius: 0.6em;
+}
+
+.horizontalBar > div:last-child {
+  border-top-right-radius: 0.6em;
+  border-bottom-right-radius: 0.6em;
+}
+
 .agressive {
   background-color: rgb(192, 0, 0);
   color: white;
-  border-top-left-radius: 0.6em;
-  border-bottom-left-radius: 0.6em;
 }
 
 .mixed {
@@ -35,6 +43,4 @@
 .defensive {
   background-color: lightblue;
   color: black;
-  border-top-right-radius: 0.6em;
-  border-bottom-right-radius: 0.6em;
 }
