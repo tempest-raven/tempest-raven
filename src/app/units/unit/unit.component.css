@@ -1,0 +1,40 @@
+.agressionBar {
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+
+.horizontalBar {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  
+}
+
+.horizontalBar > div {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.2em;
+  text-align: center;
+  box-sizing: border-box;
+  /*border: 1px solid black;*/
+  /*border-radius: 0.6em;*/
+}
+
+.agressive {
+  background-color: rgb(192, 0, 0);
+  color: white;
+  border-top-left-radius: 0.6em;
+  border-bottom-left-radius: 0.6em;
+}
+
+.mixed {
+  background-color: gold;
+}
+
+.defensive {
+  background-color: lightblue;
+  color: black;
+  border-top-right-radius: 0.6em;
+  border-bottom-right-radius: 0.6em;
+}

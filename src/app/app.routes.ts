@@ -7,6 +7,8 @@ import { BuffService } from './buffs/buff.service';
 import { ElementListComponent } from './element-list/element-list.component';
 import { ItemComponent } from './items/item/item.component';
 import { ItemService } from './items/item.service';
+import { UnitService } from './units/unit.service';
+import { UnitComponent } from './units/unit/unit.component';
 
 export const routes: Routes = [
     { path: "abilities", component: ElementListComponent, title: "Abilities", 
@@ -38,6 +40,14 @@ export const routes: Routes = [
     },
     { path: "item/:elementId/:slug", component: ItemComponent, title: s => s.params["slug"] },
     { path: "item/:elementId", component: ItemComponent, title: s => "Item ID " + s.params["elementId"] },
+
+    { path: "units", component: ElementListComponent, title: "Units [WIP]", 
+        data: { 
+            navigation: true, 
+            component: UnitComponent, 
+            service: UnitService 
+        } as elementListData<number>
+    },
 
     { path: "", redirectTo: "abilities", pathMatch: "full"}
 ];
