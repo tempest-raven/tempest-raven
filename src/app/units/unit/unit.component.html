@@ -7,56 +7,92 @@
       <div>Instinct mod: {{unit.magicScale}}</div>
       <div>Speed mod: {{unit.speedScale}}</div>
       <div>Focus: {{unit.focus}}</div>
-      <div class="agressionBar">
-        <div>Agression AI:</div>
-        <div class="horizontalBar">
-          @let agressiveSize = 100 - unit.agressiveHP();
-          @if (agressiveSize > 0){
-            <div class="agressive" [style]="'width: ' + agressiveSize + '%;'">
-              @if (agressiveSize >= 30){
-                &gt; {{unit.agressiveHP()}}% HP
-              } @else if (agressiveSize >= 20) {
-                &gt; {{unit.agressiveHP()}}%
-              } @else if (agressiveSize <= 5){
+    </div>
+    <div class="agressionBar">
+      <div class="agressionBarText">Agression AI:</div>
+      <div class="horizontalBar">
+        @let agressiveSize = 100 - unit.agressiveHP();
+        @if (agressiveSize > 0){
+          <div class="agressive" [style]="'width: ' + agressiveSize + '%;'">
+            @if (agressiveSize >= 30){
+              &gt; {{unit.agressiveHP()}}% HP
+            } @else if (agressiveSize >= 20) {
+              &gt; {{unit.agressiveHP()}}%
+            } @else if (agressiveSize <= 5){
 
-              }
-              @else {
-                {{unit.agressiveHP()}}
-              }
-            </div>
-          }
-          
-          @if (unit.middleHP() > 0){
-            <div class="mixed" [style]="'width: ' + unit.middleHP() + '%;'">
-              @if (unit.middleHP() >= 40){
-                {{unit.defensiveHP()}}% - {{unit.agressiveHP()}}%
-              } @else if (unit.middleHP() >= 25) {
-                {{unit.defensiveHP()}}-{{unit.agressiveHP()}}%
-              } @else if (unit.middleHP() >= 20) {
-                {{unit.defensiveHP()}}-{{unit.agressiveHP()}}
-              } @else {
-                
-              }
-            </div>
-          }
-          @if (unit.defensiveHP() > 0){
-            <div class="defensive" [style]="'width: ' + unit.defensiveHP() + '%;'">
-              @if (unit.defensiveHP() >= 30){
-                &lt; {{unit.defensiveHP()}}% HP
-              } @else if (unit.defensiveHP() >= 20) {
-                &lt; {{unit.defensiveHP()}}%
-              } @else if (unit.defensiveHP() <= 5){
+            }
+            @else {
+              {{unit.agressiveHP()}}
+            }
+          </div>
+        }
+        
+        @if (unit.middleHP() > 0){
+          <div class="mixed" [style]="'width: ' + unit.middleHP() + '%;'">
+            @if (unit.middleHP() >= 40){
+              {{unit.defensiveHP()}}% - {{unit.agressiveHP()}}%
+            } @else if (unit.middleHP() >= 25) {
+              {{unit.defensiveHP()}}-{{unit.agressiveHP()}}%
+            } @else if (unit.middleHP() >= 20) {
+              {{unit.defensiveHP()}}-{{unit.agressiveHP()}}
+            } @else {
+              
+            }
+          </div>
+        }
+        @if (unit.defensiveHP() > 0){
+          <div class="defensive" [style]="'width: ' + unit.defensiveHP() + '%;'">
+            @if (unit.defensiveHP() >= 30){
+              &lt; {{unit.defensiveHP()}}% HP
+            } @else if (unit.defensiveHP() >= 20) {
+              &lt; {{unit.defensiveHP()}}%
+            } @else if (unit.defensiveHP() <= 5){
 
-              }
-              @else {
-                {{unit.defensiveHP()}}
-              }
-            </div>
-          }
-        </div>
-        <!--div>Chance to use: {{unit.middleHPrandomness()}}%</div-->
+            }
+            @else {
+              {{unit.defensiveHP()}}
+            }
+          </div>
+        }
+      </div>
+      <!--div>Chance to use: {{unit.middleHPrandomness()}}%</div-->
+    </div>
+    <div class="displayDesc3">
+      <div>
+        Agressive moves:
+        @for (ability of unit.movesA; track $index){
+          <div><a class="whiteLink" [routerLink]="['/ability', ability.id]" [tooltip]="abilityComponent" [tooltipData]="{elementId: ability.id}">{{ability.internalName}}</a></div>
+        } @empty {
+          None
+        }
+      </div>
+      <div>
+        Defensive moves:
+        @for (ability of unit.movesD; track $index){
+          <div><a class="whiteLink" [routerLink]="['/ability', ability.id]" [tooltip]="abilityComponent" [tooltipData]="{elementId: ability.id}">{{ability.internalName}}</a></div>
+        } @empty {
+          None
+        }
       </div>
       
+      <!--div>
+        Uses {{unit.focusMove()?.internalName ?? "no ability"}} when below {{unit.minimumFocus()}} focus
+      </div-->
     </div>
+    @let phaseMoves = unit.phaseMoves();
+    @if (phaseMoves.length > 0){
+      <div class="displayCost">Phase moves (set in battle data)</div>
+      <div class="displayDesc2">
+        
+        @for (moveList of phaseMoves; track $index){
+          @if (moveList){
+            <div>Phase {{$index}}</div>
+            @for (ability of moveList; track $index){
+              <div><a class="whiteLink" [routerLink]="['/ability', ability.id]" [tooltip]="abilityComponent" [tooltipData]="{elementId: ability.id}">{{ability.internalName}}</a></div>
+            }
+          }
+        }
+      </div>
+    }
   </div>
 }

@@ -1,6 +1,10 @@
 .agressionBar {
-  background-color: rgb(255, 255, 255);
+  background-color: #cccccc;
   color: black;
+}
+
+.agressionBarText {
+  padding-left: 5px;
 }
 
 .horizontalBar {
@@ -43,4 +47,11 @@
 .defensive {
   background-color: lightblue;
   color: black;
+}
+
+.whiteLink {
+  color: white;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
 }

@@ -53,11 +53,30 @@ export class Unit {
     return this.agressionArray[4];
   }
 
-  //Last defensive move
+  //FIXME: improve detection to match the ingame AI's
   focusMove(){
-    if (this.movesD.length === 0){
-      return null;
+    const moveArrays = [this.movesD, this.movesA];
+    for (let i = 0; i < moveArrays.length; i++) {
+      const moves = moveArrays[i];
+      for (let index = 0; index < moves.length; index++) {
+        const ability = moves[index];
+        if (ability.moveType === "Focus"){
+          return ability;
+        }
+      }
     }
-    return this.movesD[this.movesD.length - 1];
+    return null;
+  }
+
+  phaseMoves(){
+    let groups: Ability[][] = [];
+    //this.movesABS.sort((a, b) => a[1] - b[1]);
+    this.movesABS.forEach(([ab, phasenum]) => {
+      if (groups[phasenum] === undefined){
+        groups[phasenum] = [];
+      }
+      groups[phasenum].push(ab);
+    });
+    return groups;
   }
 }

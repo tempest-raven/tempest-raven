@@ -41,10 +41,12 @@ export class UnitService implements requestService {
         const unitProp = match[1] as "movesA" | "movesABS" | "movesD" | "agressionArray" | "model" | "skinSetter" | "PER" | "DEF" | "equipment" | "voiceHit" | "voiceDie" ;
         let value: string | string[] | number[] | [number, number][] | Ability[] | [Ability, number][] = JSON.parse(match[2]);
         if (unitProp === "movesA" || unitProp === "movesD"){
-          value = (value as number[]).map(v => this.abilityService.abilityList.get(v)!);
+          value = (value as number[]).map(v => this.abilityService.abilityList.get(v))
+                                     .filter(v => v !== undefined);
         }
         if (unitProp === "movesABS"){
-          value = (value as [number, number][]).map(([ab, phase]) => [this.abilityService.abilityList.get(ab)!, phase] as [Ability, number]);
+          value = (value as [number, number][]).map(([ab, phase]) => [this.abilityService.abilityList.get(ab), phase])
+                                               .filter(v => v[0] !== undefined) as [Ability, number][];
         }
         /* @ts-ignore */
         lastUnit![unitProp] = value;
