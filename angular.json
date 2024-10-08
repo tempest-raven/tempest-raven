@@ -90,15 +90,6 @@
             ],
             "scripts": []
           }
-        },
-        "deploy": {
-          "builder": "angular-cli-ghpages:deploy",
-          "options": {
-            "baseHref": "/tempest-raven/",
-            "repo": "https://github.com/Tempest-Raven/tempest-raven.git",
-            "message": "Deploy to GitHub pages",
-            "branch": "gh-pages"
-          }
         }
       }
     }
