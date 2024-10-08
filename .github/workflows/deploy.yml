@@ -33,10 +33,13 @@ jobs:
         node-version: 20
     - name: CI and deploy
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
         npm install -g @angular/cli
         npm ci
-        ng deploy --name=${{ github.actor }} --email=${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com
+        ng build --base-href=/tempest-raven/
+        npx gh-pages -d dist/browser -u "github-actions-bot <support+actions@github.com>"
+    #    ng deploy --name=${{ github.actor }} --email=${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com
     #- run: npm test
     
