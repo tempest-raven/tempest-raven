@@ -39,6 +39,7 @@ jobs:
         npm install -g @angular/cli
         npm ci
         ng build --base-href=/tempest-raven/
+        cp dist/browser/index.html dist/browser/404.html
         npx gh-pages -d dist/browser -u "github-actions-bot <support+actions@github.com>"
     #    ng deploy --name=${{ github.actor }} --email=${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com
     #- run: npm test
