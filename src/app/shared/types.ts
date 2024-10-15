@@ -1,16 +1,17 @@
 import { Type, ProviderToken } from "@angular/core";
 
-export type elementComponent<T extends number | string = number | string> = { 
+export type elementComponent<T extends number | string> = T extends any ? { 
   elementId: T;
   addLink: boolean
-}
-export type elementListData<T extends number | string = number | string> = { 
+} : never;
+export type elementListData<T extends number | string = number | string> = T extends any ? { 
   component: Type<elementComponent<T>>, 
   service: ProviderToken<requestService<T>> 
-};
-export type requestService<T extends number | string = number | string> = { 
+} : never;
+export type requestService<T extends number | string> = T extends any ? { 
   request: Promise<Map<T, {id: T}>>
-}
+} : never;
+let test: requestService<number | string>
 export type pseudoBool = 0 | 1;
 export type sonnyElement = "Physical" | "Magic" | "Ice" | "Fire" | "Lightning" | "Earth" | "Shadow" | "Poison";
 export type sonnyLanguage = "ENGLISH" | "GERMAN";

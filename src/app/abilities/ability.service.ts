@@ -6,7 +6,7 @@ import { requestService } from '../shared/types';
 @Injectable({
   providedIn: 'root'
 })
-export class AbilityService implements requestService {
+export class AbilityService implements requestService<number> {
   private static scriptLocation = "assets/data/sonny2/scripts/frame_42/DoAction_6.as";
   public abilityList = new Map<number, Ability>();
   public request;

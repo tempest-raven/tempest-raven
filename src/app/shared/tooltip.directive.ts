@@ -1,14 +1,16 @@
 import { ApplicationRef, Component, ComponentRef, createComponent, Directive, ElementRef, HostListener, Input, Type, ViewContainerRef } from '@angular/core';
-
+export type tooltipObj<T> = {
+  component: Type<T>,
+  data: Partial<T>
+}
 @Directive({
-  selector: '[tooltip]',
+  selector: '[tooltips]',
   standalone: true
 })
-export class TooltipDirective<T extends typeof Component> {
-  @Input({required: true}) tooltip!: Type<T>;
-  @Input() tooltipData: Partial<T> = {};
+export class TooltipDirective<T extends any[]> { 
+  @Input({required: true}) tooltips!: {[K in keyof T]: tooltipObj<T[K]>};
   private tooltipEl: HTMLElement;
-  private containedComponent!: ComponentRef<T>;
+  private containedComponents!: {[K in keyof T]: ComponentRef<T[K]>};
 
   posX = 0;
   posY = 0;
@@ -18,54 +20,90 @@ export class TooltipDirective<T extends typeof Component> {
     if (tooltipEl === null){
       tooltipEl = document.createElement("div");
       tooltipEl.id = "tooltip";
-      tooltipEl.classList.add("hidden");
       document.body.appendChild(tooltipEl);
     }
     this.tooltipEl = tooltipEl;
   }
 
-  @HostListener('mouseenter') onMouseEnter(){
-    this.tooltipEl.textContent = "Loading...";
-    this.tooltipEl.classList.remove("hidden");
-    const injector = this.applicationRef.injector;
-    this.containedComponent = createComponent(this.tooltip, {environmentInjector: injector, hostElement: this.tooltipEl});
-    Object.assign(this.containedComponent.instance, this.tooltipData);
+  @HostListener('mouseenter', ['$event']) onMouseEnter(ev: MouseEvent){
     
-    this.applicationRef.attachView(this.containedComponent.hostView);
-    this.containedComponent.changeDetectorRef.detectChanges();
+    const injector = this.applicationRef.injector;
+    let containedComponents = [];
+    for (const tooltip of this.tooltips){
+      let tmpDiv = document.createElement("div");
+      
+      let containedComponent = createComponent(tooltip.component, {environmentInjector: injector, hostElement: tmpDiv});
+      Object.assign(containedComponent.instance, tooltip.data);
+      
+      this.applicationRef.attachView(containedComponent.hostView);
+      containedComponent.changeDetectorRef.detectChanges();
+      containedComponents.push(containedComponent);
+      this.tooltipEl.appendChild(tmpDiv);
+    }
+    this.containedComponents = containedComponents as typeof this.containedComponents;
+    ev.stopPropagation();
+    ev.preventDefault();
   }
+
   @HostListener('click')
   @HostListener('mouseleave') onMouseLeave(){
-    //this.containedComponent.changeDetectorRef.detach()
-    //this.applicationRef.detachView(this.containedComponent.hostView);
-    //this.containedComponent.destroy();
-    this.tooltipEl.classList.add("hidden");
+    this.containedComponents.forEach(containedComponent => {
+      containedComponent.changeDetectorRef.detach()
+      this.applicationRef.detachView(containedComponent.hostView);
+      containedComponent.destroy();
+    })
+    this.hideTooltip();
+    while (this.tooltipEl.lastChild){
+      this.tooltipEl.removeChild(this.tooltipEl.lastChild);
+    }
   }
 
   @HostListener('mousemove', ['$event']) onMouseMove(ev: MouseEvent){
-    const x = ev.clientX;
-    const y = ev.clientY;
+    const mouseX = ev.clientX;
+    const mouseY = ev.clientY;
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
-    if (x / windowWidth < 0.8){
-        this.tooltipEl.style.left = x + 10 + "px";
+    const tooltipSize = this.tooltipEl.getBoundingClientRect();
+    const tooltipWidth = tooltipSize.width;
+    const tooltipHeight = tooltipSize.height;
+    if (tooltipWidth === 0 || tooltipHeight === 0){
+      requestAnimationFrame(_ => this.onMouseMove(ev));
+      return;
+    }
+    if (mouseX + tooltipWidth + 10 < windowWidth){
+        this.tooltipEl.style.left = mouseX + 10 + "px";
         this.tooltipEl.style.right = "";
     } else {
         this.tooltipEl.style.left = "";
-        this.tooltipEl.style.right = windowWidth - (x - 10) + "px";
+        this.tooltipEl.style.right = windowWidth - Math.max(mouseX - 10, tooltipWidth) + "px";
     }
 
-    if (y / windowHeight < 0.8){
-        this.tooltipEl.style.top = y + 10 + "px";
+    if (mouseY + tooltipHeight + 10 < windowHeight){
+        this.tooltipEl.style.top = mouseY + 10 + "px";
         this.tooltipEl.style.bottom = "";
     } else {
         this.tooltipEl.style.top = "";
-        this.tooltipEl.style.bottom = windowHeight - (y - 10) + "px";
+        this.tooltipEl.style.bottom = windowHeight - Math.max(mouseY - 10, tooltipHeight) + "px";
     }
+    this.showTooltip();
   }
 
-  /*private highlight(color: string){
-    this.el.nativeElement.style.backgroundColor = color;
-  }*/
+  /**
+   * Show the tooltip into view
+   */
+  showTooltip() {
+    this.tooltipEl.style.visibility = "";
+  }
+
+  /** 
+   * Hide the tooltip from view
+   */
+  hideTooltip() {
+    /**
+     * We use `visibility: hidden` and not `display: none` because 
+     * `.getBoundingClientRect()` would return a width and height of 0
+     */
+    this.tooltipEl.style.visibility = "hidden";
+  }
 
 }

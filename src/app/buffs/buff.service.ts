@@ -6,7 +6,7 @@ import { requestService } from '../shared/types';
 @Injectable({
   providedIn: 'root'
 })
-export class BuffService implements requestService {
+export class BuffService implements requestService<string> {
   private static scriptLocation = "assets/data/sonny2/scripts/frame_42/DoAction_10.as";
   public buffList = new Map<string, Buff>();
   public request;

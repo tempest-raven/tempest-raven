@@ -8,7 +8,7 @@ import { Ability } from '../abilities/ability';
 @Injectable({
   providedIn: 'root'
 })
-export class UnitService implements requestService {
+export class UnitService implements requestService<number> {
   private static scriptLocation = "assets/data/sonny2/scripts/frame_42/DoAction_13.as";
   public unitList = new Map<number, Unit>();
   request: Promise<typeof this.unitList>;

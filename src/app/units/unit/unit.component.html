@@ -61,7 +61,7 @@
       <div>
         Agressive moves:
         @for (ability of unit.movesA; track $index){
-          <div><a class="whiteLink" [routerLink]="['/ability', ability.id]" [tooltip]="abilityComponent" [tooltipData]="{elementId: ability.id}">{{ability.internalName}}</a></div>
+          <div><a class="whiteLink" [routerLink]="['/ability', ability.id]" [tooltips]="getAbilityTooltips(ability)" >{{ability.internalName}}</a></div>
         } @empty {
           None
         }
@@ -69,7 +69,7 @@
       <div>
         Defensive moves:
         @for (ability of unit.movesD; track $index){
-          <div><a class="whiteLink" [routerLink]="['/ability', ability.id]" [tooltip]="abilityComponent" [tooltipData]="{elementId: ability.id}">{{ability.internalName}}</a></div>
+          <div><a class="whiteLink" [routerLink]="['/ability', ability.id]" [tooltips]="getAbilityTooltips(ability)" >{{ability.internalName}}</a></div>
         } @empty {
           None
         }
@@ -88,7 +88,7 @@
           @if (moveList){
             <div>Phase {{$index}}</div>
             @for (ability of moveList; track $index){
-              <div><a class="whiteLink" [routerLink]="['/ability', ability.id]" [tooltip]="abilityComponent" [tooltipData]="{elementId: ability.id}">{{ability.internalName}}</a></div>
+              <div><a class="whiteLink" [routerLink]="['/ability', ability.id]" [tooltips]="getAbilityTooltips(ability)">{{ability.internalName}}</a></div>
             }
           }
         }

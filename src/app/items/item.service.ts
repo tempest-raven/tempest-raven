@@ -8,7 +8,7 @@ import { simple } from 'acorn-walk';
 @Injectable({
   providedIn: 'root'
 })
-export class ItemService implements requestService {
+export class ItemService implements requestService<number> {
   private static scriptLocation = "assets/data/sonny2/scripts/frame_42/DoAction_16.as";
   public itemList = new Map<number, Item>();
   public request: Promise<Map<number, Item>>;
