@@ -53,7 +53,7 @@ body {
 
 .gridDisplay {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, /*1fr*/250px));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 3px;
 }
 
