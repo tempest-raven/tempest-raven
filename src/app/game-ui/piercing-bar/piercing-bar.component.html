@@ -1,0 +1,9 @@
+<div class="barContainer">
+  <div [class]="['barContent', 'barEmpty' ,'bgNone' + element]" style="height: 100%;"></div>
+  <div [class]="['barContent', 'critDamage', 'bgDark' + element]" [style]="'height: ' + ((critDamage() - 1) * 100) + '%'"></div>
+  <div [class]="['barContent', 'critChance', 'bg' + element]" [style]="'height: ' + (critChance() * 100) + '%'"></div>
+  @if (nonCritDamage() > 0){
+    <div [class]="['barContent', 'nonCritDamage', 'bgWhite']" [style]="'height: ' + ((nonCritDamage()) * 100) + '%'"></div>
+  }
+  
+</div>

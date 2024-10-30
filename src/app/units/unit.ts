@@ -1,8 +1,18 @@
 import { Ability } from "../abilities/ability";
-import { languageObject } from "../shared/types";
+import { languageObject, sonnyElement } from "../shared/types";
 
 export class Unit {
   static langStrings: languageObject;
+  elementArray: sonnyElement[] = [
+    "Physical",
+    "Magic",
+    "Ice",
+    "Fire",
+    "Lightning",
+    "Earth",
+    "Shadow",
+    "Poison"
+  ];
 
   public movesA: Ability[] = [];
   public movesD: Ability[] = [];

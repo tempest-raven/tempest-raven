@@ -1,5 +1,34 @@
 /* Core */
 
+:root {
+    --sonny-physical: hsl(0, 100%, 38%);
+    --sonny-magic: hsl(330, 91%, 78%);
+    --sonny-ice: hsl(198, 88%, 68%);
+    --sonny-fire: hsl(24, 100%, 50%);
+    --sonny-lightning: hsl(48, 100%, 50%);
+    --sonny-earth: hsl(35, 30%, 40%);
+    --sonny-shadow: hsl(268, 25%, 40%);
+    --sonny-poison: hsl(114, 27%, 40%);
+
+    --sonny-physical-dark: hsl(0, 100%, 19%);
+    --sonny-magic-dark: hsl(330, 27%, 24%);
+    --sonny-ice-dark: hsl(197, 41%, 21%);
+    --sonny-fire-dark: hsl(24, 100%, 25%);
+    --sonny-lightning-dark: hsl(48, 100%, 25%);
+    --sonny-earth-dark: hsl(35, 30%, 20%);
+    --sonny-shadow-dark: hsl(269, 25%, 20%);
+    --sonny-poison-dark: hsl(113, 27%, 20%);
+
+    --sonny-physical-darkest: hsl(0, 100%, 3%);
+    --sonny-magic-darkest: hsl(330, 25%, 6%);
+    --sonny-ice-darkest: hsl(198, 41%, 5%);
+    --sonny-fire-darkest: hsl(24, 100%, 4%);
+    --sonny-lightning-darkest: hsl(48, 100%, 4%);
+    --sonny-earth-darkest: hsl(35, 30%, 3%);
+    --sonny-shadow-darkest: hsl(268, 25%, 3%);
+    --sonny-poison-darkest: hsl(114, 27%, 3%);
+}
+
 html {
     cursor: default;
     /*background-color: #cccccc;*/
@@ -24,35 +53,85 @@ body {
 
 .gridDisplay {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, /*1fr*/250px));
     gap: 3px;
 }
 
 /* Colors */
 
 .Physical {
-    color: #C40000;
+    color: var(--sonny-physical);
 }
 .Magic {
-    color: #FB95C8;
+    color: var(--sonny-magic);
 }
 .Ice {
-    color: #68CBF4;
+    color: var(--sonny-ice);
 }
 .Fire {
-    color: #FF6600;
+    color: var(--sonny-fire);
 }
 .Lightning {
-    color: #FFCC00;
+    color: var(--sonny-lightning);
 }
 .Earth {
-    color: #856B47;
+    color: var(--sonny-earth);
 }
 .Shadow {
-    color: #664D80;
+    color: var(--sonny-shadow);
 }
 .Poison {
-    color: #508349;
+    color: var(--sonny-poison);
+}
+
+.bgPhysical {
+    background-color: var(--sonny-physical);
+}
+.bgMagic {
+    background-color: var(--sonny-magic);
+}
+.bgIce {
+    background-color: var(--sonny-ice);
+}
+.bgFire {
+    background-color: var(--sonny-fire);
+}
+.bgLightning {
+    background-color: var(--sonny-lightning);
+}
+.bgEarth {
+    background-color: var(--sonny-earth);
+}
+.bgShadow {
+    background-color: var(--sonny-shadow);
+}
+.bgPoison {
+    background-color: var(--sonny-poison);
+}
+
+.bgDarkPhysical {
+    background-color: var(--sonny-physical-dark);
+}
+.bgDarkMagic {
+    background-color: var(--sonny-magic-dark);
+}
+.bgDarkIce {
+    background-color: var(--sonny-ice-dark);
+}
+.bgDarkFire {
+    background-color: var(--sonny-fire-dark);
+}
+.bgDarkLightning {
+    background-color: var(--sonny-lightning-dark);
+}
+.bgDarkEarth {
+    background-color: var(--sonny-earth-dark);
+}
+.bgDarkShadow {
+    background-color: var(--sonny-shadow-dark);
+}
+.bgDarkPoison {
+    background-color: var(--sonny-poison-dark);
 }
 
 /* Game-like element display */

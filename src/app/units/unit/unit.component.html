@@ -8,6 +8,26 @@
       <div>Speed mod: {{unit.speedScale}}</div>
       <div>Focus: {{unit.focus}}</div>
     </div>
+    <div class="elementBars">
+      <div class="elementBarContainer">
+        <div class="elementBarTitle">Piercing</div>
+        <div class="elementBarGrid">
+          @for (per of unit.PER; track $index) {
+            <app-piercing-bar [value]="per" [element]="unit.elementArray[$index]" [level]="0"></app-piercing-bar>
+            <!--div>{{unit.elementArray[$index]}} Piercing {{per | signedNumber}}</div-->
+          }
+        </div>
+      </div>
+      <div class="elementBarContainer">
+        <div class="elementBarTitle">Defense</div>
+        <div class="elementBarGrid">
+          @for (per of unit.DEF; track $index) {
+            <app-piercing-bar [value]="per" [element]="unit.elementArray[$index]" [level]="0"></app-piercing-bar>
+            <!--div>{{unit.elementArray[$index]}} Piercing {{per | signedNumber}}</div-->
+          }
+        </div>
+      </div>
+    </div>
     <div class="agressionBar">
       <div class="agressionBarText">Agression AI:</div>
       <div class="horizontalBar">

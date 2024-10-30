@@ -1,0 +1,101 @@
+.barContainer {
+  display: inline-block;
+  position: relative;
+  height: 72px;
+  /*width: 12.5%; /*25px;*/
+  /*background-color: black;*/
+}
+
+.barContent {
+  position: absolute;
+  box-sizing: border-box;
+  left: 0px;
+  bottom: 0px;
+  width: 13px;
+  max-height: 100%;
+  min-height: 0;
+}
+
+.barEmpty, .critDamage {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.critChance {
+  border-left: 1px solid rgba(0,0,0,0.4);
+  border-right: 1px solid rgba(0,0,0,0.4);
+}
+
+.bgBlack {
+  background-color: black;
+}
+
+.bgWhite {
+  background-color: white;
+  box-shadow: 0px 0px 5px 2px white;
+}
+
+.bgNonePhysical {
+  background-color: var(--sonny-physical-darkest);
+  background: linear-gradient(to right, black, var(--sonny-physical-darkest) 20%, var(--sonny-physical-darkest) 80%, black);
+}
+.bgNoneMagic {
+  background-color: var(--sonny-magic-darkest);
+  background: linear-gradient(to right, black, var(--sonny-magic-darkest) 20%, var(--sonny-magic-darkest) 80%, black);
+}
+.bgNoneIce {
+  background-color: var(--sonny-ice-darkest);
+  background: linear-gradient(to right, black, var(--sonny-ice-darkest) 20%, var(--sonny-ice-darkest) 80%, black);
+}
+.bgNoneFire {
+  background-color: var(--sonny-fire-darkest);
+  background: linear-gradient(to right, black, var(--sonny-fire-darkest) 20%, var(--sonny-fire-darkest) 80%, black);
+}
+.bgNoneLightning {
+  background-color: var(--sonny-lightning-darkest);
+  background: linear-gradient(to right, black, var(--sonny-lightning-darkest) 20%, var(--sonny-lightning-darkest) 80%, black);
+}
+.bgNoneEarth {
+  background-color: var(--sonny-earth-darkest);
+  background: linear-gradient(to right, black, var(--sonny-earth-darkest) 20%, var(--sonny-earth-darkest) 80%, black);
+}
+.bgNoneShadow {
+  background-color: var(--sonny-shadow-darkest);
+  background: linear-gradient(to right, black, var(--sonny-shadow-darkest) 20%, var(--sonny-shadow-darkest) 80%, black);
+}
+.bgNonePoison {
+  background-color: var(--sonny-poison-darkest);
+  background: linear-gradient(to right, black, var(--sonny-poison-darkest) 20%, var(--sonny-poison-darkest) 80%, black);
+}
+
+.bgPhysical {
+  box-shadow: 0px 0px 5px 2px var(--sonny-physical);
+}
+
+.bgMagic {
+  box-shadow: 0px 0px 5px 2px var(--sonny-magic);
+}
+
+.bgIce {
+  box-shadow: 0px 0px 5px 2px var(--sonny-ice);
+}
+
+.bgFire {
+  box-shadow: 0px 0px 5px 2px var(--sonny-fire);
+}
+
+.bgLightning {
+  box-shadow: 0px 0px 5px 2px var(--sonny-lightning);
+}
+
+.bgEarth {
+  box-shadow: 0px 0px 5px 2px var(--sonny-earth);
+}
+
+.bgShadow {
+  box-shadow: 0px 0px 5px 2px var(--sonny-shadow);
+}
+
+.bgPoison {
+  box-shadow: 0px 0px 5px 2px var(--sonny-poison);
+}
