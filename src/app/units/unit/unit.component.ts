@@ -11,16 +11,15 @@ import { SignedNumberPipe } from "../../shared/signed-number.pipe";
 import { PiercingBarComponent } from "../../game-ui/piercing-bar/piercing-bar.component";
 
 @Component({
-  selector: 'app-unit',
-  standalone: true,
-  imports: [
-    RouterLink,
-    TooltipDirective,
-    SignedNumberPipe,
-    PiercingBarComponent
-],
-  templateUrl: './unit.component.html',
-  styleUrl: './unit.component.css'
+    selector: 'app-unit',
+    imports: [
+        RouterLink,
+        TooltipDirective,
+        SignedNumberPipe,
+        PiercingBarComponent
+    ],
+    templateUrl: './unit.component.html',
+    styleUrl: './unit.component.css'
 })
 export class UnitComponent implements elementComponent<number>, OnInit {
   @Input({required: true, transform: numberAttribute}) elementId: number = 0;

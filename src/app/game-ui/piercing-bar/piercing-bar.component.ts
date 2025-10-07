@@ -2,11 +2,10 @@ import { Component, Input, numberAttribute } from '@angular/core';
 import { sonnyElement } from '../../shared/types';
 
 @Component({
-  selector: 'app-piercing-bar, app-defense-bar',
-  standalone: true,
-  imports: [],
-  templateUrl: './piercing-bar.component.html',
-  styleUrl: './piercing-bar.component.css'
+    selector: 'app-piercing-bar, app-defense-bar',
+    imports: [],
+    templateUrl: './piercing-bar.component.html',
+    styleUrl: './piercing-bar.component.css'
 })
 export class PiercingBarComponent {
   @Input({required: true, transform: numberAttribute}) value!: number;

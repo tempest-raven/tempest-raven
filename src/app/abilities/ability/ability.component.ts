@@ -11,19 +11,18 @@ import { BuffService } from '../../buffs/buff.service';
 import { elementComponent } from '../../shared/types';
 
 @Component({
-  selector: 'app-ability',
-  standalone: true,
-  imports: [
-    NgClass,
-    PercentPipe, 
-    SignedPercentPipe, 
-    AbilityScalePipe, 
-    RouterLink, 
-    BuffComponent, 
-    TooltipDirective
-  ],
-  templateUrl: './ability.component.html',
-  styleUrl: './ability.component.css'
+    selector: 'app-ability',
+    imports: [
+        NgClass,
+        PercentPipe,
+        SignedPercentPipe,
+        AbilityScalePipe,
+        RouterLink,
+        BuffComponent,
+        TooltipDirective
+    ],
+    templateUrl: './ability.component.html',
+    styleUrl: './ability.component.css'
 })
 export class AbilityComponent implements elementComponent<number>, OnInit {
   @Input({required: true, transform: numberAttribute}) elementId: number = 0;

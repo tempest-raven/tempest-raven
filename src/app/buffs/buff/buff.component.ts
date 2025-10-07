@@ -6,13 +6,12 @@ import { RouterLink } from '@angular/router';
 import { elementComponent } from '../../shared/types';
 
 @Component({
-  selector: 'app-buff',
-  standalone: true,
-  imports: [
-    RouterLink
-  ],
-  templateUrl: './buff.component.html',
-  styleUrl: './buff.component.css'
+    selector: 'app-buff',
+    imports: [
+        RouterLink
+    ],
+    templateUrl: './buff.component.html',
+    styleUrl: './buff.component.css'
 })
 export class BuffComponent implements elementComponent<string>, OnInit {
   private static identity = (_: any) => _;

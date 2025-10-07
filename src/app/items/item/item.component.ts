@@ -6,14 +6,13 @@ import { RouterLink } from '@angular/router';
 import { SignedNumberPipe } from '../../shared/signed-number.pipe';
 
 @Component({
-  selector: 'app-item',
-  standalone: true,
-  imports: [
-    RouterLink,
-    SignedNumberPipe
-  ],
-  templateUrl: './item.component.html',
-  styleUrl: './item.component.css'
+    selector: 'app-item',
+    imports: [
+        RouterLink,
+        SignedNumberPipe
+    ],
+    templateUrl: './item.component.html',
+    styleUrl: './item.component.css'
 })
 export class ItemComponent implements elementComponent<number>, OnInit {
   @Input({required: true, transform: numberAttribute}) elementId: number = 0;

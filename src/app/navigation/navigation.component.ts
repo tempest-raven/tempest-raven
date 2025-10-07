@@ -12,21 +12,20 @@ import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@ang
 import { routes } from '../app.routes';
 
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.css',
-  standalone: true,
-  imports: [
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    AsyncPipe,
-    RouterOutlet,
-    RouterLink,
-    RouterLinkActive,
-  ]
+    selector: 'app-navigation',
+    templateUrl: './navigation.component.html',
+    styleUrl: './navigation.component.css',
+    imports: [
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatListModule,
+        MatIconModule,
+        AsyncPipe,
+        RouterOutlet,
+        RouterLink,
+        RouterLinkActive,
+    ]
 })
 export class NavigationComponent {
   private breakpointObserver = inject(BreakpointObserver);

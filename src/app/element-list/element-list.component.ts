@@ -6,15 +6,14 @@ import { elementComponent, elementListData, requestService } from '../shared/typ
 import { NgComponentOutlet } from '@angular/common';
 
 @Component({
-  selector: 'app-element-list',
-  standalone: true,
-  imports: [
-    RouterLink,
-    MatProgressSpinnerModule,
-    NgComponentOutlet,
-  ],
-  templateUrl: './element-list.component.html',
-  styleUrl: './element-list.component.css'
+    selector: 'app-element-list',
+    imports: [
+        RouterLink,
+        MatProgressSpinnerModule,
+        NgComponentOutlet,
+    ],
+    templateUrl: './element-list.component.html',
+    styleUrl: './element-list.component.css'
 })
 export class ElementListComponent<T extends string | number> implements OnInit {
   public component: Type<elementComponent<T>> | undefined;
