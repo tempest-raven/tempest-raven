@@ -1,5 +1,12 @@
 /* Core */
 
+/* Font */
+:root { font-family: "Inter", sans-serif; }
+@supports (font-variation-settings: normal) {
+  :root { font-family: "InterVariable", sans-serif; font-optical-sizing: auto; }
+}
+
+/* Sonny-specific colors */
 :root {
     --sonny-physical: hsl(0, 100%, 38%);
     --sonny-magic: hsl(330, 91%, 78%);
@@ -39,7 +46,7 @@ html {
 body {
     height: 100%;
     margin: 0;
-    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    /*font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;*/
 }
 
 /* General */
