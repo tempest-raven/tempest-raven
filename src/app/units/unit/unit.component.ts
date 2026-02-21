@@ -7,7 +7,6 @@ import { TooltipDirective, tooltipObj } from '../../shared/tooltip.directive';
 import { AbilityComponent } from '../../abilities/ability/ability.component';
 import { BuffComponent } from '../../buffs/buff/buff.component';
 import { Ability } from '../../abilities/ability';
-import { SignedNumberPipe } from "../../shared/signed-number.pipe";
 import { PiercingBarComponent } from "../../game-ui/piercing-bar/piercing-bar.component";
 
 @Component({
@@ -15,7 +14,6 @@ import { PiercingBarComponent } from "../../game-ui/piercing-bar/piercing-bar.co
     imports: [
         RouterLink,
         TooltipDirective,
-        SignedNumberPipe,
         PiercingBarComponent
     ],
     templateUrl: './unit.component.html',

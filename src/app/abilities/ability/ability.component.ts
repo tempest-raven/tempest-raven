@@ -17,7 +17,6 @@ import { elementComponent } from '../../shared/types';
         SignedPercentPipe,
         AbilityScalePipe,
         RouterLink,
-        BuffComponent,
         TooltipDirective
     ],
     templateUrl: './ability.component.html',
