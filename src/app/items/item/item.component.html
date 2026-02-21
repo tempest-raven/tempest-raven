@@ -1,4 +1,4 @@
-@if (item) {
+@if (item(); as item) {
   <div>
     <div [class]="['displayTitle', 'rarity' + item.rarity]">
       <a class="buffName" [routerLink]="addLink ? ['/item', item.id] : null">

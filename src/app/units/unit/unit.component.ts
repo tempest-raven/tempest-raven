@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, ComponentDecorator, Input, numberAttribute, OnInit } from '@angular/core';
+import { booleanAttribute, Component, ComponentDecorator, Input, numberAttribute, OnInit, signal } from '@angular/core';
 import { UnitService } from '../unit.service';
 import { elementComponent } from '../../shared/types';
 import { Unit } from '../unit';
@@ -24,7 +24,7 @@ import { PiercingBarComponent } from "../../game-ui/piercing-bar/piercing-bar.co
 export class UnitComponent implements elementComponent<number>, OnInit {
   @Input({required: true, transform: numberAttribute}) elementId: number = 0;
   @Input({transform: booleanAttribute}) addLink: boolean = false;
-  public unit: Unit | undefined;
+  public unit = signal<Unit | undefined>(undefined);
   public abilityComponent = AbilityComponent;
   public buffComponent = BuffComponent;
 
@@ -35,7 +35,7 @@ export class UnitComponent implements elementComponent<number>, OnInit {
   }
 
   ngOnInit(){
-    this.unitService.request.then(response => this.unit = response.get(this.elementId));
+    this.unitService.request.then(response => this.unit.set(response.get(this.elementId)));
   }
 
   getAbilityTooltips(ab: Ability): TooltipDirective<elementComponent<number | string>[]>["tooltips"] {

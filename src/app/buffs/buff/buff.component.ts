@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, Input, OnInit } from '@angular/core';
+import { booleanAttribute, Component, Input, OnInit, signal } from '@angular/core';
 import { Buff } from '../buff';
 import { BuffService } from '../buff.service';
 import { formatPercent } from '@angular/common';
@@ -65,11 +65,11 @@ export class BuffComponent implements elementComponent<string>, OnInit {
   @Input({required: true}) elementId: string = "";
   @Input({transform: booleanAttribute}) addLink: boolean = false;
   public attributeMap = BuffComponent._attributeMap;
-  public buff: Buff | undefined;
+  public buff = signal<Buff | undefined>(undefined);
 
   constructor(private buffService: BuffService){}
 
   ngOnInit(){
-    this.buffService.request.then(response => this.buff = response.get(this.elementId));
+    this.buffService.request.then(response => this.buff.set(response.get(this.elementId)));
   }
 }

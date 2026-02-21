@@ -1,4 +1,4 @@
-import { Component, inject, Injectable, Injector, OnInit, ProviderToken, Type } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Injectable, Injector, OnInit, ProviderToken, signal, Type } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Observable } from 'rxjs';
@@ -8,23 +8,23 @@ import { NgComponentOutlet } from '@angular/common';
 @Component({
     selector: 'app-element-list',
     imports: [
-        RouterLink,
-        MatProgressSpinnerModule,
-        NgComponentOutlet,
-    ],
+      MatProgressSpinnerModule,
+      NgComponentOutlet
+    ], 
     templateUrl: './element-list.component.html',
     styleUrl: './element-list.component.css'
 })
 export class ElementListComponent<T extends string | number> implements OnInit {
-  public component: Type<elementComponent<T>> | undefined;
-  public elementList: Map<string, {id: string}> | Map<number, {id: number}> /*: Awaited<requestService<T>["request"]>*/ = new Map();
+  public component = signal<Type<elementComponent<T>> | undefined>(undefined);
+  public elementList = signal<Map<string, {id: string}> | Map<number, {id: number}>>(new Map()); /*: Awaited<requestService<T>["request"]>*/
 
-  constructor(private activatedRoute: ActivatedRoute){
+  constructor(private activatedRoute: ActivatedRoute, private cdr: ChangeDetectorRef){
     let data = this.activatedRoute.data as Observable<elementListData<T>>;
     data.subscribe({
       next: async (data) => {
-        this.component = data.component as Type<elementComponent<T>>;
-        this.elementList = await inject(data.service as ProviderToken<requestService<T>>).request;
+        this.component.set(data.component as Type<elementComponent<T>>);
+        const list = await inject(data.service as ProviderToken<requestService<T>>).request;
+        this.elementList.set(list);
       },
     })
   }

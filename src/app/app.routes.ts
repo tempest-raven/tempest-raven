@@ -41,7 +41,7 @@ export const routes: Routes = [
     { path: "item/:elementId/:slug", component: ItemComponent, title: s => s.params["slug"] },
     { path: "item/:elementId", component: ItemComponent, title: s => "Item ID " + s.params["elementId"] },
 
-    { path: "units", component: ElementListComponent, title: "Units [WIP]", 
+    { path: "units", component: ElementListComponent, title: "Units", 
         data: { 
             navigation: true, 
             component: UnitComponent, 

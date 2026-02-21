@@ -1,7 +1,7 @@
-import { booleanAttribute, Component, Input, numberAttribute, OnInit } from '@angular/core';
+import { booleanAttribute, Component, Input, numberAttribute, OnInit, signal } from '@angular/core';
 import { Ability } from '../ability';
 import { AbilityService } from '../ability.service';
-import { NgClass, PercentPipe } from '@angular/common';
+import { PercentPipe } from '@angular/common';
 import { AbilityScalePipe } from '../ability-scale.pipe';
 import { RouterLink } from '@angular/router';
 import { SignedPercentPipe } from '../../shared/signed-percent.pipe';
@@ -13,7 +13,6 @@ import { elementComponent } from '../../shared/types';
 @Component({
     selector: 'app-ability',
     imports: [
-        NgClass,
         PercentPipe,
         SignedPercentPipe,
         AbilityScalePipe,
@@ -27,7 +26,7 @@ import { elementComponent } from '../../shared/types';
 export class AbilityComponent implements elementComponent<number>, OnInit {
   @Input({required: true, transform: numberAttribute}) elementId: number = 0;
   @Input({transform: booleanAttribute}) addLink: boolean = false;
-  public ability: Ability | undefined;
+  public ability = signal<Ability | undefined>(undefined);
   buffComponent = BuffComponent;
 
   constructor(
@@ -38,6 +37,6 @@ export class AbilityComponent implements elementComponent<number>, OnInit {
   }
 
   ngOnInit(){
-    this.abilityService.request.then(response => this.ability = response.get(this.elementId));
+    this.abilityService.request.then(response => this.ability.set(response.get(this.elementId)));
   }
 }

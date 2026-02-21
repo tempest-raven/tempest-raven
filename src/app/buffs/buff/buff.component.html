@@ -1,4 +1,4 @@
-@if (buff){
+@if (buff(); as buff){
 <div class="buff" id="buffTemplate">
   <div class="displayTitle">
     <a class="buffName" [routerLink]="addLink ? ['/buff', buff.id] : null">

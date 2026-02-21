@@ -5,7 +5,13 @@ export type tooltipObj<T> = {
 }
 @Directive({
   selector: '[tooltips]',
-  standalone: true
+  standalone: true,
+  host: {
+    '(mouseenter)' : 'onMouseEnter($event)',
+    '(click)' : 'onMouseLeave()',
+    '(mouseleave)' : 'onMouseLeave()',
+    '(mousemove)' : 'onMouseMove($event)',
+  }
 })
 export class TooltipDirective<T extends any[]> { 
   @Input({required: true}) tooltips!: {[K in keyof T]: tooltipObj<T[K]>};
@@ -25,8 +31,7 @@ export class TooltipDirective<T extends any[]> {
     this.tooltipEl = tooltipEl;
   }
 
-  @HostListener('mouseenter', ['$event']) onMouseEnter(ev: MouseEvent){
-    
+  onMouseEnter(ev: MouseEvent){
     const injector = this.applicationRef.injector;
     let containedComponents = [];
     for (const tooltip of this.tooltips){
@@ -36,7 +41,7 @@ export class TooltipDirective<T extends any[]> {
       Object.assign(containedComponent.instance, tooltip.data);
       
       this.applicationRef.attachView(containedComponent.hostView);
-      containedComponent.changeDetectorRef.detectChanges();
+      containedComponent.changeDetectorRef.markForCheck();
       containedComponents.push(containedComponent);
       this.tooltipEl.appendChild(tmpDiv);
     }
@@ -45,8 +50,7 @@ export class TooltipDirective<T extends any[]> {
     ev.preventDefault();
   }
 
-  @HostListener('click')
-  @HostListener('mouseleave') onMouseLeave(){
+  onMouseLeave(){
     this.containedComponents.forEach(containedComponent => {
       containedComponent.changeDetectorRef.detach()
       this.applicationRef.detachView(containedComponent.hostView);
@@ -58,7 +62,7 @@ export class TooltipDirective<T extends any[]> {
     }
   }
 
-  @HostListener('mousemove', ['$event']) onMouseMove(ev: MouseEvent){
+  onMouseMove(ev: MouseEvent){
     const mouseX = ev.clientX;
     const mouseY = ev.clientY;
     const windowWidth = window.innerWidth;

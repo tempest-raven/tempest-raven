@@ -1,4 +1,4 @@
-@if (ability){
+@if (ability(); as ability){
 <div class="ability" id="abilityTemplate">
     <div class="abilityTitle displayTitle">
         
@@ -8,12 +8,12 @@
                 {{ability.localizedName()}} 
                 <span class="right">
                     @if (ability.localizedName() !== ability.internalName){
-                        <span [ngClass]="{internalName: true, small: abilityHasLocaleName}" title="Internal name">{{ability.internalName}} </span>
+                        <span [class]="{internalName: true, small: abilityHasLocaleName}" title="Internal name">{{ability.internalName}} </span>
                     }
                     <span class="abilityId">{{ability.id}}</span> 
                 </span>
             } @else {
-                <span [ngClass]="{internalName: true, small: abilityHasLocaleName}" title="Internal name">{{ability.internalName}}</span>
+                <span [class]="{internalName: true, small: abilityHasLocaleName}" title="Internal name">{{ability.internalName}}</span>
                 <span class="right">
                     <span class="abilityId">{{ability.id}}</span> 
                 </span>
