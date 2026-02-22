@@ -31,14 +31,13 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 24
-        cache: 'npm'
     - name: CI and deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
         npm install -g @angular/cli
-        npm ci
+        npm i
         ng build --base-href=/tempest-raven/
         cp dist/browser/index.html dist/browser/404.html
         npx gh-pages -d dist/browser -u "github-actions-bot <support+actions@github.com>"
