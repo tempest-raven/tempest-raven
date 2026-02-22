@@ -2,7 +2,7 @@
 <div class="ability">
     <div class="abilityTitle displayTitle">
         
-        <a class="abilityName" [routerLink]="addLink ? ['/ability', ability.id, ability.internalName] : null">
+        <a class="abilityName" [routerLink]="addLink ? ['/sonny2', 'ability', ability.id, ability.internalName] : null">
             @let abilityHasLocaleName = (ability.localeNameId !== 0 || ability.internalName === "Vicious Strike") && ability.id >= 100;
             @if (abilityHasLocaleName){
                 {{ability.localizedName()}} 
@@ -105,7 +105,7 @@
                         Apply 
                     }
                 }
-                <a [routerLink]="['/buff', ability.buffId]" class="abilityBuffId" [tooltips]="[{component: buffComponent, data: {elementId: ability.buffId}}]" >{{ability.buffId}}</a>
+                <a [routerLink]="['/sonny2', 'buff', ability.buffId]" class="abilityBuffId" [tooltips]="[{component: buffComponent, data: {elementId: ability.buffId}}]" >{{ability.buffId}}</a>
                 {{ ability.canTargetEnemy && ability.projectileType !== "Shock" ? "on hit" : "" }}
             </div>
         }

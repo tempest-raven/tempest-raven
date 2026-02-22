@@ -6,14 +6,21 @@
     <mat-toolbar>
       Menu
     </mat-toolbar>
-    <mat-nav-list>
-      @for (route of routes; track route) {
-        <a mat-list-item [routerLink]="route.path" routerLinkActive #rla="routerLinkActive" [activated]="rla.isActive" >{{route.title ?? "No title"}}</a>
+    
+    @for (gameRoutes of routes; track gameRoutes) {
+      <mat-toolbar>
+        {{ gameRoutes.title }}
+      </mat-toolbar>
+      
+      <mat-nav-list> 
+      @for (route of gameRoutes.children; track route) {
+          <a mat-list-item [routerLink]="route.fullPath" routerLinkActive #rla="routerLinkActive" [activated]="rla.isActive" >{{route.title}}</a>
       }
-    </mat-nav-list>
+      </mat-nav-list>
+    }
   </mat-sidenav>
   <mat-sidenav-content class="sidenav-content">
-    <mat-toolbar color="primary">
+    <mat-toolbar class="mat-primary">
       @if (isHandset$ | async) {
         <button
           type="button"
@@ -23,7 +30,9 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
       }
-      <span>{{ (activatedRoute.title | async ) ?? "Tempest Raven" }}</span>
+      <span>
+        {{ (activatedRoute.title | async ) ?? appName }}
+      </span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet />
