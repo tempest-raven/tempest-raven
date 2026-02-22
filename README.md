@@ -1,6 +1,6 @@
 # Tempest Raven
 
-Tempest Raven is a platform that lets you consult detailed internal data about the [Sonny 2 flash game](https://armorgames.com/play/2900/sonny-2) published by [Armor Games](https://armorgames.com/). It is published under the [MIT License](./LICENSE.txt).
+Tempest Raven is a platform for exploring detailed internal data about the [Sonny 2 flash game](https://armorgames.com/play/2900/sonny-2) published by [Armor Games](https://armorgames.com/). The project is open-source and released under the [MIT License](./LICENSE.txt).
 
 ## Features
 
@@ -9,9 +9,8 @@ Tempest Raven is a platform that lets you consult detailed internal data about t
 - View all abilities
 - View all buffs
 - View all items (including many unused ones)
-- Share links for any specific data (for example the rank 3 of Vicious Strike)
 
-### Planned or upcoming features
+### Planned features
 
 In no particular order:
 - Adding in-game sprites when possible (items, units, buffs, ability icons)
@@ -21,50 +20,48 @@ In no particular order:
 - Adding fights
 - Adding class ability trees
 
-This list is not exhaustive, and a feature being in the list does not guarantee its implementation. Items may be added, changed or removed at any moment.
+This list is not exhaustive, and planned features may be added, changed, or removed at any time.
 
 ### Unlikely to be added
 
-While it is possible for the following features to be added, at this stage of the project, these are considered unlikely to be implemented:
+These features are possible, but unlikely to be implemented:
 
 - Support for [Sonny (2017)](https://store.steampowered.com/app/586750/Sonny/) data. Sonny 2017 is made from scratch, and uses a different engine (Unity), and as such, its data structure isn't compatible at all with the flash games' data
-- Animations and character models. Implementing those without resorting to hand-made images and GIFs is likely to be (very) difficult. 
+- Animations and character models. Implementing those would likely require using hand-made images and GIFs for each. 
 
 ## Play Sonny and Sonny 2
 
 You can play both Sonny games:
 - Directly on https://armorgames.com : [Sonny](https://armorgames.com/play/505/sonny) — [Sonny 2](https://armorgames.com/play/2900/sonny-2)
-  - Easiest method, but lower compatibility (mostly minor visual glitches) because of the usage of the Ruffle emulator
+  - Easiest, but minor glitches (mostly visual) because of the Ruffle emulator
 - Via [Flashpoint archive](https://flashpointarchive.org/)
   - Also access many other web games with high compatibility, but requires a few GB of disk space just for the base install
-- Through the [Flash Player projector (archive.org link)](https://archive.org/details/flashplayer32_0r0_363_win_sa) + a local copy of the game files. Download links directly from armorgames.com: [Sonny](https://cache.armorgames.com/files/games/sonny-505.swf) — [Sonny 2](https://cache.armorgames.com/files/games/sonny-2-2900.swf)
-  - Best method to preserve high compatibility *and* disk space, and can load modded versions, but requires some manual set-up
-- NEW: On Steam : [Sonny Legacy Collection](https://store.steampowered.com/app/2757720/Sonny_Legacy_Collection/)
-  - Achievement support, high compatibility and improved performance, but is a paid game. ☕ Support the devs!
+- Through the [Flash Player projector (archive.org link)](https://archive.org/details/flashplayer32_0r0_363_win_sa) + a local copy of the game files. 
+  - Download links directly from armorgames.com: [Sonny](https://cache.armorgames.com/files/games/sonny-505.swf) — [Sonny 2](https://cache.armorgames.com/files/games/sonny-2-2900.swf)
+  - Best way to preserve both high compatibility and disk space, and is the best method to load modded versions on PC, but requires managing files yourself
+- On Steam : [Sonny Legacy Collection](https://store.steampowered.com/app/2757720/Sonny_Legacy_Collection/)
+  - Achievement support, high compatibility and improved performance. ☕ Support the devs!
 
 ## Other ressources
 
 If you like Sonny, check out these links!
 
-[Sonny Wiki](https://sonny.fandom.com/wiki/Sonny_Wiki) — [Sonny Community Discord server](https://discord.gg/nkn5g6KEBF) — [Reddit](https://www.reddit.com/r/Sonny/)
+[Sonny Wiki](https://sonny.wiki.gg/) — [Sonny Community Discord server](https://discord.gg/nkn5g6KEBF) — [Reddit](https://www.reddit.com/r/Sonny/)
 
 ## Contributing
 
-As an open-source project, everyone is welcome to provide any contributions, like code or graphical assets. In order to preserve license compatibility, by contributing, you agree to submit your contributions under the MIT license. Be sure you are legally allowed to do so.
+As an open-source project, everyone is welcome to contribute code or graphical assets. By contributing, you agree to license your work under MIT.
 
 ## For developers
 
-This repository consists of a website that uses [Angular](https://angular.dev/) as its primary framework.
-
 ### Requirements
 
-- [Node.js](https://nodejs.org) version 20.17.0 (LTS) or later
-- A terminal capable of running node, npm and angular CLI commands
+- [Node.js](https://nodejs.org) version 24 (LTS)
 
-### Installation
+### Setup
 
-- Clone this repository
-- Run `npm install`
+- Run `npm i`
+- If not already present on your system, install Angular CLI: `npm install -g @angular/cli`
 
 ### Development server
 
