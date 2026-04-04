@@ -1,9 +1,10 @@
 import { Component, numberAttribute, input } from '@angular/core';
 import { sonnyElement } from '../../shared/types';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-piercing-bar, app-defense-bar',
-    imports: [],
+    selector: 'app-piercing-bar',
+    imports: [DecimalPipe],
     templateUrl: './piercing-bar.component.html',
     styleUrl: './piercing-bar.component.css'
 })

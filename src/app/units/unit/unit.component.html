@@ -1,11 +1,14 @@
 @if (unit(); as unit){
   <div>
-    <div class="displayTitle">{{unit.internalName}}</div>
+    <div class="displayTitle">
+      {{unit.internalName}}
+      <span class="right unitId">{{unit.id}}</span>
+    </div>
     <div class="displayDesc1">
-      <div>Vitality mod: {{unit.vitalityScale}}</div>
-      <div>Strength mod: {{unit.strengthScale}}</div>
-      <div>Instinct mod: {{unit.magicScale}}</div>
-      <div>Speed mod: {{unit.speedScale}}</div>
+      <div>Vitality modifier: {{unit.vitalityScale}}</div>
+      <div>Strength modifier: {{unit.strengthScale}}</div>
+      <div>Instinct modifier: {{unit.magicScale}}</div>
+      <div>Speed modifier: {{unit.speedScale}}</div>
       <div>Focus: {{unit.focus}}</div>
     </div>
     <div class="elementBars">
@@ -13,7 +16,11 @@
         <div class="elementBarTitle">Piercing</div>
         <div class="elementBarGrid">
           @for (per of unit.PER; track $index) {
-            <app-piercing-bar [value]="per" [element]="unit.elementArray[$index]" [level]="0"></app-piercing-bar>
+            <app-piercing-bar [value]="per" 
+            [element]="unit.elementArray[$index]" 
+            [level]="0"
+            [appTooltip]="piercingTooltip"
+            [tooltipData]="{value: per, element: unit.elementArray[$index]}"></app-piercing-bar>
             <!--div>{{unit.elementArray[$index]}} Piercing {{per | signedNumber}}</div-->
           }
         </div>
@@ -22,7 +29,11 @@
         <div class="elementBarTitle">Defense</div>
         <div class="elementBarGrid">
           @for (per of unit.DEF; track $index) {
-            <app-piercing-bar [value]="per" [element]="unit.elementArray[$index]" [level]="0"></app-piercing-bar>
+            <app-piercing-bar [value]="per" 
+            [element]="unit.elementArray[$index]" 
+            [level]="0"
+            [appTooltip]="defenseTooltip"
+            [tooltipData]="{value: per, element: unit.elementArray[$index]}"></app-piercing-bar>
             <!--div>{{unit.elementArray[$index]}} Piercing {{per | signedNumber}}</div-->
           }
         </div>
@@ -115,9 +126,26 @@
       </div>
     }
   </div>
-}<ng-template #abilityTooltip let-ab>
+}
+<ng-template #abilityTooltip let-ab>
   <app-ability [elementId]="ab.id" />
   @if (ab.buffId !== 0) {
     <app-buff [elementId]="ab.buffId" />
   }
+</ng-template>
+<ng-template #piercingTooltip let-piercing>
+  <div class="displaySubTitle">
+    {{piercing.element}} Piercing: {{piercing.value}}% 
+  </div>
+  <div class="displayDesc3">
+    <!-- TODO -->
+  </div>
+</ng-template>
+<ng-template #defenseTooltip let-defense>
+  <div class="displaySubTitle">
+    {{defense.element}} Defense: {{defense.value}}% 
+  </div>
+  <div class="displayDesc3">
+    <!-- TODO -->
+  </div>
 </ng-template>
