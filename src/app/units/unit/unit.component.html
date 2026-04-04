@@ -59,7 +59,8 @@
         }
         
         @if (unit.middleHP() > 0){
-          <div class="mixed" [style]="'width: ' + unit.middleHP() + '%;'">
+          <div class="mixed" [style]="'width: ' + unit.middleHP() + '%;'"
+          [appTooltip]="randomAgression" [tooltipData]="unit.middleHPrandomness()">
             @if (unit.middleHP() >= 40){
               {{unit.defensiveHP()}}% - {{unit.agressiveHP()}}%
             } @else if (unit.middleHP() >= 25) {
@@ -147,5 +148,11 @@
   </div>
   <div class="displayDesc3">
     <!-- TODO -->
+  </div>
+</ng-template>
+<ng-template #randomAgression let-randomness>
+  <div class="displayDesc3">
+    This unit has a {{randomness}}% chance to use an agressive move, 
+    otherwise it will use a defensive move
   </div>
 </ng-template>
