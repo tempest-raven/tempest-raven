@@ -61,8 +61,8 @@ export class TooltipDirective<T> implements OnDestroy {
 
   onTouchStart(event: TouchEvent): void {
     if (this.tooltipDisabled()) return;
-    // Prevent immediate navigation on links
-    if (this.anchorHref) event.preventDefault();
+    // Prevent the tooltip closing back immediately
+    event.preventDefault();
     const touch = event.touches[0];
     this.service.show({
       content:    this.appTooltip(),
