@@ -81,7 +81,7 @@
       <div>
         Agressive moves:
         @for (ability of unit.movesA; track $index){
-          <div><a class="whiteLink" [routerLink]="['/sonny2', 'ability', ability.id]" [tooltips]="getAbilityTooltips(ability)" >{{ability.internalName}}</a></div>
+          <div><a class="whiteLink" [routerLink]="['/sonny2', 'ability', ability.id]" [appTooltip]="abilityTooltip" [tooltipData]="ability">{{ability.internalName}}</a></div>
         } @empty {
           None
         }
@@ -89,7 +89,7 @@
       <div>
         Defensive moves:
         @for (ability of unit.movesD; track $index){
-          <div><a class="whiteLink" [routerLink]="['/sonny2', 'ability', ability.id]" [tooltips]="getAbilityTooltips(ability)" >{{ability.internalName}}</a></div>
+          <div><a class="whiteLink" [routerLink]="['/sonny2', 'ability', ability.id]" [appTooltip]="abilityTooltip" [tooltipData]="ability">{{ability.internalName}}</a></div>
         } @empty {
           None
         }
@@ -108,11 +108,16 @@
           @if (moveList){
             <div>Phase {{$index}}</div>
             @for (ability of moveList; track $index){
-              <div><a class="whiteLink" [routerLink]="['/sonny2', 'ability', ability.id]" [tooltips]="getAbilityTooltips(ability)">{{ability.internalName}}</a></div>
+              <div><a class="whiteLink" [routerLink]="['/sonny2', 'ability', ability.id]" [appTooltip]="abilityTooltip" [tooltipData]="ability">{{ability.internalName}}</a></div>
             }
           }
         }
       </div>
     }
   </div>
-}
+}<ng-template #abilityTooltip let-ab>
+  <app-ability [elementId]="ab.id" />
+  @if (ab.buffId !== 0) {
+    <app-buff [elementId]="ab.buffId" />
+  }
+</ng-template>

@@ -1,0 +1,31 @@
+
+
+@if (!isMobile && data()) {
+  <div class="tooltip-box" 
+      role="tooltip"
+      #box
+      [style.left.px]="left()"
+      [style.top.px]="top()">
+    <ng-container
+      *ngTemplateOutlet="data()!.content; context: data()!.context"
+    />
+  </div>
+}
+
+@if (isMobile && data()) {
+  <div class="mobile-backdrop" (click)="close()" aria-hidden="true"></div>
+
+  <div class="mobile-panel" role="dialog" aria-modal="true">
+    <div class="mobile-content">
+      <ng-container *ngTemplateOutlet="data()!.content; context: data()!.context" />
+    </div>
+
+    @if (data()!.anchorHref) {
+      <hr class="mobile-divider" />
+      <a matFab extended [routerLink]="data()!.anchorHref" (click)="close()" class="mobile-link-button">
+        <mat-icon>open_in_full</mat-icon>
+        Open link
+      </a>
+    }
+  </div>
+}

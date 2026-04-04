@@ -1,6 +1,5 @@
-import { booleanAttribute, Component, Input, numberAttribute, OnInit, signal } from '@angular/core';
+import { booleanAttribute, Component, numberAttribute, OnInit, signal, input } from '@angular/core';
 import { ItemService } from '../item.service';
-import { elementComponent } from '../../shared/types';
 import { Item } from '../item';
 import { RouterLink } from '@angular/router';
 import { SignedNumberPipe } from '../../shared/signed-number.pipe';
@@ -14,14 +13,14 @@ import { SignedNumberPipe } from '../../shared/signed-number.pipe';
     templateUrl: './item.component.html',
     styleUrl: './item.component.css'
 })
-export class ItemComponent implements elementComponent<number>, OnInit {
-  @Input({required: true, transform: numberAttribute}) elementId: number = 0;
-  @Input({transform: booleanAttribute}) addLink: boolean = false;
+export class ItemComponent implements OnInit {
+  readonly elementId = input.required<number, unknown>({ transform: numberAttribute });
+  readonly addLink = input<boolean, unknown>(false, { transform: booleanAttribute });
   public item = signal<Item | undefined>(undefined);
   
   constructor(private itemService: ItemService){}
 
   ngOnInit(): void {
-    this.itemService.request.then(response => this.item.set(response.get(this.elementId)));
+    this.itemService.request.then(response => this.item.set(response.get(this.elementId())));
   }
 }

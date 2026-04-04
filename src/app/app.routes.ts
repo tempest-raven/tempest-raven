@@ -1,14 +1,11 @@
 import { Routes } from '@angular/router';
 import { AbilityComponent } from './abilities/ability/ability.component';
 import { BuffComponent } from './buffs/buff/buff.component';
-import { AbilityService } from './abilities/ability.service';
-import { elementListData } from './shared/types';
-import { BuffService } from './buffs/buff.service';
-import { ElementListComponent } from './element-list/element-list.component';
 import { ItemComponent } from './items/item/item.component';
-import { ItemService } from './items/item.service';
-import { UnitService } from './units/unit.service';
-import { UnitComponent } from './units/unit/unit.component';
+import { AbilityListComponent } from './abilities/ability-list/ability-list.component';
+import { BuffListComponent } from './buffs/buff-list/buff-list.component';
+import { ItemListComponent } from './items/item-list/item-list.component';
+import { UnitListComponent } from './units/unit-list/unit-list.component';
 
 export const routes: Routes = [
     { 
@@ -16,43 +13,19 @@ export const routes: Routes = [
         data: { navigation: true }, 
         title: "Sonny 2",
         children: [
-            { path: "abilities", component: ElementListComponent, title: "Abilities", 
-                data: { 
-                    navigation: true, 
-                    component: AbilityComponent, 
-                    service: AbilityService 
-                } as elementListData<number>
-            },
+            { path: "abilities", component: AbilityListComponent, title: "Abilities", data: { navigation: true } },
             { path: "ability/:elementId/:slug", component: AbilityComponent, title: s => s.params["slug"] },
             { path: "ability/:elementId", component: AbilityComponent, title: s => "Ability " + s.params["elementId"] },
             
-            { path: "buffs", component: ElementListComponent, title: "Buffs", 
-                data: { 
-                    navigation: true, 
-                    component: BuffComponent, 
-                    service: BuffService
-                } as elementListData<string>
-            },
+            { path: "buffs", component: BuffListComponent, title: "Buffs", data: { navigation: true } },
             { path: "buff/:elementId/:slug", component: BuffComponent, title: s => s.params["slug"] },
             { path: "buff/:elementId", component: BuffComponent, title: s => "Buff " + s.params["elementId"] },
             
-            { path: "items", component: ElementListComponent, title: "Items", 
-                data: { 
-                    navigation: true, 
-                    component: ItemComponent, 
-                    service: ItemService 
-                } as elementListData<number>
-            },
+            { path: "items", component: ItemListComponent, title: "Items", data: { navigation: true } },
             { path: "item/:elementId/:slug", component: ItemComponent, title: s => s.params["slug"] },
             { path: "item/:elementId", component: ItemComponent, title: s => "Item " + s.params["elementId"] },
             
-            { path: "units", component: ElementListComponent, title: "Units", 
-                data: { 
-                    navigation: true, 
-                    component: UnitComponent, 
-                    service: UnitService 
-                } as elementListData<number>
-            },
+            { path: "units", component: UnitListComponent, title: "Units", data: { navigation: true } },
         ]
     },
 

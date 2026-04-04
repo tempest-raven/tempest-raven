@@ -1,7 +1,7 @@
 @if (item(); as item) {
   <div>
     <div [class]="['displayTitle', 'rarity' + item.rarity]">
-      <a class="buffName" [routerLink]="addLink ? ['/sonny2', 'item', item.id, item.localizedName() ?? item.internalName] : null">
+      <a class="buffName" [routerLink]="addLink() ? ['/sonny2', 'item', item.id, item.localizedName() ?? item.internalName] : null">
         <span>
           @if (item.localizedName()){
             {{item.localizedName()}}

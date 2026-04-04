@@ -1,9 +1,8 @@
-import { booleanAttribute, Component, Input, OnInit, signal } from '@angular/core';
+import { booleanAttribute, Component, OnInit, signal, input } from '@angular/core';
 import { Buff } from '../buff';
 import { BuffService } from '../buff.service';
 import { formatPercent } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { elementComponent } from '../../shared/types';
 
 @Component({
     selector: 'app-buff',
@@ -13,7 +12,7 @@ import { elementComponent } from '../../shared/types';
     templateUrl: './buff.component.html',
     styleUrl: './buff.component.css'
 })
-export class BuffComponent implements elementComponent<string>, OnInit {
+export class BuffComponent implements OnInit {
   private static identity = (_: any) => _;
   private static toPercent = (v: number) => formatPercent(v, "en-US");
   private static toPercentSigned = (v: number) => (v > 0 ? "+" : "") + BuffComponent.toPercent(v);
@@ -62,14 +61,14 @@ export class BuffComponent implements elementComponent<string>, OnInit {
     [50, ["Silenced", (_: any) => null]],
   ]);
 
-  @Input({required: true}) elementId: string = "";
-  @Input({transform: booleanAttribute}) addLink: boolean = false;
+  readonly elementId = input.required<string>();
+  readonly addLink = input<boolean, unknown>(false, { transform: booleanAttribute });
   public attributeMap = BuffComponent._attributeMap;
   public buff = signal<Buff | undefined>(undefined);
 
   constructor(private buffService: BuffService){}
 
   ngOnInit(){
-    this.buffService.request.then(response => this.buff.set(response.get(this.elementId)));
+    this.buffService.request.then(response => this.buff.set(response.get(this.elementId())));
   }
 }

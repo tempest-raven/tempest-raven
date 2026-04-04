@@ -1,4 +1,4 @@
-import { Component, Input, numberAttribute } from '@angular/core';
+import { Component, numberAttribute, input } from '@angular/core';
 import { sonnyElement } from '../../shared/types';
 
 @Component({
@@ -8,12 +8,12 @@ import { sonnyElement } from '../../shared/types';
     styleUrl: './piercing-bar.component.css'
 })
 export class PiercingBarComponent {
-  @Input({required: true, transform: numberAttribute}) value!: number;
-  @Input({required: true}) element!: sonnyElement;
-  @Input({required: true, transform: numberAttribute}) level!: number;
+  readonly value = input.required<number, unknown>({ transform: numberAttribute });
+  readonly element = input.required<sonnyElement>();
+  readonly level = input.required<number, unknown>({ transform: numberAttribute });
 
   piercingRatio(){
-    let ratio = this.value / (100 + 15 * this.level);
+    let ratio = this.value() / (100 + 15 * this.level());
     if (ratio > 10){
       ratio = 10;
     }

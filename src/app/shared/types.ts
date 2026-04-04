@@ -1,13 +1,5 @@
-import { Type, ProviderToken } from "@angular/core";
+import { Type, ProviderToken, InputSignal, InputSignalWithTransform, Signal } from "@angular/core";
 
-export type elementComponent<T extends number | string> = T extends any ? { 
-  elementId: T;
-  addLink: boolean
-} : never;
-export type elementListData<T extends number | string = number | string> = T extends any ? { 
-  component: Type<elementComponent<T>>, 
-  service: ProviderToken<requestService<T>> 
-} : never;
 export type requestService<T extends number | string> = T extends any ? { 
   request: Promise<Map<T, {id: T}>>
 } : never;

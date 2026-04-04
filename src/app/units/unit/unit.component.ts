@@ -1,27 +1,28 @@
-import { booleanAttribute, Component, ComponentDecorator, Input, numberAttribute, OnInit, signal } from '@angular/core';
+import { booleanAttribute, Component, ComponentDecorator, numberAttribute, OnInit, signal, input } from '@angular/core';
 import { UnitService } from '../unit.service';
-import { elementComponent } from '../../shared/types';
 import { Unit } from '../unit';
 import { RouterLink } from '@angular/router';
-import { TooltipDirective, tooltipObj } from '../../shared/tooltip.directive';
 import { AbilityComponent } from '../../abilities/ability/ability.component';
 import { BuffComponent } from '../../buffs/buff/buff.component';
 import { Ability } from '../../abilities/ability';
 import { PiercingBarComponent } from "../../game-ui/piercing-bar/piercing-bar.component";
+import { TooltipDirective } from '../../shared/tooltip/tooltip.directive';
 
 @Component({
     selector: 'app-unit',
     imports: [
         RouterLink,
         TooltipDirective,
-        PiercingBarComponent
+        PiercingBarComponent,
+        AbilityComponent,
+        BuffComponent
     ],
     templateUrl: './unit.component.html',
     styleUrl: './unit.component.css'
 })
-export class UnitComponent implements elementComponent<number>, OnInit {
-  @Input({required: true, transform: numberAttribute}) elementId: number = 0;
-  @Input({transform: booleanAttribute}) addLink: boolean = false;
+export class UnitComponent implements OnInit {
+  readonly elementId = input.required<number, unknown>({ transform: numberAttribute });
+  readonly addLink = input<boolean, unknown>(false, { transform: booleanAttribute });
   public unit = signal<Unit | undefined>(undefined);
   public abilityComponent = AbilityComponent;
   public buffComponent = BuffComponent;
@@ -33,24 +34,6 @@ export class UnitComponent implements elementComponent<number>, OnInit {
   }
 
   ngOnInit(){
-    this.unitService.request.then(response => this.unit.set(response.get(this.elementId)));
-  }
-
-  getAbilityTooltips(ab: Ability): TooltipDirective<elementComponent<number | string>[]>["tooltips"] {
-    let tooltips: (tooltipObj<AbilityComponent> | tooltipObj<BuffComponent>)[] = [{
-      component: AbilityComponent,
-      data: {
-        elementId: ab.id
-      }
-    }]
-    if (ab.buffId !== 0){
-      tooltips.push({
-        component: BuffComponent,
-        data: {
-          elementId: ab.buffId
-        }
-      })
-    }
-    return tooltips;
+    this.unitService.request.then(response => this.unit.set(response.get(this.elementId())));
   }
 }

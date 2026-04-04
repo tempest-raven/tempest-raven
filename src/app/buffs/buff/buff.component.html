@@ -1,7 +1,7 @@
 @if (buff(); as buff){
 <div class="buff">
   <div class="displayTitle">
-    <a class="buffName" [routerLink]="addLink ? ['/sonny2', 'buff', buff.id, buff.localizedName()] : null">
+    <a class="buffName" [routerLink]="addLink() ? ['/sonny2', 'buff', buff.id, buff.localizedName()] : null">
       <!-- Passives -->
       @if (buff.attributes.get(16) === -1){ 
         {{buff.id}}
