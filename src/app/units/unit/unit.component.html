@@ -1,8 +1,10 @@
 @if (unit(); as unit){
   <div>
     <div class="displayTitle">
-      {{unit.internalName}}
-      <span class="right unitId">{{unit.id}}</span>
+      <a [routerLink]="['/sonny2', 'unit', unit.id, unit.internalName]" routerLinkActive="no-link">
+        {{unit.internalName}}
+        <span class="right unitId">{{unit.id}}</span>
+      </a>
     </div>
     <div class="displayDesc1">
       <div>Vitality modifier: {{unit.vitalityScale}}</div>

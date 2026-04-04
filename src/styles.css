@@ -223,3 +223,11 @@ body {
 .hidden {
     display: none !important;
 }
+
+/* Router link styling */
+.no-link {
+    pointer-events: none;
+    cursor: default !important;
+    text-decoration: none !important;
+    color: inherit !important;
+}

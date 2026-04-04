@@ -3,7 +3,7 @@ import { Ability } from '../ability';
 import { AbilityService } from '../ability.service';
 import { PercentPipe } from '@angular/common';
 import { AbilityScalePipe } from '../ability-scale.pipe';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SignedPercentPipe } from '../../shared/signed-percent.pipe';
 import { BuffComponent } from '../../buffs/buff/buff.component';
 import { TooltipDirective } from '../../shared/tooltip/tooltip.directive';
@@ -15,6 +15,7 @@ import { TooltipDirective } from '../../shared/tooltip/tooltip.directive';
     SignedPercentPipe,
     AbilityScalePipe,
     RouterLink,
+    RouterLinkActive,
     TooltipDirective,
     BuffComponent
 ],
@@ -23,7 +24,6 @@ import { TooltipDirective } from '../../shared/tooltip/tooltip.directive';
 })
 export class AbilityComponent implements OnInit {
   readonly elementId = input.required<number, unknown>({ transform: numberAttribute });
-  readonly addLink = input<boolean, unknown>(false, { transform: booleanAttribute });
   public ability = signal<Ability | undefined>(undefined);
   private abilityService = inject(AbilityService);
 

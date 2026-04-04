@@ -2,12 +2,13 @@ import { booleanAttribute, Component, OnInit, signal, input, inject } from '@ang
 import { Buff } from '../buff';
 import { BuffService } from '../buff.service';
 import { formatPercent } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
     selector: 'app-buff',
     imports: [
-        RouterLink
+        RouterLink,
+        RouterLinkActive
     ],
     templateUrl: './buff.component.html',
     styleUrl: './buff.component.css'
@@ -62,7 +63,6 @@ export class BuffComponent implements OnInit {
   ]);
 
   readonly elementId = input.required<string>();
-  readonly addLink = input<boolean, unknown>(false, { transform: booleanAttribute });
   public attributeMap = BuffComponent._attributeMap;
   public buff = signal<Buff | undefined>(undefined);
   private buffService = inject(BuffService);

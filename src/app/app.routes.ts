@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AbilityComponent } from './abilities/ability/ability.component';
 import { BuffComponent } from './buffs/buff/buff.component';
 import { ItemComponent } from './items/item/item.component';
+import { UnitComponent } from './units/unit/unit.component';
 import { AbilityListComponent } from './abilities/ability-list/ability-list.component';
 import { BuffListComponent } from './buffs/buff-list/buff-list.component';
 import { ItemListComponent } from './items/item-list/item-list.component';
@@ -26,6 +27,8 @@ export const routes: Routes = [
             { path: "item/:elementId", component: ItemComponent, title: s => "Item " + s.params["elementId"] },
             
             { path: "units", component: UnitListComponent, title: "Units", data: { navigation: true } },
+            { path: "unit/:elementId/:slug", component: UnitComponent, title: s => s.params["slug"] },
+            { path: "unit/:elementId", component: UnitComponent, title: s => "Unit " + s.params["elementId"] },
         ]
     },
 

@@ -1,6 +1,6 @@
 <div class="gridDisplay">
     @for (ability of dataList(); track ability.id){
-        <app-ability [elementId]="ability.id" [addLink]="true"/>
+        <app-ability [elementId]="ability.id"/>
     } @empty {
         <mat-spinner/>
     }

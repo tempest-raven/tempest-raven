@@ -2,7 +2,7 @@
 <div class="ability">
     <div class="abilityTitle displayTitle">
         
-        <a class="abilityName" [routerLink]="addLink() ? ['/sonny2', 'ability', ability.id, ability.internalName] : null">
+        <a class="abilityName" [routerLink]="['/sonny2', 'ability', ability.id, ability.internalName]" routerLinkActive="no-link">
             @let abilityHasLocaleName = (ability.localeNameId !== 0 || ability.internalName === "Vicious Strike") && ability.id >= 100;
             @if (abilityHasLocaleName){
                 {{ability.localizedName()}} 
