@@ -1,24 +1,22 @@
-import { booleanAttribute, Component, OnInit, signal, input, inject } from '@angular/core';
-import { Buff } from '../buff';
-import { BuffService } from '../buff.service';
-import { formatPercent } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, OnInit, signal, input, inject } from "@angular/core";
+import { Buff } from "../buff";
+import { BuffService } from "../buff.service";
+import { formatPercent } from "@angular/common";
+import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
-    selector: 'app-buff',
-    imports: [
-        RouterLink,
-        RouterLinkActive
-    ],
-    templateUrl: './buff.component.html',
-    styleUrl: './buff.component.css'
+  selector: "app-buff",
+  imports: [RouterLink, RouterLinkActive],
+  templateUrl: "./buff.component.html",
+  styleUrl: "./buff.component.css",
 })
 export class BuffComponent implements OnInit {
-  private static identity = (_: any) => _;
+  private static identity = <T>(_: T) => _;
   private static toPercent = (v: number) => formatPercent(v, "en-US");
   private static toPercentSigned = (v: number) => (v > 0 ? "+" : "") + BuffComponent.toPercent(v);
-  private static scaleFunction = (v: number) => v > 0 ? `${BuffComponent.toPercent(v)} damage` : `${BuffComponent.toPercent(-v)} healing`;
-  static _attributeMap: Map<number, [string, (v: number) => number | string | null]> = new Map([
+  private static scaleFunction = (v: number) =>
+    v > 0 ? `${BuffComponent.toPercent(v)} damage` : `${BuffComponent.toPercent(-v)} healing`;
+  static _attributeMap = new Map<number, [string, (v: number) => number | string | null]>([
     [3, ["Strength modifier", BuffComponent.toPercentSigned]],
     [5, ["Instinct modifier", BuffComponent.toPercentSigned]],
     [7, ["Speed modifier", BuffComponent.toPercentSigned]],
@@ -27,17 +25,17 @@ export class BuffComponent implements OnInit {
     [11, ["Direct damage dealt", BuffComponent.toPercentSigned]],
     [12, ["Flat direct damage taken", BuffComponent.identity]],
     [13, ["Direct damage taken", BuffComponent.toPercentSigned]],
-    [14, ["Flat effect over time", (v: number) => v > 0 ? `${v} damage` : `${-v} healing`]],
+    [14, ["Flat effect over time", (v: number) => (v > 0 ? `${v} damage` : `${-v} healing`)]],
     [15, ["Focus granted", (v: number) => -v]],
-    [16, ["Duration", (v: number) => v > 0 ? `${v} turn(s)` : "Passive"]], //mandatory
-    [17, ["Stunned", (_: any) => null]],
+    [16, ["Duration", (v: number) => (v > 0 ? `${v} turn(s)` : "Passive")]], //mandatory
+    [17, ["Stunned", () => null]],
     [19, ["Flat shield", BuffComponent.identity]],
     //[20, ["Buff or debuff", v => v === 1 ? "buff" : "debuff"]],
     [23, ["Element piercing", BuffComponent.toPercentSigned]],
     [24, ["Element defence", BuffComponent.toPercentSigned]],
     //Skip 25
-    [26, ["Subversion", (_: any) => "Swaps healing and damage"]],
-    [27, ["Unstackable", (_: any) => null]],
+    [26, ["Subversion", () => "Swaps healing and damage"]],
+    [27, ["Unstackable", () => null]],
     [28, ["Strength scale", BuffComponent.scaleFunction]],
     [29, ["Instinct scale", BuffComponent.scaleFunction]],
     [30, ["Speed scale", BuffComponent.scaleFunction]],
@@ -59,7 +57,7 @@ export class BuffComponent implements OnInit {
     [47, ["Periodic healing received", BuffComponent.toPercentSigned]],
     [48, ["Periodic damage done", BuffComponent.toPercentSigned]],
     [49, ["Maximum focus", BuffComponent.identity]],
-    [50, ["Silenced", (_: any) => null]],
+    [50, ["Silenced", () => null]],
   ]);
 
   readonly elementId = input.required<string>();
@@ -67,7 +65,7 @@ export class BuffComponent implements OnInit {
   public buff = signal<Buff | undefined>(undefined);
   private buffService = inject(BuffService);
 
-  ngOnInit(){
+  ngOnInit() {
     this.buffService.request.then(response => this.buff.set(response.get(this.elementId())));
   }
 }

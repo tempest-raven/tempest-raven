@@ -1,7 +1,7 @@
 <div class="gridDisplay">
-    @for (buff of dataList(); track buff.id){
-        <app-unit [elementId]="buff.id"/>
-    } @empty {
-        <mat-spinner/>
-    }
+  @for (buff of dataList(); track buff.id) {
+    <app-unit [elementId]="buff.id" />
+  } @empty {
+    <mat-spinner />
+  }
 </div>

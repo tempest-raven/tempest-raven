@@ -1,48 +1,39 @@
-import {
-  Component,
-  Directive,
-  ElementRef,
-  OnDestroy,
-  TemplateRef,
-  inject,
-  input,
-} from '@angular/core';
-import { TooltipService } from './tooltip.service';
+import { Directive, ElementRef, OnDestroy, TemplateRef, inject, input } from "@angular/core";
+import { TooltipService } from "./tooltip.service";
 
 export interface TooltipContext<T> {
   $implicit: T;
 }
 @Directive({
-  selector: '[appTooltip]',
+  selector: "[appTooltip]",
   standalone: true,
   host: {
-    '(mouseenter)': 'onMouseEnter($event)',
-    '(mousemove)':  'onMouseMove($event)',
-    '(mouseleave)': 'onMouseLeave()',
-    '(touchstart)': 'onTouchStart($event)',
+    "(mouseenter)": "onMouseEnter($event)",
+    "(mousemove)": "onMouseMove($event)",
+    "(mouseleave)": "onMouseLeave()",
+    "(touchstart)": "onTouchStart($event)",
   },
 })
 export class TooltipDirective<T> implements OnDestroy {
-  readonly appTooltip      = input.required<TemplateRef<TooltipContext<T>>>();
-  readonly tooltipData  = input<T | null>(null);
+  readonly appTooltip = input.required<TemplateRef<TooltipContext<T>>>();
+  readonly tooltipData = input<T | null>(null);
   readonly tooltipDisabled = input(false);
 
-  private readonly el      = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly service = inject(TooltipService);
 
   private readonly isTouchDevice =
-    typeof window !== 'undefined' &&
-    ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
   // ─── Mouse events (desktop) ──────────────────────────────────────────
 
   onMouseEnter(event: MouseEvent): void {
     if (this.tooltipDisabled() || this.isTouchDevice) return;
     this.service.show({
-      content:    this.appTooltip(),
-      context:    { $implicit: this.tooltipData()},
-      x:          event.clientX,
-      y:          event.clientY,
+      content: this.appTooltip(),
+      context: { $implicit: this.tooltipData() },
+      x: event.clientX,
+      y: event.clientY,
       anchorHref: this.anchorHref,
     });
   }
@@ -65,10 +56,10 @@ export class TooltipDirective<T> implements OnDestroy {
     event.preventDefault();
     const touch = event.touches[0];
     this.service.show({
-      content:    this.appTooltip(),
-      context:    { $implicit: this.tooltipData()},
-      x:          touch.clientX,
-      y:          touch.clientY,
+      content: this.appTooltip(),
+      context: { $implicit: this.tooltipData() },
+      x: touch.clientX,
+      y: touch.clientY,
       anchorHref: this.anchorHref,
     });
   }
@@ -81,8 +72,8 @@ export class TooltipDirective<T> implements OnDestroy {
 
   private get anchorHref(): string | null {
     const host = this.el.nativeElement;
-    
-    if (host.tagName === 'A') return (host as HTMLAnchorElement).href || null;
-    return host.closest('a')?.href ?? null;
+
+    if (host.tagName === "A") return (host as HTMLAnchorElement).href || null;
+    return host.closest("a")?.href ?? null;
   }
 }

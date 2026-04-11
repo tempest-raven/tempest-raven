@@ -11,17 +11,17 @@ export class Unit {
     "Lightning",
     "Earth",
     "Shadow",
-    "Poison"
+    "Poison",
   ];
 
   public movesA: Ability[] = [];
   public movesD: Ability[] = [];
   public movesABS: [ab: Ability, phase: number][] = [];
-  public agressionArray: number[] = [0,0,0,0,0];
+  public agressionArray: number[] = [0, 0, 0, 0, 0];
   public PER: number[] = [];
   public DEF: number[] = [];
-  public model: string[] = ["MODEL1","ONE","ONE","M"];
-  public equipment = [0,0,0,0,0,0,0];
+  public model: string[] = ["MODEL1", "ONE", "ONE", "M"];
+  public equipment = [0, 0, 0, 0, 0, 0, 0];
   public skinSetter: string | 0 = 0;
   public voiceHit: string[] = [];
   public voiceDie?: string;
@@ -34,43 +34,38 @@ export class Unit {
     public magicScale: number,
     public speedScale: number,
     public focus: number,
-  ){
+  ) {}
 
-  }
-
-
-  middleHPrandomness(){
+  middleHPrandomness() {
     return this.agressionArray[0];
   }
 
-  agressiveHP(){
+  agressiveHP() {
     return Math.min(this.agressionArray[1], 100);
   }
 
-  defensiveHP(){
+  defensiveHP() {
     return Math.max(this.agressionArray[2], 0);
   }
 
-  middleHP(){
+  middleHP() {
     return this.agressiveHP() - this.defensiveHP();
   }
 
-  targestWeakest(){
+  targestWeakest() {
     return this.agressionArray[3];
   }
 
-  minimumFocus(){
+  minimumFocus() {
     return this.agressionArray[4];
   }
 
   //FIXME: improve detection to match the ingame AI's
-  focusMove(){
+  focusMove() {
     const moveArrays = [this.movesD, this.movesA];
-    for (let i = 0; i < moveArrays.length; i++) {
-      const moves = moveArrays[i];
-      for (let index = 0; index < moves.length; index++) {
-        const ability = moves[index];
-        if (ability.moveType === "Focus"){
+    for (const moves of moveArrays) {
+      for (const ability of moves) {
+        if (ability.moveType === "Focus") {
           return ability;
         }
       }
@@ -78,11 +73,11 @@ export class Unit {
     return null;
   }
 
-  phaseMoves(){
-    let groups: Ability[][] = [];
+  phaseMoves() {
+    const groups: Ability[][] = [];
     //this.movesABS.sort((a, b) => a[1] - b[1]);
     this.movesABS.forEach(([ab, phasenum]) => {
-      if (groups[phasenum] === undefined){
+      if (groups[phasenum] === undefined) {
         groups[phasenum] = [];
       }
       groups[phasenum].push(ab);

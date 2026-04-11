@@ -1,7 +1,7 @@
 <div class="gridDisplay">
-    @for (item of dataList(); track item.id){
-        <app-item [elementId]="item.id"/>
-    } @empty {
-        <mat-spinner/>
-    }
+  @for (item of dataList(); track item.id) {
+    <app-item [elementId]="item.id" />
+  } @empty {
+    <mat-spinner />
+  }
 </div>

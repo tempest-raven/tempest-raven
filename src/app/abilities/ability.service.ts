@@ -1,20 +1,22 @@
-import { Injectable } from '@angular/core';
-import { Ability } from './ability';
-import { SonnyTranslationService } from '../sonny-translation.service';
-import { requestService } from '../shared/types';
+import { Injectable, inject } from "@angular/core";
+import { Ability } from "./ability";
+import { SonnyTranslationService } from "../sonny-translation.service";
+import { requestService } from "../shared/types";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: "root" })
 export class AbilityService implements requestService<number> {
+  private translationService = inject(SonnyTranslationService);
+
   private static scriptLocation = "assets/data/sonny2/scripts/frame_42/DoAction_6.as";
   public abilityList = new Map<number, Ability>();
   public request;
 
-  constructor(private translationService: SonnyTranslationService) {
+  constructor() {
+    const translationService = this.translationService;
+
     const requests = Promise.all([
-      translationService.request, 
-      fetch(AbilityService.scriptLocation).then(res => res.text())
+      translationService.request,
+      fetch(AbilityService.scriptLocation).then(res => res.text()),
     ]).then(([langStrings, abilityScript]) => {
       Ability.langStrings = langStrings;
       return this.parseAbilityScript(abilityScript);
@@ -27,27 +29,31 @@ export class AbilityService implements requestService<number> {
    * @param rawScript The script to be parsed
    * @returns The parsed script
    */
-  private parseAbilityScript(rawScript: string): Map<number, Ability>{
+  private parseAbilityScript(rawScript: string): Map<number, Ability> {
     rawScript = rawScript.replace(/\r/g, "");
-    let lines = rawScript.split("\n");
+    const lines = rawScript.split("\n");
     let lastAbilityId = 0;
     let lastAbility: Ability | null = null;
     for (const line of lines) {
-      let match: ReturnType<String["match"]> = null;
       //Conditions ordered from most common to least commonly encountered
 
       //Ability edition
-      if (match = line.match(/^_root.hackMove\[(\d+)\] ?= ?(.+);/)){
+      const hackMoveMatch = line.match(/^_root.hackMove\[(\d+)\] ?= ?(.+);/);
+      if (hackMoveMatch) {
         //lastAbility existing is enforced in the actionScript itself
-        lastAbility!.setAttribute(+match[1], match[2]);
+        lastAbility!.setAttribute(+hackMoveMatch[1], hackMoveMatch[2]);
         continue;
       }
       //New Ability
-      if (match = line.match(/^addNewMove\((.+)\);/)){
-        if (match[1] !== '"None"'){
-          let abilityParams: ConstructorParameters<typeof Ability> = [
-            lastAbilityId, 
-            ...match[1].replace(/\\'/g, "'").split(",").map(v => JSON.parse(v))
+      const newMoveMatch = line.match(/^addNewMove\((.+)\);/);
+      if (newMoveMatch) {
+        if (newMoveMatch[1] !== '"None"') {
+          const abilityParams: ConstructorParameters<typeof Ability> = [
+            lastAbilityId,
+            ...newMoveMatch[1]
+              .replace(/\\'/g, "'")
+              .split(",")
+              .map(v => JSON.parse(v)),
           ] as ConstructorParameters<typeof Ability>;
           lastAbility = new Ability(...abilityParams);
           this.abilityList.set(lastAbilityId, lastAbility);
@@ -56,11 +62,11 @@ export class AbilityService implements requestService<number> {
         continue;
       }
       //Skip ID holes
-      if (match = line.match(/^MoveCount ?= ?(\d+);/)){
-          lastAbilityId = +match[1];
+      const moveCountMatch = line.match(/^MoveCount ?= ?(\d+);/);
+      if (moveCountMatch) {
+        lastAbilityId = +moveCountMatch[1];
       }
     }
     return this.abilityList;
   }
 }
-

@@ -1,28 +1,30 @@
-@if (unit(); as unit){
+@if (unit(); as unit) {
   <div>
     <div class="displayTitle">
       <a [routerLink]="['/sonny2', 'unit', unit.id, unit.internalName]" routerLinkActive="no-link">
-        {{unit.internalName}}
-        <span class="right unitId">{{unit.id}}</span>
+        {{ unit.internalName }}
+        <span class="right unitId">{{ unit.id }}</span>
       </a>
     </div>
     <div class="displayDesc1">
-      <div>Vitality modifier: {{unit.vitalityScale}}</div>
-      <div>Strength modifier: {{unit.strengthScale}}</div>
-      <div>Instinct modifier: {{unit.magicScale}}</div>
-      <div>Speed modifier: {{unit.speedScale}}</div>
-      <div>Focus: {{unit.focus}}</div>
+      <div>Vitality modifier: {{ unit.vitalityScale }}</div>
+      <div>Strength modifier: {{ unit.strengthScale }}</div>
+      <div>Instinct modifier: {{ unit.magicScale }}</div>
+      <div>Speed modifier: {{ unit.speedScale }}</div>
+      <div>Focus: {{ unit.focus }}</div>
     </div>
     <div class="elementBars">
       <div class="elementBarContainer">
         <div class="elementBarTitle">Piercing</div>
         <div class="elementBarGrid">
           @for (per of unit.PER; track $index) {
-            <app-piercing-bar [value]="per" 
-            [element]="unit.elementArray[$index]" 
-            [level]="0"
-            [appTooltip]="piercingTooltip"
-            [tooltipData]="{value: per, element: unit.elementArray[$index]}"></app-piercing-bar>
+            <app-piercing-bar
+              [value]="per"
+              [element]="unit.elementArray[$index]"
+              [level]="0"
+              [appTooltip]="piercingTooltip"
+              [tooltipData]="{ value: per, element: unit.elementArray[$index] }"
+            ></app-piercing-bar>
             <!--div>{{unit.elementArray[$index]}} Piercing {{per | signedNumber}}</div-->
           }
         </div>
@@ -31,11 +33,13 @@
         <div class="elementBarTitle">Defense</div>
         <div class="elementBarGrid">
           @for (per of unit.DEF; track $index) {
-            <app-piercing-bar [value]="per" 
-            [element]="unit.elementArray[$index]" 
-            [level]="0"
-            [appTooltip]="defenseTooltip"
-            [tooltipData]="{value: per, element: unit.elementArray[$index]}"></app-piercing-bar>
+            <app-piercing-bar
+              [value]="per"
+              [element]="unit.elementArray[$index]"
+              [level]="0"
+              [appTooltip]="defenseTooltip"
+              [tooltipData]="{ value: per, element: unit.elementArray[$index] }"
+            ></app-piercing-bar>
             <!--div>{{unit.elementArray[$index]}} Piercing {{per | signedNumber}}</div-->
           }
         </div>
@@ -45,46 +49,43 @@
       <div class="agressionBarText">Agression AI:</div>
       <div class="horizontalBar">
         @let agressiveSize = 100 - unit.agressiveHP();
-        @if (agressiveSize > 0){
+        @if (agressiveSize > 0) {
           <div class="agressive" [style]="'width: ' + agressiveSize + '%;'">
-            @if (agressiveSize >= 30){
-              &gt; {{unit.agressiveHP()}}% HP
+            @if (agressiveSize >= 30) {
+              &gt; {{ unit.agressiveHP() }}% HP
             } @else if (agressiveSize >= 20) {
-              &gt; {{unit.agressiveHP()}}%
-            } @else if (agressiveSize <= 5){
-
-            }
-            @else {
-              {{unit.agressiveHP()}}
-            }
-          </div>
-        }
-        
-        @if (unit.middleHP() > 0){
-          <div class="mixed" [style]="'width: ' + unit.middleHP() + '%;'"
-          [appTooltip]="randomAgression" [tooltipData]="unit.middleHPrandomness()">
-            @if (unit.middleHP() >= 40){
-              {{unit.defensiveHP()}}% - {{unit.agressiveHP()}}%
-            } @else if (unit.middleHP() >= 25) {
-              {{unit.defensiveHP()}}-{{unit.agressiveHP()}}%
-            } @else if (unit.middleHP() >= 20) {
-              {{unit.defensiveHP()}}-{{unit.agressiveHP()}}
+              &gt; {{ unit.agressiveHP() }}%
+            } @else if (agressiveSize <= 5) {
             } @else {
-              
+              {{ unit.agressiveHP() }}
             }
           </div>
         }
-        @if (unit.defensiveHP() > 0){
+        @if (unit.middleHP() > 0) {
+          <div
+            class="mixed"
+            [style]="'width: ' + unit.middleHP() + '%;'"
+            [appTooltip]="randomAgression"
+            [tooltipData]="unit.middleHPrandomness()"
+          >
+            @if (unit.middleHP() >= 40) {
+              {{ unit.defensiveHP() }}% - {{ unit.agressiveHP() }}%
+            } @else if (unit.middleHP() >= 25) {
+              {{ unit.defensiveHP() }}-{{ unit.agressiveHP() }}%
+            } @else if (unit.middleHP() >= 20) {
+              {{ unit.defensiveHP() }}-{{ unit.agressiveHP() }}
+            } @else {}
+          </div>
+        }
+        @if (unit.defensiveHP() > 0) {
           <div class="defensive" [style]="'width: ' + unit.defensiveHP() + '%;'">
-            @if (unit.defensiveHP() >= 30){
-              &lt; {{unit.defensiveHP()}}% HP
+            @if (unit.defensiveHP() >= 30) {
+              &lt; {{ unit.defensiveHP() }}% HP
             } @else if (unit.defensiveHP() >= 20) {
-              &lt; {{unit.defensiveHP()}}%
-            } @else if (unit.defensiveHP() <= 5){
-
-            }
-            @else {
-              {{unit.defensiveHP()}}
+              &lt; {{ unit.defensiveHP() }}%
+            } @else if (unit.defensiveHP() <= 5) {
+            } @else {
+              {{ unit.defensiveHP() }}
             }
           </div>
         }
@@ -94,35 +95,58 @@
     <div class="displayDesc3">
       <div>
         Agressive moves:
-        @for (ability of unit.movesA; track $index){
-          <div><a class="whiteLink" [routerLink]="['/sonny2', 'ability', ability.id]" [appTooltip]="abilityTooltip" [tooltipData]="ability">{{ability.internalName}}</a></div>
+        @for (ability of unit.movesA; track $index) {
+          <div>
+            <a
+              class="whiteLink"
+              [routerLink]="['/sonny2', 'ability', ability.id]"
+              [appTooltip]="abilityTooltip"
+              [tooltipData]="ability"
+              >{{ ability.internalName }}</a
+            >
+          </div>
         } @empty {
           None
         }
       </div>
       <div>
         Defensive moves:
-        @for (ability of unit.movesD; track $index){
-          <div><a class="whiteLink" [routerLink]="['/sonny2', 'ability', ability.id]" [appTooltip]="abilityTooltip" [tooltipData]="ability">{{ability.internalName}}</a></div>
+        @for (ability of unit.movesD; track $index) {
+          <div>
+            <a
+              class="whiteLink"
+              [routerLink]="['/sonny2', 'ability', ability.id]"
+              [appTooltip]="abilityTooltip"
+              [tooltipData]="ability"
+              >{{ ability.internalName }}</a
+            >
+          </div>
         } @empty {
           None
         }
       </div>
-      
+
       <!--div>
         Uses {{unit.focusMove()?.internalName ?? "no ability"}} when below {{unit.minimumFocus()}} focus
       </div-->
     </div>
     @let phaseMoves = unit.phaseMoves();
-    @if (phaseMoves.length > 0){
+    @if (phaseMoves.length > 0) {
       <div class="displayCost">Phase moves (set in battle data)</div>
       <div class="displayDesc2">
-        
-        @for (moveList of phaseMoves; track $index){
-          @if (moveList){
-            <div>Phase {{$index}}</div>
-            @for (ability of moveList; track $index){
-              <div><a class="whiteLink" [routerLink]="['/sonny2', 'ability', ability.id]" [appTooltip]="abilityTooltip" [tooltipData]="ability">{{ability.internalName}}</a></div>
+        @for (moveList of phaseMoves; track $index) {
+          @if (moveList) {
+            <div>Phase {{ $index }}</div>
+            @for (ability of moveList; track $index) {
+              <div>
+                <a
+                  class="whiteLink"
+                  [routerLink]="['/sonny2', 'ability', ability.id]"
+                  [appTooltip]="abilityTooltip"
+                  [tooltipData]="ability"
+                  >{{ ability.internalName }}</a
+                >
+              </div>
             }
           }
         }
@@ -137,24 +161,20 @@
   }
 </ng-template>
 <ng-template #piercingTooltip let-piercing>
-  <div class="displaySubTitle">
-    {{piercing.element}} Piercing: {{piercing.value}}% 
-  </div>
+  <div class="displaySubTitle">{{ piercing.element }} Piercing: {{ piercing.value }}%</div>
   <div class="displayDesc3">
     <!-- TODO -->
   </div>
 </ng-template>
 <ng-template #defenseTooltip let-defense>
-  <div class="displaySubTitle">
-    {{defense.element}} Defense: {{defense.value}}% 
-  </div>
+  <div class="displaySubTitle">{{ defense.element }} Defense: {{ defense.value }}%</div>
   <div class="displayDesc3">
     <!-- TODO -->
   </div>
 </ng-template>
 <ng-template #randomAgression let-randomness>
   <div class="displayDesc3">
-    This unit has a {{randomness}}% chance to use an agressive move, 
-    otherwise it will use a defensive move
+    This unit has a {{ randomness }}% chance to use an agressive move, otherwise it will use a
+    defensive move
   </div>
 </ng-template>
