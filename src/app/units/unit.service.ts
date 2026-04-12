@@ -75,6 +75,7 @@ export class UnitService implements requestService<number> {
       //createNewUnitKrin("Prison Guard",10,10,5,12,100);
       const newUnitMatch = line.match(/^createNewUnitKrin\((.+)\);/);
       if (newUnitMatch) {
+        lastUnitId++;
         const unitParams = [
           lastUnitId,
           ...newUnitMatch[1]
@@ -84,7 +85,6 @@ export class UnitService implements requestService<number> {
         ] as ConstructorParameters<typeof Unit>;
         lastUnit = new Unit(...unitParams);
         this.unitList.set(lastUnitId, lastUnit);
-        lastUnitId++;
         continue;
       }
 
